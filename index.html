@@ -1,0 +1,86 @@
+<!DOCTYPE HTML>
+<html lang="ja">
+<title>世界の首都・国旗</title>
+
+<head prefix="og: http://ogp.me/ns# fb: http://ogp.me/ns/fb# article: http://ogp.me/ns/article#">
+  <meta charset="UTF-8" name="viewport"
+    content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta property="og:title" content="世界の首都・国旗" />
+  <meta property="og:type" content="website" />
+  <meta property="og:image" content="https://nationalflag.netlify.app/ogp.jpg" />
+  <meta name="description" content="世界の国々の国名や首都、国旗をデジタル地球儀にまとめました。地理教育にご利用ください。" />
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="世界の首都・国旗" />
+  <meta name="twitter:image" content="https://nationalflag.netlify.app/ogp.jpg" />
+  <meta name="author" content="仁志">
+  <meta name="keywords" content="首都,国旗,地理,地理教育,教育" />
+
+  <!-- Google tag (gtag.js) -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-MPP84V2NHB"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag() { dataLayer.push(arguments); }
+    gtag('js', new Date());
+
+    gtag('config', 'G-MPP84V2NHB');
+  </script>
+
+  <!-- deck.gl standalone bundle -->
+  <script src="https://unpkg.com/deck.gl@^8.6.0-alpha.0/dist.min.js"></script>
+
+  <style type="text/css">
+    html {
+      margin: 0;
+      padding: 0
+    }
+
+    html,
+    body,
+    iframe {
+      width: 100%;
+      height: 100%;
+      margin: 0;
+      padding: 0
+    }
+
+    body {
+      background: #ffffff;
+    }
+
+    .header {
+      background: rgba(0, 0, 0, 0.8);
+      color: #ffffff;
+      z-index: 100;
+      position: fixed;
+      top: 5px;
+      left: 5px;
+      padding: 15px;
+    }
+
+    h2 {
+      margin: 0;
+      padding: 0;
+    }
+
+    iframe {
+      margin: 0;
+      padding: 0;
+      border: none;
+      position: absolute;
+      z-index: 0;
+    }
+  </style>
+</head>
+
+<body>
+
+  <div class="header">
+    <h2>世界の首都・国旗</h2>
+  </div>
+
+  <iframe src="./map.html"></iframe>
+
+</body>
+
+</html>
