@@ -8,7 +8,11 @@
 
 世界の首都の位置データ(https://amano-tec.com/data/world.html)
 
-世界の国旗（https://amano-tec.com/data/worldflags.html）
+世界の国旗（https://amano-tec.com/data/worldflags.html)
+
+世界の首都の位置データは、2022年6月1日現在のものです。
+
+世界の国旗のデータは、2015年6月1日現在のものです。（ただし、モーリタニアは2017年に国旗が変わっているので、データを修正しました。）
 
 ## ライセンス
 
