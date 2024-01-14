@@ -54,7 +54,7 @@
   const COUNTRIES =
     'https://d2ad6b4ur7yvpq.cloudfront.net/naturalearth-3.3.0/ne_50m_admin_0_scale_rank.geojson'; //eslint-disable-line
 
-  const AREA = "./world.geojson";
+  const AREA = "./nationalflag.geojson";
 
   const INITIAL_VIEW_STATE = {
     latitude: 12.983,
@@ -67,7 +67,7 @@
     if (!d || !d.object) return null;
     let obj = d.object;
 
-    const html_tr = ["<table>", "<center><img src='./img/" + obj.properties.iso_a2 + "@3x.png'></center>" + "国名：" + obj.properties.日本語国名 + "<br>首都：" + obj.properties.日本語名, "</table>"].join("\n");
+    const html_tr = ["<table>", "<center><img src='./img/" + obj.properties.country_code + "@3x.png'></center>" + "国名：" + obj.properties.name_jps + "<br>首都：" + obj.properties.capital_jp, "</table>"].join("\n");
 
     return {
       html: html_tr,

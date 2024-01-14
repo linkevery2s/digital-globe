@@ -8,11 +8,11 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta property="og:title" content="世界の首都・国旗" />
   <meta property="og:type" content="website" />
-  <meta property="og:image" content="https://nationalflag.netlify.app/ogp.jpg" />
-  <meta name="description" content="世界の国々の国名や首都、国旗をデジタル地球儀にまとめました。地理教育にご利用ください。" />
+  <meta property="og:image" content="https://nationalflag.netlify.app/ogp.png" />
+  <meta name="description" content="世界の国々の国名や首都、国旗をデジタル地球儀にまとめました。地理教育などにご活用ください。" />
   <meta name="twitter:card" content="summary_large_image">
   <meta name="twitter:title" content="世界の首都・国旗" />
-  <meta name="twitter:image" content="https://nationalflag.netlify.app/ogp.jpg" />
+  <meta name="twitter:image" content="https://nationalflag.netlify.app/ogp.png" />
   <meta name="author" content="仁志">
   <meta name="keywords" content="首都,国旗,地理,地理教育,教育" />
 
@@ -55,7 +55,7 @@
       position: fixed;
       top: 5px;
       left: 5px;
-      padding: 15px;
+      padding: 3px 10px 3px 10px;
     }
 
     h2 {
@@ -70,6 +70,17 @@
       position: absolute;
       z-index: 0;
     }
+
+    p{
+      padding: 0;
+      margin: 0;
+    }
+
+    a{
+      text-decoration: none;
+      border-bottom: 1px dotted #ffffff;
+      color: #ffffff;
+    }
   </style>
 </head>
 
@@ -77,6 +88,7 @@
 
   <div class="header">
     <h2>世界の首都・国旗</h2>
+    <p><a href="https://github.com/linkevery2s/nationalflag" target="_blank">src on GitHub</a> &copy <a href="https://hitoshi2s.netlify.app/" target="_blank">仁志</a>.</p>
   </div>
 
   <iframe src="./map.html"></iframe>
