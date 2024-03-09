@@ -1,51 +1,28 @@
 <!DOCTYPE HTML>
 <html lang="ja">
-<title>デジタル地球儀「世界の首都・国旗」</title>
+<title>デジタル地球儀</title>
 
 <head prefix="og: http://ogp.me/ns# fb: http://ogp.me/ns/fb# article: http://ogp.me/ns/article#">
   <meta charset="UTF-8" name="viewport"
     content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <meta property="og:title" content="デジタル地球儀「世界の首都・国旗」" />
+  <meta property="og:title" content="デジタル地球儀" />
   <meta property="og:type" content="website" />
-  <meta property="og:image" content="https://national-flag-globe.netlify.app/ogp.png" />
-  <meta name="description" content="世界の国々の国名や首都、国旗をデジタル地球儀にまとめました。地理教育などにご活用ください。" />
+  <meta property="og:image" content="https://national-globe.netlify.app/ogp.png" />
+  <meta name="description" content="世界の国々の国名や首都、半島、山脈などをデジタル地球儀にまとめました。地理教育などにご活用ください。" />
   <meta name="twitter:card" content="summary_large_image">
-  <meta name="twitter:title" content="デジタル地球儀「世界の首都・国旗」" />
-  <meta name="twitter:image" content="https://national-flag-globe.netlify.app/ogp.png" />
+  <meta name="twitter:title" content="デジタル地球儀" />
+  <meta name="twitter:image" content="https://national-globe.netlify.app/ogp.png" />
   <meta name="author" content="仁志">
   <meta name="keywords" content="首都,国旗,地理,地理教育,教育,地球儀,デジタル地球儀" />
-	<link rel="apple-touch-icon" href="./apple-touch-icon.png">
-	<link rel="shortcut icon" href="./apple-touch-icon.png">
+  <link rel="apple-touch-icon" href="./apple-touch-icon.png">
+  <link rel="shortcut icon" href="./apple-touch-icon.png">
 
-  <link rel="manifest" href="./manifest.json">
-	<script>
-		if ('serviceWorker' in navigator) {
-			navigator.serviceWorker.register('./service-worker.js').then(function() {
-				console.log('Service Worker Registered');
-			});
-		}
-	</script>
-
-  <!-- Google tag (gtag.js) -->
-  <script async src="https://www.googletagmanager.com/gtag/js?id=G-MPP84V2NHB"></script>
-  <script>
-    window.dataLayer = window.dataLayer || [];
-    function gtag() { dataLayer.push(arguments); }
-    gtag('js', new Date());
-
-    gtag('config', 'G-MPP84V2NHB');
-  </script>
 
   <style type="text/css">
-    html {
-      margin: 0;
-      padding: 0
-    }
-
     html,
     body,
-    iframe {
+    #main {
       width: 100%;
       height: 100%;
       margin: 0;
@@ -57,50 +34,153 @@
     }
 
     .header {
-      background: rgba(0, 0, 0, 0.8);
+      background: rgba(25, 68, 142, 0.8);
       color: #ffffff;
       z-index: 100;
       position: fixed;
-      top: 5px;
-      left: 5px;
-      padding: 3px 10px 3px 10px;
-    }
-
-    h3 {
-      margin: 0;
-      padding: 0;
+      width: 100%;
     }
 
     iframe {
       margin: 0;
       padding: 0;
+      width: 100%;
+      height: 100%;
       border: none;
       position: absolute;
       z-index: 0;
     }
 
-    p{
-      padding: 0;
-      margin: 0;
+    .footer {
+      background: rgba(25, 68, 142, 0.8);
+      color: #ffffff;
+      z-index: 100;
+      position: fixed;
+      bottom: 0;
+      width: 100%;
+
     }
 
-    a{
-      text-decoration: none;
+    .footer a {
       border-bottom: 1px dotted #ffffff;
-      color: #ffffff;
+    }
+
+    .footer a:hover {
+      border-bottom: none;
+      color: #38b48b;
+    }
+
+    .btn-menu {
+      position: fixed;
+      top: 10px;
+      right: 5px;
+      border: 1px solid #999;
+      background: transparent;
+      color: #fff;
+      padding: .5rem;
+      font-size: 1rem;
+      cursor: pointer;
+      line-height: 1;
+    }
+
+    li {
+      margin: 1rem 0;
+      cursor: pointer;
+    }
+
+    nav {
+      background: rgba(0, 110, 84 , 0.8);
+      position: absolute;
+      top: 3.5rem;
+      z-index: 1;
+      right: 0;
+      overflow-x: hidden;
+      text-align: center;
+      width: 0;
+      transition: .5s;
+    }
+
+    nav.open-menu {
+      width: 100%;
     }
   </style>
+
+  <link rel="manifest" href="./manifest.json">
+  <script>
+    if ('serviceWorker' in navigator) {
+      navigator.serviceWorker.register('./service-worker.js').then(function () {
+        console.log('Service Worker Registered');
+      });
+    }
+  </script>
+
+  <script src="https://cdn.tailwindcss.com"></script>
+
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"
+    integrity="sha512-DTOQO9RWCH3ppGqcWaEA1BIZOC6xxalwEsw9c2QQeAIftl+Vegovlnee1c9QX4TctnWMn13TZye+giMm8e2LwA=="
+    crossorigin="anonymous" referrerpolicy="no-referrer" />
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/js/all.min.js"
+    integrity="sha512-GWzVrcGlo0TxTRvz9ttioyYJ+Wwk9Ck0G81D+eO63BaqHaJ3YZX9wuqjwgfcV/MrB2PhaVX9DkYVhbFpStnqpQ=="
+    crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+
+  <!-- Google tag (gtag.js) -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-MPP84V2NHB"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag() { dataLayer.push(arguments); }
+    gtag('js', new Date());
+
+    gtag('config', 'G-MPP84V2NHB');
+  </script>
+
+  <script type="module">
+    document.getElementById("main").innerHTML = '<iframe src="./flag.html"></iframe>';
+
+    const btn = document.querySelector('.btn-menu');
+    const nav = document.querySelector('nav');
+
+    btn.addEventListener('click', () => {
+      nav.classList.toggle('open-menu');
+    });
+
+    window.flag = () =>{
+      nav.classList.toggle('open-menu');
+      document.getElementById("main").innerHTML = '<iframe src="./flag.html"></iframe>';
+    }
+
+    window.gis1 = () =>{
+      nav.classList.toggle('open-menu');
+      document.getElementById("main").innerHTML = '<iframe src="./worldgis1.html"></iframe>';
+    }
+
+  </script>
+
 </head>
 
 <body>
 
-  <div class="header">
-    <h3>デジタル地球儀「世界の首都・国旗」</h3>
-    <p>データ出展元は↓こちらに記載.</p>
-    <p><a href="https://github.com/linkevery2s/nationalflag" target="_blank">src on GitHub</a> &copy <a href="https://hitoshi2s.netlify.app/" target="_blank">仁志</a>.</p>
+  <div id="header" class="header text-center py-3">
+    <h3 class="text-2xl">デジタル地球儀</h3>
+
+    <button class="btn-menu">MENU</button>
+    <nav>
+      <ul>
+        <li onclick = "flag();">世界の首都・国旗</li>
+        <li onclick = "gis1();">世界の地理①</li>
+      </ul>
+    </nav>
+
   </div>
 
-  <iframe src="./map.html"></iframe>
+  <div id="main"></div>
+
+  <div class="footer p-2 text-xs text-center">
+    <p><a href="https://github.com/linkevery2s/nationalflag" target="_blank">src on GitHub</a>. &copy <a
+        href="https://hitoshi2s.netlify.app/" target="_blank">齋藤 仁志</a>.</p>
+
+  </div>
+
+
 
 </body>
 

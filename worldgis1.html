@@ -1,0 +1,127 @@
+<!DOCTYPE HTML>
+<html lang="ja">
+<title>地図</title>
+
+<head prefix="og: http://ogp.me/ns# fb: http://ogp.me/ns/fb# article: http://ogp.me/ns/article#">
+  <meta charset="UTF-8" name="viewport"
+    content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <script src="https://unpkg.com/deck.gl@^8.1.0/dist.min.js"></script>
+  <script src="./worldgis1.json"></script>
+
+  <style type="text/css">
+    html {
+      margin: 0;
+      padding: 0
+    }
+
+    html,
+    body {
+      width: 100%;
+      height: 100%;
+    }
+
+    body {
+      background: #ffffff;
+      margin: 0;
+      padding: 0;
+    }
+
+    #container {
+      width: 100%;
+      height: 100%;
+      z-index: 10;
+    }
+
+    .header {
+      background: rgba(0, 0, 0, 0.8);
+      z-index: 100;
+      position: fixed;
+      top: 0;
+      padding: 5px;
+    }
+  </style>
+</head>
+
+<body>
+
+  <div id="container"></div>
+
+</body>
+
+<script type="text/javascript">
+
+  const { DeckGL, _GlobeView, TileLayer, BitmapLayer, COORDINATE_SYSTEM, SolidPolygonLayer, ScatterplotLayer } = deck;
+
+  const INITIAL_VIEW_STATE = {
+    latitude: 12.983,
+    longitude: 142.502,
+    zoom: .5
+  };
+
+  const tooltip = (d) => {
+
+    if (!d || !d.object) return null;
+    let obj = d.object;
+
+    const html_tr = ["<table>", "名称：" + obj.name + "<br>概要：" + obj.description, "</table>"].join("\n");
+
+    return {
+      html: html_tr,
+      style: {
+        background: "rgba(0,0,0,0.7)",
+        color: "#ffffff",
+        width: "150px"
+      }
+    };
+  };
+
+  const tile = new TileLayer({
+    data: 'https://cyberjapandata.gsi.go.jp/xyz/std/{z}/{x}/{y}.png',
+    minZoom: 0,
+    maxZoom: 19,
+    tileSize: 256,
+
+    renderSubLayers: props => {
+      const {
+        bbox: { west, south, east, north }
+      } = props.tile;
+
+      return new BitmapLayer(props, {
+        data: null,
+        image: props.data,
+        _imageCoordinateSystem: COORDINATE_SYSTEM.CARTESIAN,
+        bounds: [west, south, east, north]
+      });
+    }
+  })
+
+  const deckgl = new DeckGL({
+    container: 'container',
+    views: new _GlobeView(),
+    initialViewState: INITIAL_VIEW_STATE,
+    controller: true,
+    getTooltip: tooltip,
+    layers: [
+      tile,
+      new ScatterplotLayer({
+        id: 'scatterplot-layer',
+        data: worldgis1,
+        pickable: true,
+        opacity: 0.8,
+        stroked: true,
+        filled: true,
+        radiusScale: 6,
+        radiusMinPixels: 10,
+        radiusMaxPixels: 10,
+        lineWidthMinPixels: 1,
+        getPosition: d => [d.lng, d.lat],
+        getRadius: d => 15,
+        getFillColor: d => [232, 57, 41],
+        getLineColor: d => [255, 255, 255]
+      })
+    ]
+  });
+</script>
+
+</html>

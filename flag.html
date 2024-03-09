@@ -8,6 +8,7 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <!-- deck.gl standalone bundle -->
   <script src="https://unpkg.com/deck.gl@^8.6.0-alpha.0/dist.min.js"></script>
+  <script src="https://cdn.tailwindcss.com"></script>
 
   <style type="text/css">
     html {
@@ -31,14 +32,6 @@
       height: 100%;
       z-index: 10;
     }
-
-		.header {
-			background: rgba(0,0,0, 0.8);
-			z-index: 100;
-			position: fixed;
-			top: 0;
-			padding: 5px;
-		}
 
   </style>
 </head>
@@ -80,7 +73,6 @@
 
   const deckgl = new deck.DeckGL({
     container: 'container',
-
     views: new deck._GlobeView(),
     initialViewState: INITIAL_VIEW_STATE,
     controller: true,
@@ -123,7 +115,7 @@
         filled: true,
         pointRadiusMinPixels: 7,
         pointRadiusScale: 2000,
-        getPointRadius: f => 11,
+        getPointRadius: f => 15,
         getFillColor: [232, 57, 41],
         opacity: 0.7,
         pickable: true,
