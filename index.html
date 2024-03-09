@@ -74,14 +74,15 @@
       position: fixed;
       top: 10px;
       right: 5px;
-      border: 1px solid #999;
+      border: 1px solid #ffffff;
       background: transparent;
-      color: #fff;
+      color: #ffffff;
       padding: .5rem;
       font-size: 1rem;
       cursor: pointer;
       line-height: 1;
     }
+
 
     li {
       margin: 1rem 0;
@@ -89,7 +90,7 @@
     }
 
     nav {
-      background: rgba(0, 110, 84 , 0.8);
+      background: rgba(0, 110, 84, 0.8);
       position: absolute;
       top: 3.5rem;
       z-index: 1;
@@ -102,6 +103,23 @@
 
     nav.open-menu {
       width: 100%;
+    }
+
+    .zoom {
+      position: fixed;
+      top: 16px;
+      left: 10px;
+      cursor: pointer;
+    }
+
+    .zoom2 {
+      position: fixed;
+      top: 16px;
+      left: 10px;
+      cursor: pointer;
+      display: none;
+      color: #000000;
+      z-index: 1;
     }
   </style>
 
@@ -123,6 +141,9 @@
     integrity="sha512-GWzVrcGlo0TxTRvz9ttioyYJ+Wwk9Ck0G81D+eO63BaqHaJ3YZX9wuqjwgfcV/MrB2PhaVX9DkYVhbFpStnqpQ=="
     crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 
+  <script src="https://code.jquery.com/jquery-3.7.1.min.js"
+    integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
+
   <!-- Google tag (gtag.js) -->
   <script async src="https://www.googletagmanager.com/gtag/js?id=G-MPP84V2NHB"></script>
   <script>
@@ -134,7 +155,7 @@
   </script>
 
   <script type="module">
-    document.getElementById("main").innerHTML = '<iframe src="./flag.html"></iframe>';
+    document.getElementById("main").innerHTML = '<iframe src="./data/flag.html"></iframe>';
 
     const btn = document.querySelector('.btn-menu');
     const nav = document.querySelector('nav');
@@ -143,15 +164,34 @@
       nav.classList.toggle('open-menu');
     });
 
-    window.flag = () =>{
-      nav.classList.toggle('open-menu');
-      document.getElementById("main").innerHTML = '<iframe src="./flag.html"></iframe>';
-    }
+    const flag = document.querySelector('.flag');
+    const gis1 = document.querySelector('.gis1');
 
-    window.gis1 = () =>{
+    flag.addEventListener('click', () => {
       nav.classList.toggle('open-menu');
-      document.getElementById("main").innerHTML = '<iframe src="./worldgis1.html"></iframe>';
-    }
+      document.getElementById("main").innerHTML = '<iframe src="./data/flag.html"></iframe>';
+    });
+
+    gis1.addEventListener('click', () => {
+      nav.classList.toggle('open-menu');
+      document.getElementById("main").innerHTML = '<iframe src="./data/worldgis1.html"></iframe>';
+    });
+
+    const zoom = document.querySelector('.zoom');
+    const zoom2 = document.querySelector('.zoom2');
+
+    zoom.addEventListener('click', () => {
+      $('#header').fadeOut();
+      $('#footer').fadeOut();
+      zoom2.style.display = "block";
+    });
+
+    zoom2.addEventListener('click', () => {
+      $('#header').fadeIn();
+      $('#footer').fadeIn();
+      zoom2.style.display = "none";
+    });
+
 
   </script>
 
@@ -159,14 +199,18 @@
 
 <body>
 
+  <span class="zoom2" id="zoom2"> <i class="fa-solid fa-xl fa-expand"></i> </span>
+
   <div id="header" class="header text-center py-3">
     <h3 class="text-2xl">デジタル地球儀</h3>
+
+    <span class="zoom"> <i class="fa-solid fa-xl fa-expand"></i> </span>
 
     <button class="btn-menu">MENU</button>
     <nav>
       <ul>
-        <li onclick = "flag();">世界の首都・国旗</li>
-        <li onclick = "gis1();">世界の地理①</li>
+        <li class="flag">世界の首都・国旗</li>
+        <li class="gis1">世界の地理①</li>
       </ul>
     </nav>
 
@@ -174,7 +218,7 @@
 
   <div id="main"></div>
 
-  <div class="footer p-2 text-xs text-center">
+  <div id="footer" class="footer p-2 text-xs text-center">
     <p><a href="https://github.com/linkevery2s/nationalflag" target="_blank">src on GitHub</a>. &copy <a
         href="https://hitoshi2s.netlify.app/" target="_blank">齋藤 仁志</a>.</p>
 
