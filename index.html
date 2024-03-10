@@ -26,7 +26,8 @@
       width: 100%;
       height: 100%;
       margin: 0;
-      padding: 0
+      padding: 0;
+      z-index: 0;
     }
 
     body {
@@ -61,11 +62,11 @@
 
     }
 
-    .footer a {
+    .footer p a {
       border-bottom: 1px dotted #ffffff;
     }
 
-    .footer a:hover {
+    .footer p a:hover {
       border-bottom: none;
       color: #38b48b;
     }
@@ -95,14 +96,10 @@
       top: 3.5rem;
       z-index: 1;
       right: 0;
-      overflow-x: hidden;
       text-align: center;
-      width: 0;
-      transition: .5s;
-    }
-
-    nav.open-menu {
       width: 100%;
+      transition: .5s;
+      display: none;
     }
 
     .zoom {
@@ -120,6 +117,36 @@
       display: none;
       color: #000000;
       z-index: 1;
+    }
+
+    .search, .manual{
+      cursor: pointer;
+    }
+
+    .source{
+      position: absolute;
+      color: #38b48b;
+      top: -30px;
+      right: 5px;
+      z-index: 10;
+      border-bottom: 1px dotted #38b48b;
+      padding: 0;
+      cursor: pointer;
+    }
+    .source:hover{
+      border: none;
+    }
+
+    .source2{
+      position: absolute;
+      color: #38b48b;
+      bottom: 5px;
+      right: 5px;
+      z-index: 10;
+      border-bottom: 1px dotted #38b48b;
+      padding: 0;
+      cursor: pointer;
+      display: none;
     }
   </style>
 
@@ -155,28 +182,46 @@
   </script>
 
   <script type="module">
+
+    /* 初期画面 */
+    $('#navi').hide();
     document.getElementById("main").innerHTML = '<iframe src="./data/flag.html"></iframe>';
 
+    const source = document.querySelector(".source");
+    const source2 = document.querySelector(".source2");
+
+    source.innerHTML = '<a href="https://geojson.xyz/" target="_blank">geojson.xyz</a>';
+    source2.innerHTML = '<a href="https://geojson.xyz/" target="_blank">geojson.xyz</a>';
+
+    /* ナビゲーション表示 */
     const btn = document.querySelector('.btn-menu');
     const nav = document.querySelector('nav');
 
+    nav.style.display = "block";
+
     btn.addEventListener('click', () => {
-      nav.classList.toggle('open-menu');
+      $('#navi').toggle("slow");
     });
 
+    /* 地図の切り替え */
     const flag = document.querySelector('.flag');
     const gis1 = document.querySelector('.gis1');
 
     flag.addEventListener('click', () => {
-      nav.classList.toggle('open-menu');
+      $('#navi').hide();
       document.getElementById("main").innerHTML = '<iframe src="./data/flag.html"></iframe>';
+      source.innerHTML = '<a href="https://geojson.xyz/" target="_blank">geojson.xyz</a>';
+      source2.innerHTML = '<a href="https://geojson.xyz/" target="_blank">geojson.xyz</a>';
     });
 
     gis1.addEventListener('click', () => {
-      nav.classList.toggle('open-menu');
+      $('#navi').hide();
       document.getElementById("main").innerHTML = '<iframe src="./data/worldgis1.html"></iframe>';
+      source.innerHTML = '<a href="https://maps.gsi.go.jp/development/ichiran.html" target="_blank">地理院タイル</a>';
+      source2.innerHTML = '<a href="https://maps.gsi.go.jp/development/ichiran.html" target="_blank">地理院タイル</a>';
     });
 
+    /* 全画面表示の切り替え */
     const zoom = document.querySelector('.zoom');
     const zoom2 = document.querySelector('.zoom2');
 
@@ -184,12 +229,14 @@
       $('#header').fadeOut();
       $('#footer').fadeOut();
       zoom2.style.display = "block";
+      source2.style.display = "block";
     });
 
     zoom2.addEventListener('click', () => {
       $('#header').fadeIn();
       $('#footer').fadeIn();
       zoom2.style.display = "none";
+      source2.style.display = "none";
     });
 
 
@@ -202,30 +249,41 @@
   <span class="zoom2" id="zoom2"> <i class="fa-solid fa-xl fa-expand"></i> </span>
 
   <div id="header" class="header text-center py-3">
-    <h3 class="text-2xl">デジタル地球儀</h3>
+    <h3 class="text-2xl"><a href="./index.html">デジタル地球儀</a></h3>
 
     <span class="zoom"> <i class="fa-solid fa-xl fa-expand"></i> </span>
 
     <button class="btn-menu">MENU</button>
-    <nav>
-      <ul>
-        <li class="flag">世界の首都・国旗</li>
-        <li class="gis1">世界の地理①</li>
-      </ul>
-    </nav>
+    <div id="navi">
+      <nav>
+        <ul>
+          <li class="flag">世界の首都・国旗</li>
+          <li class="gis1">世界の地理①</li>
+        </ul>
+      </nav>
+    </div>
 
   </div>
 
-  <div id="main"></div>
+  <div id="main">
+  </div>
 
-  <div id="footer" class="footer p-2 text-xs text-center">
-    <p><a href="https://github.com/linkevery2s/nationalflag" target="_blank">src on GitHub</a>. &copy <a
+  <div class="source2"></div>
+
+  <div id="footer" class="footer p-2 text-center">
+
+    <div class="source" id="source"></div>
+
+    <div class="grid gap-4 grid-cols-3 grid-rows-1">
+      <div class="search"><i class="fa-solid fa-magnifying-glass"></i> 検　索</div>
+      <a href="./index.html"><div><i class="fa-solid fa-house"></i> ホーム</div></a>
+      <div class="manual"><i class="fa-solid fa-book"></i> 使い方</div>
+    </div>
+
+    <p class="text-xs mt-1"><a href="https://github.com/linkevery2s/nationalflag" target="_blank">src on GitHub</a>. &copy <a
         href="https://hitoshi2s.netlify.app/" target="_blank">齋藤 仁志</a>.</p>
 
   </div>
 
-
-
 </body>
-
 </html>

@@ -16,7 +16,8 @@
       padding: 0
     }
 
-    html,body{
+    html,
+    body {
       width: 100%;
       height: 100%;
     }
@@ -32,12 +33,11 @@
       height: 100%;
       z-index: 10;
     }
-
   </style>
 </head>
 
 <body>
-  
+
   <div id="container"></div>
 
 </body>
@@ -52,7 +52,7 @@
   const INITIAL_VIEW_STATE = {
     latitude: 12.983,
     longitude: 142.502,
-    zoom: .5
+    zoom: .4
   };
 
   const tooltip = (d) => {
@@ -100,7 +100,6 @@
       new deck.GeoJsonLayer({
         id: 'base-map',
         data: COUNTRIES,
-        // Styles
         stroked: true,
         filled: true,
         lineWidthMinPixels: 2,
@@ -113,14 +112,16 @@
         id: 'airports',
         data: AREA,
         filled: true,
-        pointRadiusMinPixels: 7,
+        lineWidthMinPixels: 1,
+        pointRadiusMinPixels: 10,
         pointRadiusScale: 2000,
-        getPointRadius: f => 15,
+        getPointRadius: 17,
         getFillColor: [232, 57, 41],
-        opacity: 0.7,
+        getLineColor: [255, 255, 255],
+        getLineWidth: 10,
+        opacity: 0.8,
         pickable: true,
         autoHighlight: true
-        // sonClick: info => info.object && alert(`${info.object.properties.日本語国名}`)
       })
     ]
   });
