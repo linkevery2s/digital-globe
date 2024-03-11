@@ -37,7 +37,7 @@
     .header {
       background: rgba(25, 68, 142, 0.8);
       color: #ffffff;
-      z-index: 100;
+      z-index: 2;
       position: fixed;
       width: 100%;
     }
@@ -55,7 +55,7 @@
     .footer {
       background: rgba(25, 68, 142, 0.8);
       color: #ffffff;
-      z-index: 100;
+      z-index: 2;
       position: fixed;
       bottom: 0;
       width: 100%;
@@ -119,11 +119,12 @@
       z-index: 1;
     }
 
-    .search, .manual{
+    .search-btn,
+    .manual-btn {
       cursor: pointer;
     }
 
-    .source{
+    .source {
       position: absolute;
       color: #38b48b;
       top: -30px;
@@ -133,11 +134,12 @@
       padding: 0;
       cursor: pointer;
     }
-    .source:hover{
+
+    .source:hover {
       border: none;
     }
 
-    .source2{
+    .source2 {
       position: absolute;
       color: #38b48b;
       bottom: 5px;
@@ -147,6 +149,81 @@
       padding: 0;
       cursor: pointer;
       display: none;
+    }
+
+    #overlay {
+      width: 100%;
+      height: 120vh;
+      position: fixed;
+      top: 0;
+      left: 0;
+      background: rgba(0, 0, 0, .8);
+      display: none;
+      z-index: 10;
+    }
+
+    #manual {
+      left: 50%;
+      position: absolute;
+      top: 50%;
+      transform: translate(-50%, -50%);
+      width: 85%;
+      max-width: 600px;
+      display: none;
+      z-index: 11;
+      background: #ffffff;
+      padding: .3em;
+    }
+
+    #search {
+      left: 50%;
+      position: absolute;
+      top: 50%;
+      transform: translate(-50%, -50%);
+      width: 85%;
+      max-width: 600px;
+      display: none;
+      z-index: 11;
+      background: #ffffff;
+      padding: .3em;
+    }
+
+    #closed-btn {
+      position: absolute;
+      top: 5px;
+      right: 5px;
+      border-radius: 100%;
+      color: #000000;
+      border: 1px solid #000000;
+      cursor: pointer;
+      width: 30px;
+      height: 30px;
+      text-align: center;
+    }
+
+    #closed-btn:hover {
+      background: rgba(0, 0, 0, .5);
+      color: #ffffff;
+      border: 1px solid #ffffff;
+    }
+
+    #closed-btn2 {
+      position: absolute;
+      top: 5px;
+      right: 5px;
+      border-radius: 100%;
+      color: #000000;
+      border: 1px solid #000000;
+      cursor: pointer;
+      width: 30px;
+      height: 30px;
+      text-align: center;
+    }
+
+    #closed-btn2:hover {
+      background: rgba(0, 0, 0, .5);
+      color: #ffffff;
+      border: 1px solid #ffffff;
     }
   </style>
 
@@ -239,15 +316,51 @@
       source2.style.display = "none";
     });
 
+    /* 使い方のポップアップ表示 */
+    const manual_btn = document.querySelector('.manual-btn');
+    const search_btn = document.querySelector('.search-btn');
+    const overlay = document.querySelector('#overlay');
+    const manual = document.querySelector('#manual');
+    const search = document.querySelector('#search');
 
+    const closed_btn = document.querySelector("#closed-btn");
+    const closed_btn2 = document.querySelector("#closed-btn2");
+
+    manual_btn.addEventListener('click', () => {
+      $('#overlay').fadeIn();
+      $('#manual').fadeIn();
+    });
+
+    search_btn.addEventListener('click', () => {
+      $('#overlay').fadeIn();
+      $('#search').fadeIn();
+    });
+
+    overlay.addEventListener('click', () => {
+      $('#overlay').fadeOut();
+      $('#manual').fadeOut();
+      $('#search').fadeOut();
+    });
+
+    closed_btn.addEventListener('click', () => {
+      $('#overlay').fadeOut();
+      $('#manual').fadeOut();
+    });
+
+    closed_btn2.addEventListener('click', () => {
+      $('#overlay').fadeOut();
+      $('#search').fadeOut();
+    });
   </script>
 
 </head>
 
 <body>
 
+  <!-- ヘッダー・フッター非表示 -->
   <span class="zoom2" id="zoom2"> <i class="fa-solid fa-xl fa-expand"></i> </span>
 
+  <!-- ヘッダー -->
   <div id="header" class="header text-center py-3">
     <h3 class="text-2xl"><a href="./index.html">デジタル地球儀</a></h3>
 
@@ -265,25 +378,42 @@
 
   </div>
 
+  <!-- メインコンテンツ -->
   <div id="main">
   </div>
 
+  <!-- mapの出典 -->
   <div class="source2"></div>
 
+  <!-- ポップアップ用のoverlay -->
+  <div id="overlay"></div>
+
+  <div id="manual"><span id="closed-btn">×</span>
+    <h3 class="text-2xl text-center"><i class="fa-solid fa-book"></i> 使い方</h3>
+  </div>
+
+  <div id="search"><span id="closed-btn2">×</span>
+    <h3 class="text-2xl text-center"><i class="fa-solid fa-magnifying-glass"></i> 検　索</h3>
+  </div>
+
+  <!-- フッター -->
   <div id="footer" class="footer p-2 text-center">
 
     <div class="source" id="source"></div>
 
     <div class="grid gap-4 grid-cols-3 grid-rows-1">
-      <div class="search"><i class="fa-solid fa-magnifying-glass"></i> 検　索</div>
-      <a href="./index.html"><div><i class="fa-solid fa-house"></i> ホーム</div></a>
-      <div class="manual"><i class="fa-solid fa-book"></i> 使い方</div>
+      <div class="search-btn"><i class="fa-solid fa-magnifying-glass"></i> 検　索</div>
+      <a href="./index.html">
+        <div><i class="fa-solid fa-house"></i> ホーム</div>
+      </a>
+      <div class="manual-btn"><i class="fa-solid fa-book"></i> 使い方</div>
     </div>
 
-    <p class="text-xs mt-1"><a href="https://github.com/linkevery2s/nationalflag" target="_blank">src on GitHub</a>. &copy <a
-        href="https://hitoshi2s.netlify.app/" target="_blank">齋藤 仁志</a>.</p>
+    <p class="text-xs mt-1"><a href="https://github.com/linkevery2s/nationalflag" target="_blank">src on GitHub</a>.
+      &copy <a href="https://hitoshi2s.netlify.app/" target="_blank">齋藤 仁志</a>.</p>
 
   </div>
 
 </body>
+
 </html>
