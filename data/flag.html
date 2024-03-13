@@ -49,10 +49,38 @@
 
   const AREA = "./nationalflag.geojson";
 
+  let lat; let lon; let zoom; let center;
+
+  const url_hash = location.hash;
+  let hash_last;
+
+  if (url_hash === "") {
+    lat = 12.983;
+    lon = 142.502;
+    zoom = .4;
+    center = [];
+
+  } else {
+    console.log(url_hash);
+
+    hash_last = url_hash.split("!");
+
+    lat = Number(hash_last[1].split("/")[1]);
+    lon = Number(hash_last[1].split("/")[0]);
+
+    zoom = 3;
+
+    center = [{
+      "lat": lat,
+      "lng": lon
+    }]
+
+  }
+
   const INITIAL_VIEW_STATE = {
-    latitude: 12.983,
-    longitude: 142.502,
-    zoom: .4
+    latitude: lat,
+    longitude: lon,
+    zoom: zoom
   };
 
   const tooltip = (d) => {
@@ -60,8 +88,10 @@
     if (!d || !d.object) return null;
     let obj = d.object;
 
-    const html_tr = ["<table>", "<center><img src='./img/" + obj.properties.country_code + "@3x.png'></center>" + "国名：" + obj.properties.name_jps + "<br>首都：" + obj.properties.capital_jp, "</table>"].join("\n");
+    let html_tr;
 
+    html_tr = ["<table>", "<center><img src='./img/" + obj.properties.country_code + "@3x.png'></center>" + "国名：" + obj.properties.name_jps + "<br>首都：" + obj.properties.capital_jp, "</table>"].join("\n");
+ 
     return {
       html: html_tr,
       style: {
@@ -69,6 +99,7 @@
         color: "#ffffff"
       }
     };
+
   };
 
   const deckgl = new deck.DeckGL({
@@ -123,6 +154,7 @@
         pickable: true,
         autoHighlight: true
       })
+
     ]
   });
 </script>

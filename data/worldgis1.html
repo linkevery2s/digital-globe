@@ -53,10 +53,38 @@
 
   const { DeckGL, _GlobeView, TileLayer, BitmapLayer, COORDINATE_SYSTEM, SolidPolygonLayer, ScatterplotLayer } = deck;
 
+  let lat; let lon; let zoom; let center;
+
+  const url_hash = location.hash;
+  let hash_last;
+
+  if (url_hash === "") {
+    lat = 12.983;
+    lon = 142.502;
+    zoom = .4;
+    center = [];
+
+  } else {
+    console.log(url_hash);
+
+    hash_last = url_hash.split("!");
+
+    lat = Number(hash_last[1].split("/")[1]);
+    lon = Number(hash_last[1].split("/")[0]);
+
+    zoom = 3;
+
+    center = [{
+      "lat": lat,
+      "lng": lon
+    }]
+
+  }
+
   const INITIAL_VIEW_STATE = {
-    latitude: 12.983,
-    longitude: 142.502,
-    zoom: .4
+    latitude: lat,
+    longitude: lon,
+    zoom: zoom
   };
 
   const tooltip = (d) => {
