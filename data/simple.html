@@ -1,6 +1,6 @@
 <!DOCTYPE HTML>
 <html lang="ja">
-<title>世界の首都・国旗</title>
+<title>緯度・経度・赤道</title>
 
 <head prefix="og: http://ogp.me/ns# fb: http://ogp.me/ns/fb# article: http://ogp.me/ns/article#">
   <meta charset="UTF-8" name="viewport"
@@ -47,8 +47,6 @@
   const COUNTRIES =
     'https://d2ad6b4ur7yvpq.cloudfront.net/naturalearth-3.3.0/ne_50m_admin_0_scale_rank.geojson'; //eslint-disable-line
 
-  const AREA = "./nationalflag.geojson";
-
   let lat; let lon; let zoom; let center;
 
   const url_hash = location.hash;
@@ -73,7 +71,7 @@
     center = [{
       "lat": lat,
       "lng": lon
-    }];
+    }]
 
   }
 
@@ -82,6 +80,21 @@
     longitude: lon,
     zoom: zoom
   };
+
+  const data1 = [
+    {
+      inbound: 72633,
+      outbound: 74735,
+      from: {
+        name: '19th St. Oakland (19TH)',
+        coordinates: [-122.269029, 37.80787]
+      },
+      to: {
+        name: '12th St. Oakland City Center (12TH)',
+        coordinates: [-122.271604, 37.803664]
+      }
+    }
+   ];
 
   const tooltip = (d) => {
 
@@ -109,42 +122,6 @@
     controller: true,
     getTooltip: tooltip,
     layers: [
-      new deck.SolidPolygonLayer({
-        id: 'background',
-        data: [
-          [
-            [-180, 90],
-            [0, 90],
-            [180, 90],
-            [180, -90],
-            [0, -90],
-            [-180, -90]
-          ]
-        ],
-        opacity: 0.3,
-        getPolygon: d => d,
-        stroked: false,
-        filled: true,
-        getFillColor: [234, 244, 252]
-      }),
-
-      new deck.ScatterplotLayer({
-        id: 'scatterplot-layer',
-        data: center,
-        pickable: false,
-        opacity: 0.8,
-        stroked: true,
-        filled: true,
-        radiusScale: 6,
-        radiusMinPixels: 30,
-        radiusMaxPixels: 30,
-        lineWidthMinPixels: 2,
-        getPosition: d => [d.lng, d.lat],
-        getRadius: d => 30,
-        getFillColor: d => [25, 68, 142],
-        getLineColor: d => [25, 68, 142]
-      }),
-
       new deck.GeoJsonLayer({
         id: 'base-map',
         data: COUNTRIES,
@@ -153,25 +130,18 @@
         lineWidthMinPixels: 2,
         getLineColor: [5, 10, 40],
         opacity: 0.5,
-        getFillColor: [15, 157, 80]
+        getFillColor: [255, 255, 255]
       }),
 
-      new deck.GeoJsonLayer({
-        id: 'airports',
-        data: AREA,
-        filled: true,
-        lineWidthMinPixels: 1,
-        pointRadiusMinPixels: 10,
-        pointRadiusScale: 2000,
-        getPointRadius: 17,
-        getFillColor: [232, 57, 41],
-        getLineColor: [255, 255, 255],
-        getLineWidth: 10,
-        opacity: 0.8,
+      new deck.LineLayer({
+        id: 'line-layer',
+        data: data1,
         pickable: true,
-        autoHighlight: true
+        getWidth: 50,
+        getSourcePosition: d => d.from.coordinates,
+        getTargetPosition: d => d.to.coordinates,
+        getColor: d => [100,100,100]
       })
-
     ]
   });
 </script>
