@@ -138,8 +138,8 @@
         data: data1,
         pickable: true,
         getWidth: 50,
-        getSourcePosition: d => ［137,44］,
-        getTargetPosition: d => ［137,30］,
+        getSourcePosition: d => d.from.coordinates,
+        getTargetPosition: d => d.to.coordinates,
         getColor: d => [100,100,100]
       })
     ]
