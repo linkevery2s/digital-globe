@@ -1,6 +1,6 @@
 <!DOCTYPE HTML>
 <html lang="ja">
-<title>世界の首都・国旗</title>
+<title>緯度・経度・赤道</title>
 
 <head prefix="og: http://ogp.me/ns# fb: http://ogp.me/ns/fb# article: http://ogp.me/ns/article#">
   <meta charset="UTF-8" name="viewport"
@@ -47,7 +47,9 @@
   const COUNTRIES =
     'https://d2ad6b4ur7yvpq.cloudfront.net/naturalearth-3.3.0/ne_50m_admin_0_scale_rank.geojson'; //eslint-disable-line
 
-  const AREA = "./nationalflag.geojson";
+  const AREA = "./data/simple1.geojson";
+  const LINE = "./data/line.geojson";
+  const CENTER = "./data/center.geojson";
 
   let lat; let lon; let zoom; let center;
 
@@ -73,7 +75,7 @@
     center = [{
       "lat": lat,
       "lng": lon
-    }];
+    }]
 
   }
 
@@ -90,7 +92,7 @@
 
     let html_tr;
 
-    html_tr = ["<table>", "<center><img src='./img/" + obj.properties.country_code + "@3x.png'></center>" + "国名：" + obj.properties.name_jps + "<br>首都：" + obj.properties.capital_jp, "</table>"].join("\n");
+    html_tr = ["<table>", "<center>" + obj.properties.name, "</table>"].join("\n");
 
     return {
       html: html_tr,
@@ -109,40 +111,31 @@
     controller: true,
     getTooltip: tooltip,
     layers: [
-      new deck.SolidPolygonLayer({
-        id: 'background',
-        data: [
-          [
-            [-180, 90],
-            [0, 90],
-            [180, 90],
-            [180, -90],
-            [0, -90],
-            [-180, -90]
-          ]
-        ],
-        opacity: 0.3,
-        getPolygon: d => d,
-        stroked: false,
+
+      new deck.GeoJsonLayer({
+        id: 'line',
+        data: LINE,
         filled: true,
-        getFillColor: [234, 244, 252]
+        lineWidthMinPixels: 3,
+        getPointRadius: 17,
+        getLineColor: [0, 149, 217],
+        getLineWidth: 3,
+        opacity: 0.8,
+        pickable: true,
+        autoHighlight: true
       }),
 
-      new deck.ScatterplotLayer({
-        id: 'scatterplot-layer',
-        data: center,
-        pickable: false,
-        opacity: 0.8,
-        stroked: true,
+      new deck.GeoJsonLayer({
+        id: 'line_center',
+        data: CENTER,
         filled: true,
-        radiusScale: 6,
-        radiusMinPixels: 30,
-        radiusMaxPixels: 30,
-        lineWidthMinPixels: 2,
-        getPosition: d => [d.lng, d.lat],
-        getRadius: d => 30,
-        getFillColor: d => [25, 68, 142],
-        getLineColor: d => [25, 68, 142]
+        lineWidthMinPixels: 3,
+        getPointRadius: 17,
+        getLineColor: [240, 0, 40],
+        getLineWidth: 3,
+        opacity: 0.8,
+        pickable: true,
+        autoHighlight: true
       }),
 
       new deck.GeoJsonLayer({
@@ -153,7 +146,7 @@
         lineWidthMinPixels: 2,
         getLineColor: [5, 10, 40],
         opacity: 0.5,
-        getFillColor: [15, 157, 80]
+        getFillColor: [242, 242, 242]
       }),
 
       new deck.GeoJsonLayer({
@@ -164,13 +157,15 @@
         pointRadiusMinPixels: 10,
         pointRadiusScale: 2000,
         getPointRadius: 17,
-        getFillColor: [232, 57, 41],
+        getFillColor: [240, 131, 0],
         getLineColor: [255, 255, 255],
         getLineWidth: 10,
         opacity: 0.8,
         pickable: true,
         autoHighlight: true
       })
+
+
 
     ]
   });
