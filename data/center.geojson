@@ -1,1 +1,0 @@
-{"type":"FeatureCollection","features":[{"type":"Feature","properties":{"name":"赤道"},"geometry":{"coordinates":[[-180,0],[180,0]],"type":"LineString"},"id":0}]}
