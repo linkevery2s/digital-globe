@@ -48,8 +48,15 @@
     'https://d2ad6b4ur7yvpq.cloudfront.net/naturalearth-3.3.0/ne_50m_admin_0_scale_rank.geojson'; //eslint-disable-line
 
   const AREA = "./data/simple1.geojson";
+  const AREA2 = "./data/simple2.geojson";
+  const AREA3 = "./data/simple3.geojson";
+
   const LINE = "./data/line.geojson";
   const CENTER = "./data/center.geojson";
+
+  const LINE2 = "./data/line2.geojson";
+
+  const BORDER = "./data/border.geojson";
 
   let lat; let lon; let zoom; let center;
 
@@ -57,8 +64,8 @@
   let hash_last;
 
   if (url_hash === "") {
-    lat = 12.983;
-    lon = 142.502;
+    lat = 28.4;
+    lon = 110.4;
     zoom = .4;
     center = [];
 
@@ -113,26 +120,39 @@
     layers: [
 
       new deck.GeoJsonLayer({
-        id: 'line',
+        id: 'line',/* 太平洋ベルト */
         data: LINE,
         filled: true,
-        lineWidthMinPixels: 3,
+        lineWidthMinPixels: 5,
         getPointRadius: 17,
-        getLineColor: [0, 149, 217],
-        getLineWidth: 3,
+        getLineColor: [137, 195, 235],
+        getLineWidth: 5,
         opacity: 0.8,
         pickable: true,
         autoHighlight: true
       }),
 
       new deck.GeoJsonLayer({
-        id: 'line_center',
+        id: 'line2',/* 経度134.55 */
+        data: LINE2,
+        filled: true,
+        lineWidthMinPixels: 5,
+        getPointRadius: 17,
+        getLineColor: [56, 180, 139],
+        getLineWidth: 5,
+        opacity: 0.8,
+        pickable: true,
+        autoHighlight: true
+      }),
+
+      new deck.GeoJsonLayer({
+        id: 'line_center',/* 赤道 */
         data: CENTER,
         filled: true,
-        lineWidthMinPixels: 3,
+        lineWidthMinPixels: 5,
         getPointRadius: 17,
         getLineColor: [240, 0, 40],
-        getLineWidth: 3,
+        getLineWidth: 5,
         opacity: 0.8,
         pickable: true,
         autoHighlight: true
@@ -163,9 +183,52 @@
         opacity: 0.8,
         pickable: true,
         autoHighlight: true
+      }),
+
+      new deck.GeoJsonLayer({
+        id: 'airports2',
+        data: AREA2,
+        filled: true,
+        lineWidthMinPixels: 1,
+        pointRadiusMinPixels: 10,
+        pointRadiusScale: 2000,
+        getPointRadius: 17,
+        getFillColor: [240, 131, 0],
+        getLineColor: [255, 255, 255],
+        getLineWidth: 10,
+        opacity: 0.8,
+        pickable: true,
+        autoHighlight: true
+      }),
+
+      new deck.GeoJsonLayer({
+        id: 'airports3',
+        data: AREA3,
+        filled: true,
+        lineWidthMinPixels: 1,
+        pointRadiusMinPixels: 10,
+        pointRadiusScale: 2000,
+        getPointRadius: 17,
+        getFillColor: [240, 131, 0],
+        getLineColor: [255, 255, 255],
+        getLineWidth: 10,
+        opacity: 0.8,
+        pickable: true,
+        autoHighlight: true
+      }),
+
+      new deck.GeoJsonLayer({
+        id: 'border',/* 国境 */
+        data: BORDER,
+        filled: true,
+        lineWidthMinPixels: 5,
+        getPointRadius: 17,
+        getLineColor: [101, 49, 142],
+        getLineWidth: 5,
+        opacity: 1,
+        pickable: true,
+        autoHighlight: true
       })
-
-
 
     ]
   });
