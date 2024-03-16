@@ -9,7 +9,7 @@
   <meta property="og:title" content="デジタル地球儀" />
   <meta property="og:type" content="website" />
   <meta property="og:image" content="https://national-globe.netlify.app/ogp.png" />
-  <meta name="description" content="世界の国々の国名や首都、半島、山脈などをデジタル地球儀にまとめました。地理教育などにご活用ください。" />
+  <meta name="description" content="世界の国々や日本の地理などをデジタル地球儀にまとめました。地理教育などにご活用ください。" />
   <meta name="twitter:card" content="summary_large_image">
   <meta name="twitter:title" content="デジタル地球儀" />
   <meta name="twitter:image" content="https://national-globe.netlify.app/ogp.png" />
@@ -437,7 +437,7 @@
         let count = 0;
 
         for (let j = 0; j < max; j++) {
-          if (data.features[j].properties.name_jp.indexOf(kensaku) != -1) {
+          if (data.features[j].properties.name_jps.indexOf(kensaku) != -1) {
             search_list1.innerHTML += '<div class="item">' +
               '<span class="item_title" onclick="dis1(' + data.features[j].geometry.coordinates[0] + ',' + data.features[j].geometry.coordinates[1] + ')">' + data.features[j].properties.name_jps + '</span>' +
               '</div>';
@@ -506,10 +506,10 @@
     <div id="navi">
       <nav>
         <ul>
-          <li class="flag">世界の首都・国旗</li>
+          <li class="flag">世界の国々</li>
           <li class="gis1">世界の地理</li>
+<li class="japan">日本の地理</li>
           <li class="simple">赤道・太平洋ベルト・国境</li>
-          <li class="japan">日本の地形</li>
         </ul>
       </nav>
     </div>
