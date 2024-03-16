@@ -109,7 +109,7 @@
       top: 67px;
       left: 10px;
       cursor: pointer;
-      background: rgba(0,0,0,.5);
+      background: rgba(0, 0, 0, .5);
       color: #ffffff;
       padding: .5em;
     }
@@ -120,7 +120,7 @@
       left: 10px;
       cursor: pointer;
       display: none;
-      background: rgba(0,0,0,.5);
+      background: rgba(0, 0, 0, .5);
       color: #ffffff;
       padding: .5em;
       z-index: 1;
@@ -232,6 +232,31 @@
       color: #ffffff;
       border: 1px solid #ffffff;
     }
+
+    input {
+      color: rgba(0, 119, 184, 0.5);
+      border: 1px solid rgba(0, 0, 0, .5);
+      font-size: 1.2em;
+      font-weight: bolder;
+      height: 45px;
+      width: 90%;
+    }
+
+    input::-webkit-input-placeholder {
+      color: rgba(0, 119, 184, 0.5);
+    }
+
+    #exp {
+      background: rgba(25, 68, 142, 0.8);
+      border-radius: .3em;
+      color: #ffffff;
+    }
+
+    .item {
+      height: 50px;
+      line-height: 50px;
+      cursor: pointer;
+    }
   </style>
 
   <link rel="manifest" href="./manifest.json">
@@ -306,7 +331,7 @@
       source.innerHTML = '<a href="https://maps.gsi.go.jp/development/ichiran.html" target="_blank">地理院タイル</a>';
       source2.innerHTML = '<a href="https://maps.gsi.go.jp/development/ichiran.html" target="_blank">地理院タイル</a>';
     });
-  
+
     simple.addEventListener('click', () => {
       $('#navi').hide();
       document.getElementById("main").innerHTML = '<iframe src="./simple.html"></iframe>';
@@ -319,7 +344,7 @@
       document.getElementById("main").innerHTML = '<iframe src="./japan.html"></iframe>';
       source.innerHTML = '<a href="https://maps.gsi.go.jp/development/ichiran.html" target="_blank">地理院タイル</a>';
       source2.innerHTML = '<a href="https://maps.gsi.go.jp/development/ichiran.html" target="_blank">地理院タイル</a>';
-    });  
+    });
 
     /* 全画面表示の切り替え */
     const zoom = document.querySelector('.zoom');
@@ -374,6 +399,94 @@
       $('#overlay').fadeOut();
       $('#search').fadeOut();
     });
+
+    /* 検索機能 */
+    const search_list1 = document.querySelector('.search_list1');
+    const search_btn1 = document.querySelector('.search_btn');
+    const reset_btn1 = document.querySelector('.reset_btn');
+
+    search_list1.innerHTML = "";
+
+    let kensaku = text.value;
+
+    const res = await fetch('./data/nationalflag.geojson');
+    const data = await res.json();
+
+    console.log(data.features[1].geometry.coordinates[0]);
+
+    const max = data.features.length;
+    let count = 0;
+
+    for (let j = 0; j < max; j++) {
+
+      search_list1.innerHTML += '<div class="item">' +
+        '<span class="item_title" onclick="dis1(' + data.features[j].geometry.coordinates[0] + ',' + data.features[j].geometry.coordinates[1] + ')">' + data.features[j].properties.name_jps + '</span>' +
+        '</div>';
+      count = count + 1;
+
+    }
+
+    search_btn1.addEventListener('click', () => {
+
+      if (text.value != "") {
+
+        search_list1.innerHTML = "";
+
+        let kensaku = text.value;
+
+        let count = 0;
+
+        for (let j = 0; j < max; j++) {
+          if (data.features[j].properties.name_jp.indexOf(kensaku) != -1) {
+            search_list1.innerHTML += '<div class="item">' +
+              '<span class="item_title" onclick="dis1(' + data.features[j].geometry.coordinates[0] + ',' + data.features[j].geometry.coordinates[1] + ')">' + data.features[j].properties.name_jps + '</span>' +
+              '</div>';
+            count = count + 1;
+          }
+        }
+
+      } else { }
+
+    });
+
+    reset_btn1.addEventListener('click', () => {
+
+      search_list1.innerHTML = "";
+
+      for (let j = 0; j < max; j++) {
+
+        text.value = "";
+
+        search_list1.innerHTML += '<div class="item">' +
+        '<span class="item_title" onclick="dis1(' + data.features[j].geometry.coordinates[0] + ',' + data.features[j].geometry.coordinates[1] + ')">' + data.features[j].properties.name_jps + '</span>' +
+        '</div>';
+        count = count + 1;
+
+      }
+    });
+
+    window.dis1 = (x, y) => {
+
+      $('#overlay').fadeOut();
+      $('#search').fadeOut();
+
+      document.getElementById("main").innerHTML = '<iframe src="./flag.html#!' + x + "/" + y + '"></iframe>';
+
+      search_list1.innerHTML = "";
+
+      for (let j = 0; j < max; j++) {
+
+        text.value = "";
+
+        search_list1.innerHTML += '<div class="item">' +
+        '<span class="item_title" onclick="dis1(' + data.features[j].geometry.coordinates[0] + ',' + data.features[j].geometry.coordinates[1] + ')">' + data.features[j].properties.name_jps + '</span>' +
+        '</div>';
+        count = count + 1;
+
+      }
+
+    }
+
   </script>
 
 </head>
@@ -417,11 +530,17 @@
     <h3 class="text-2xl text-center"><i class="fa-solid fa-book"></i> 使い方</h3>
   </div>
 
-  <div id="search"><span id="closed-btn2">×</span>
-    <h3 class="text-2xl text-center"><i class="fa-solid fa-magnifying-glass"></i> 検　索</h3>
+  <div id="search" class="text-center"><span id="closed-btn2">×</span>
+    <h3 class="text-2xl text-center mb-3">検　索</h3>
 
+    <input type="text" name="text1" id="text" class="mb-3" size="15" autocomplete="off" autofocus
+      placeholder="キーワード検索" />
+    <div class="grid gap-2 grid-cols-2 grid-rows-1 mx-5">
+      <div id="exp" class="search_btn py-3">検　索</div>
+      <div id="exp" class="reset_btn py-3">リセット</div>
+    </div>
 
-    
+    <div class="search_list1 overflow-y-scroll h-72 mt-5"></div>
 
 
   </div>
