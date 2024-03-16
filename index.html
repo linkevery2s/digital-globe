@@ -86,8 +86,10 @@
 
 
     li {
-      margin: 1rem 0;
+      height: 50px;
+      line-height: 50px;
       cursor: pointer;
+      border-bottom: 1px dotted #fff;
     }
 
     nav {
@@ -289,6 +291,7 @@
     const flag = document.querySelector('.flag');
     const gis1 = document.querySelector('.gis1');
     const simple = document.querySelector('.simple');
+    const japan = document.querySelector('.japan');
 
     flag.addEventListener('click', () => {
       $('#navi').hide();
@@ -310,7 +313,14 @@
       source.innerHTML = '<a href="https://geojson.xyz/" target="_blank">geojson.xyz</a>';
       source2.innerHTML = '<a href="https://geojson.xyz/" target="_blank">geojson.xyz</a>';
     });
-  
+
+    japan.addEventListener('click', () => {
+      $('#navi').hide();
+      document.getElementById("main").innerHTML = '<iframe src="./japan.html"></iframe>';
+      source.innerHTML = '<a href="https://maps.gsi.go.jp/development/ichiran.html" target="_blank">地理院タイル</a>';
+      source2.innerHTML = '<a href="https://maps.gsi.go.jp/development/ichiran.html" target="_blank">地理院タイル</a>';
+    });  
+
     /* 全画面表示の切り替え */
     const zoom = document.querySelector('.zoom');
     const zoom2 = document.querySelector('.zoom2');
@@ -384,8 +394,9 @@
       <nav>
         <ul>
           <li class="flag">世界の首都・国旗</li>
-          <li class="gis1">世界の地理①</li>
-          <li class="simple">緯度・経度・赤道</li>
+          <li class="gis1">世界の地理</li>
+          <li class="simple">赤道・太平洋ベルト・国境</li>
+          <li class="japan">日本の地形</li>
         </ul>
       </nav>
     </div>

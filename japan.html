@@ -50,7 +50,6 @@
 </body>
 
 <script type="module">
-
   const { DeckGL, _GlobeView, TileLayer, BitmapLayer, COORDINATE_SYSTEM, SolidPolygonLayer, ScatterplotLayer } = deck;
 
   let lat; let lon; let zoom; let center;
@@ -59,9 +58,9 @@
   let hash_last;
 
   if (url_hash === "") {
-    lat = 12.983;
-    lon = 142.502;
-    zoom = .4;
+    lat = 37;
+    lon = 139.502;
+    zoom = 2;
     center = [];
 
   } else {
@@ -84,7 +83,9 @@
   const INITIAL_VIEW_STATE = {
     latitude: lat,
     longitude: lon,
-    zoom: zoom
+    zoom: zoom,
+    minZoom: 1,
+    maxZoom: 7
   };
 
   const tooltip = (d) => {
@@ -105,7 +106,7 @@
   };
 
   const tile = new TileLayer({
-    data: 'https://cyberjapandata.gsi.go.jp/xyz/std/{z}/{x}/{y}.png',
+    data: 'https://cyberjapandata.gsi.go.jp/xyz/seamlessphoto/{z}/{x}/{y}.jpg',
     minZoom: 0,
     maxZoom: 19,
     tileSize: 256,
@@ -131,23 +132,7 @@
     controller: true,
     getTooltip: tooltip,
     layers: [
-      tile,
-      new ScatterplotLayer({
-        id: 'scatterplot-layer',
-        data: worldgis1,
-        pickable: true,
-        opacity: 0.8,
-        stroked: true,
-        filled: true,
-        radiusScale: 6,
-        radiusMinPixels: 10,
-        radiusMaxPixels: 10,
-        lineWidthMinPixels: 1,
-        getPosition: d => [d.lng, d.lat],
-        getRadius: d => 15,
-        getFillColor: d => [232, 57, 41],
-        getLineColor: d => [255, 255, 255]
-      })
+      tile
     ]
   });
 </script>
