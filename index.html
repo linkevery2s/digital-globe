@@ -318,7 +318,8 @@
     const flag = document.querySelector('.flag');
     const gis1 = document.querySelector('.gis1');
     const simple = document.querySelector('.simple');
-    const japan = document.querySelector('.japan');
+    const earthquake = document.querySelector('.earthquake');
+    //const japan = document.querySelector('.japan');
 
     flag.addEventListener('click', () => {
       $('#navi').hide();
@@ -339,6 +340,13 @@
       document.getElementById("main").innerHTML = '<iframe src="./simple.html"></iframe>';
       source.innerHTML = '<a href="https://geojson.xyz/" target="_blank">geojson.xyz</a>';
       source2.innerHTML = '<a href="https://geojson.xyz/" target="_blank">geojson.xyz</a>';
+    });
+
+    earthquake.addEventListener('click', () => {
+      $('#navi').hide();
+      document.getElementById("main").innerHTML = '<iframe src="./earthquake.html"></iframe>';
+      source.innerHTML = '<a href="https://github.com/nagix/japan-eq-locator" target="_blank">Japan EQ Locator</a>';
+      source2.innerHTML = '<a href="https://github.com/nagix/japan-eq-locator" target="_blank">Japan EQ Locator</a>';
     });
 
     /*japan.addEventListener('click', () => {
@@ -562,6 +570,7 @@
           <li class="gis1">世界の地理</li>
           <!--<li class="japan">日本の地理</li>-->
           <li class="simple">赤道・太平洋ベルト・国境</li>
+          <li class="earthquake">世界の地震</li>
         </ul>
       </nav>
     </div>
