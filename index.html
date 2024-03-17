@@ -9,7 +9,7 @@
   <meta property="og:title" content="デジタル地球儀" />
   <meta property="og:type" content="website" />
   <meta property="og:image" content="https://digital-globe.netlify.app/ogp.png" />
-  <meta name="description" content="世界の国々や日本の地理などをデジタル地球儀にまとめました。地理教育などにご活用ください。" />
+  <meta name="description" content="世界の国々や地形などをデジタル地球儀にまとめました。地理教育にご活用ください。" />
   <meta name="twitter:card" content="summary_large_image">
   <meta name="twitter:title" content="デジタル地球儀" />
   <meta name="twitter:image" content="https://digital-globe.netlify.app/ogp.png" />
@@ -324,29 +324,29 @@
     flag.addEventListener('click', () => {
       $('#navi').hide();
       document.getElementById("main").innerHTML = '<iframe src="./flag.html"></iframe>';
-      source.innerHTML = '<a href="https://geojson.xyz/" target="_blank">geojson.xyz</a>';
-      source2.innerHTML = '<a href="https://geojson.xyz/" target="_blank">geojson.xyz</a>';
+      source.innerHTML = '地図データ：<a href="https://geojson.xyz/" target="_blank">geojson.xyz</a>';
+      source2.innerHTML = '地図データ：<a href="https://geojson.xyz/" target="_blank">geojson.xyz</a>';
     });
 
     gis1.addEventListener('click', () => {
       $('#navi').hide();
       document.getElementById("main").innerHTML = '<iframe src="./worldgis1.html"></iframe>';
-      source.innerHTML = '<a href="https://maps.gsi.go.jp/development/ichiran.html" target="_blank">地理院タイル</a>';
-      source2.innerHTML = '<a href="https://maps.gsi.go.jp/development/ichiran.html" target="_blank">地理院タイル</a>';
+      source.innerHTML = '地図データ：<a href="https://maps.gsi.go.jp/development/ichiran.html" target="_blank">地理院タイル</a>';
+      source2.innerHTML = '地図データ：<a href="https://maps.gsi.go.jp/development/ichiran.html" target="_blank">地理院タイル</a>';
     });
 
     simple.addEventListener('click', () => {
       $('#navi').hide();
       document.getElementById("main").innerHTML = '<iframe src="./simple.html"></iframe>';
-      source.innerHTML = '<a href="https://geojson.xyz/" target="_blank">geojson.xyz</a>';
-      source2.innerHTML = '<a href="https://geojson.xyz/" target="_blank">geojson.xyz</a>';
+      source.innerHTML = '地図データ：<a href="https://geojson.xyz/" target="_blank">geojson.xyz</a>';
+      source2.innerHTML = '地図データ：<a href="https://geojson.xyz/" target="_blank">geojson.xyz</a>';
     });
 
     earthquake.addEventListener('click', () => {
       $('#navi').hide();
       document.getElementById("main").innerHTML = '<iframe src="./earthquake.html"></iframe>';
-      source.innerHTML = '<a href="https://github.com/nagix/japan-eq-locator" target="_blank">Japan EQ Locator</a>';
-      source2.innerHTML = '<a href="https://github.com/nagix/japan-eq-locator" target="_blank">Japan EQ Locator</a>';
+      source.innerHTML = 'データ出典：<a href="https://github.com/nagix/japan-eq-locator" target="_blank">Japan EQ Locator</a>';
+      source2.innerHTML = 'データ出典：<a href="https://github.com/nagix/japan-eq-locator" target="_blank">Japan EQ Locator</a>';
     });
 
     /*japan.addEventListener('click', () => {
