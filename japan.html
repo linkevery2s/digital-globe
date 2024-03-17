@@ -1,12 +1,13 @@
 <!DOCTYPE HTML>
 <html lang="ja">
-<title>世界の地理</title>
+<title>日本の地理</title>
 
 <head prefix="og: http://ogp.me/ns# fb: http://ogp.me/ns/fb# article: http://ogp.me/ns/article#">
   <meta charset="UTF-8" name="viewport"
     content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <script src="https://unpkg.com/deck.gl@^8.1.0/dist.min.js"></script>
+
   <script src="./data/worldgis1.json"></script>
 
   <style type="text/css">
@@ -50,7 +51,10 @@
 </body>
 
 <script type="module">
-  const { DeckGL, _GlobeView, TileLayer, BitmapLayer, COORDINATE_SYSTEM, SolidPolygonLayer, ScatterplotLayer } = deck;
+  const { DeckGL, _GlobeView, TileLayer, BitmapLayer, COORDINATE_SYSTEM, SolidPolygonLayer, ScatterplotLayer, GeoJsonLayer } = deck;
+
+  const COUNTRIES =
+    'https://d2ad6b4ur7yvpq.cloudfront.net/naturalearth-3.3.0/ne_50m_admin_0_scale_rank.geojson';
 
   let lat; let lon; let zoom; let center;
 
@@ -60,7 +64,7 @@
   if (url_hash === "") {
     lat = 37;
     lon = 139.502;
-    zoom = 2;
+    zoom = .6;
     center = [];
 
   } else {
@@ -106,7 +110,8 @@
   };
 
   const tile = new TileLayer({
-    data: 'https://cyberjapandata.gsi.go.jp/xyz/seamlessphoto/{z}/{x}/{y}.jpg',
+    //data: 'https://cyberjapandata.gsi.go.jp/xyz/seamlessphoto/{z}/{x}/{y}.jpg',
+    data: "https://cyberjapandata.gsi.go.jp/xyz/pale/{z}/{x}/{y}.png",
     minZoom: 0,
     maxZoom: 19,
     tileSize: 256,
@@ -123,7 +128,8 @@
         bounds: [west, south, east, north]
       });
     }
-  })
+  });
+
 
   const deckgl = new DeckGL({
     container: 'container',
