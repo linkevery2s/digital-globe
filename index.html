@@ -71,6 +71,16 @@
       color: #38b48b;
     }
 
+    #update-btn {
+      border-bottom: 1px dotted #ffffff;
+      cursor: pointer;
+    }
+
+    #update-btn:hover {
+      border-bottom: none;
+      color: #38b48b;
+    }
+
     .btn-menu {
       position: fixed;
       top: 10px;
@@ -136,12 +146,10 @@
       color: #38b48b;
       top: -30px;
       right: 5px;
-      padding: 3px;
       z-index: 10;
       border-bottom: 1px dotted #38b48b;
       cursor: pointer;
-      background: rgba(255,255,255, .5);
-
+      background: rgba(255, 255, 255, .5);
     }
 
     .source2 {
@@ -151,13 +159,13 @@
       right: 5px;
       z-index: 10;
       border-bottom: 1px dotted #38b48b;
-      padding: 3px;
       cursor: pointer;
       display: none;
-      background: rgba(255,255,255, .5);
+      background: rgba(255, 255, 255, .5);
     }
 
-    .source, .source2:hover {
+    .source,
+    .source2:hover {
       border: none;
     }
 
@@ -172,7 +180,7 @@
       z-index: 10;
     }
 
-    #manual {
+    #manual,#search,#update {
       left: 50%;
       position: absolute;
       top: 50%;
@@ -185,20 +193,7 @@
       padding: .3em;
     }
 
-    #search {
-      left: 50%;
-      position: absolute;
-      top: 50%;
-      transform: translate(-50%, -50%);
-      width: 85%;
-      max-width: 600px;
-      display: none;
-      z-index: 11;
-      background: #ffffff;
-      padding: .3em;
-    }
-
-    #closed-btn {
+    #closed-btn,#closed-btn2,#closed-btn3 {
       position: absolute;
       top: 5px;
       right: 5px;
@@ -217,20 +212,13 @@
       border: 1px solid #ffffff;
     }
 
-    #closed-btn2 {
-      position: absolute;
-      top: 5px;
-      right: 5px;
-      border-radius: 100%;
-      color: #000000;
-      border: 1px solid #000000;
-      cursor: pointer;
-      width: 30px;
-      height: 30px;
-      text-align: center;
+    #closed-btn2:hover {
+      background: rgba(0, 0, 0, .5);
+      color: #ffffff;
+      border: 1px solid #ffffff;
     }
 
-    #closed-btn2:hover {
+    #closed-btn3:hover {
       background: rgba(0, 0, 0, .5);
       color: #ffffff;
       border: 1px solid #ffffff;
@@ -261,7 +249,11 @@
       cursor: pointer;
     }
 
-    #manual_h3{
+    .item:nth-child(odd) {
+      background: rgba(242,242,242,.5);
+    }
+
+    #manual_h3 {
       border-bottom: 3px dotted #a0d8ef;
       padding-bottom: 3px;
     }
@@ -297,6 +289,8 @@
 
     gtag('config', 'G-MPP84V2NHB');
   </script>
+
+  <script src="./data/worldgis1.json"></script>
 
   <script type="module">
 
@@ -347,12 +341,12 @@
       source2.innerHTML = '<a href="https://geojson.xyz/" target="_blank">geojson.xyz</a>';
     });
 
-    japan.addEventListener('click', () => {
+    /*japan.addEventListener('click', () => {
       $('#navi').hide();
       document.getElementById("main").innerHTML = '<iframe src="./japan.html"></iframe>';
       source.innerHTML = '<a href="https://maps.gsi.go.jp/development/ichiran.html" target="_blank">地理院タイル</a>';
       source2.innerHTML = '<a href="https://maps.gsi.go.jp/development/ichiran.html" target="_blank">地理院タイル</a>';
-    });
+    });*/
 
     /* 全画面表示の切り替え */
     const zoom = document.querySelector('.zoom');
@@ -378,9 +372,11 @@
     const overlay = document.querySelector('#overlay');
     const manual = document.querySelector('#manual');
     const search = document.querySelector('#search');
+    const update_btn = document.querySelector('#update-btn');
 
     const closed_btn = document.querySelector("#closed-btn");
     const closed_btn2 = document.querySelector("#closed-btn2");
+    const closed_btn3 = document.querySelector("#closed-btn3");
 
     manual_btn.addEventListener('click', () => {
       $('#overlay').fadeIn();
@@ -392,10 +388,16 @@
       $('#search').fadeIn();
     });
 
+    update_btn.addEventListener('click', () => {
+      $('#overlay').fadeIn();
+      $('#update').fadeIn();
+    });
+
     overlay.addEventListener('click', () => {
       $('#overlay').fadeOut();
       $('#manual').fadeOut();
       $('#search').fadeOut();
+      $('#update').fadeOut();
     });
 
     closed_btn.addEventListener('click', () => {
@@ -406,6 +408,11 @@
     closed_btn2.addEventListener('click', () => {
       $('#overlay').fadeOut();
       $('#search').fadeOut();
+    });
+
+    closed_btn3.addEventListener('click', () => {
+      $('#overlay').fadeOut();
+      $('#update').fadeOut();
     });
 
     /* 検索機能 */
@@ -420,18 +427,21 @@
     const res = await fetch('./data/nationalflag.geojson');
     const data = await res.json();
 
-    console.log(data.features[1].geometry.coordinates[0]);
+    //console.log(data.features[1].geometry.coordinates[0]);
 
     const max = data.features.length;
-    let count = 0;
+    const max2 = worldgis1.length
 
     for (let j = 0; j < max; j++) {
-
       search_list1.innerHTML += '<div class="item">' +
         '<span class="item_title" onclick="dis1(' + data.features[j].geometry.coordinates[0] + ',' + data.features[j].geometry.coordinates[1] + ')">' + data.features[j].properties.name_jps + '</span>' +
         '</div>';
-      count = count + 1;
+    }
 
+    for (let j = 0; j < max2; j++) {
+      search_list1.innerHTML += '<div class="item">' +
+        '<span class="item_title" onclick="dis2(' + worldgis1[j].lng + ',' + worldgis1[j].lat + ')">' + worldgis1[j].name + '</span>' +
+        '</div>';
     }
 
     search_btn1.addEventListener('click', () => {
@@ -442,14 +452,19 @@
 
         let kensaku = text.value;
 
-        let count = 0;
-
         for (let j = 0; j < max; j++) {
           if (data.features[j].properties.name_jps.indexOf(kensaku) != -1) {
             search_list1.innerHTML += '<div class="item">' +
               '<span class="item_title" onclick="dis1(' + data.features[j].geometry.coordinates[0] + ',' + data.features[j].geometry.coordinates[1] + ')">' + data.features[j].properties.name_jps + '</span>' +
               '</div>';
-            count = count + 1;
+          }
+        }
+
+        for (let j = 0; j < max2; j++) {
+          if (worldgis1[j].name.indexOf(kensaku) != -1) {
+            search_list1.innerHTML += '<div class="item">' +
+              '<span class="item_title" onclick="dis2(' + worldgis1[j].lng + ',' + worldgis1[j].lat + ')">' + worldgis1[j].name + '</span>' +
+              '</div>';
           }
         }
 
@@ -462,15 +477,18 @@
       search_list1.innerHTML = "";
 
       for (let j = 0; j < max; j++) {
-
         text.value = "";
-
         search_list1.innerHTML += '<div class="item">' +
           '<span class="item_title" onclick="dis1(' + data.features[j].geometry.coordinates[0] + ',' + data.features[j].geometry.coordinates[1] + ')">' + data.features[j].properties.name_jps + '</span>' +
           '</div>';
-        count = count + 1;
-
       }
+
+      for (let j = 0; j < max2; j++) {
+        search_list1.innerHTML += '<div class="item">' +
+          '<span class="item_title" onclick="dis2(' + worldgis1[j].lng + ',' + worldgis1[j].lat + ')">' + worldgis1[j].name + '</span>' +
+          '</div>';
+      }
+
     });
 
     window.dis1 = (x, y) => {
@@ -483,14 +501,40 @@
       search_list1.innerHTML = "";
 
       for (let j = 0; j < max; j++) {
-
         text.value = "";
-
         search_list1.innerHTML += '<div class="item">' +
           '<span class="item_title" onclick="dis1(' + data.features[j].geometry.coordinates[0] + ',' + data.features[j].geometry.coordinates[1] + ')">' + data.features[j].properties.name_jps + '</span>' +
           '</div>';
-        count = count + 1;
+      }
 
+      for (let j = 0; j < max2; j++) {
+        search_list1.innerHTML += '<div class="item">' +
+          '<span class="item_title" onclick="dis2(' + worldgis1[j].lng + ',' + worldgis1[j].lat + ')">' + worldgis1[j].name + '</span>' +
+          '</div>';
+      }
+
+    }
+
+    window.dis2 = (x, y) => {
+
+      $('#overlay').fadeOut();
+      $('#search').fadeOut();
+
+      document.getElementById("main").innerHTML = '<iframe src="./worldgis1.html#!' + x + "/" + y + '"></iframe>';
+
+      search_list1.innerHTML = "";
+
+      for (let j = 0; j < max; j++) {
+        text.value = "";
+        search_list1.innerHTML += '<div class="item">' +
+          '<span class="item_title" onclick="dis1(' + data.features[j].geometry.coordinates[0] + ',' + data.features[j].geometry.coordinates[1] + ')">' + data.features[j].properties.name_jps + '</span>' +
+          '</div>';
+      }
+
+      for (let j = 0; j < max2; j++) {
+        search_list1.innerHTML += '<div class="item">' +
+          '<span class="item_title" onclick="dis2(' + worldgis1[j].lng + ',' + worldgis1[j].lat + ')">' + worldgis1[j].name + '</span>' +
+          '</div>';
       }
 
     }
@@ -516,7 +560,7 @@
         <ul>
           <li class="flag">世界の国々</li>
           <li class="gis1">世界の地理</li>
-          <li class="japan">日本の地理</li>
+          <!--<li class="japan">日本の地理</li>-->
           <li class="simple">赤道・太平洋ベルト・国境</li>
         </ul>
       </nav>
@@ -537,48 +581,48 @@
   <div id="manual"><span id="closed-btn">×</span>
     <h3 class="text-2xl text-center"><i class="fa-solid fa-book"></i> 使い方</h3>
 
-    <div class="overflow-y-scroll h-72 mt-5 mx-5">
+    <div class="overflow-y-scroll h-80 mt-5 mx-5">
       <img src="./gis.jpg" width="100%">
 
-    <h3 class="text-2xl mt-5" id="manual_h3">デジタル地球儀で、地理を楽しんで学ぼう！</h3>
+      <h3 class="text-2xl mt-5" id="manual_h3">デジタル地球儀で、地理を楽しんで学ぼう！</h3>
 
-    <p class="mt-5">世界には様々な国や地形があります。</p>
+      <p class="mt-5">世界には様々な国や地形があります。</p>
 
-    <p class="mt-5">日本とは、どんな違いがあるでしょうか？</p>
+      <p class="mt-5">日本とは、どんな違いがあるでしょうか？</p>
 
-    <p class="mt-5">日本と同じ緯度、経度の国々は？</p>
+      <p class="mt-5">日本と同じ緯度、経度の国々は？</p>
 
-    <p class="mt-5">赤道直下の国々は？</p>
+      <p class="mt-5">赤道直下の国々は？</p>
 
-    <p class="mt-5">世界の山、山脈、半島はどのような特徴があるでしょうか？</p>
+      <p class="mt-5">世界の山、山脈、半島はどのような特徴があるでしょうか？</p>
 
-    <h3 class="text-2xl mt-7" id="manual_h3">MENUボタン</h3>
+      <h3 class="text-2xl mt-7" id="manual_h3">MENUボタン</h3>
 
-    <p class="mt-5">右上のMENUボタンより、様々な地球儀を切り替えて表示できます！</p>
+      <p class="mt-5">右上のMENUボタンより、様々な地球儀を切り替えて表示できます！</p>
 
-    <h3 class="text-2xl mt-7" id="manual_h3">検索ボタン</h3>
+      <h3 class="text-2xl mt-7" id="manual_h3">検索ボタン</h3>
 
-    <p class="mt-5">ワールドカップやオリンピックで、世界中の選手が登場します。</p>
+      <p class="mt-5">ワールドカップやオリンピックで、世界中の選手が登場します。</p>
 
-    <p class="mt-5">「この国はどこらへんにあるんだろう？」</p>
+      <p class="mt-5">「この国はどこらへんにあるんだろう？」</p>
 
-    <p class="mt-5">左下の検索ボタンより、検索することができます！</p>
+      <p class="mt-5">左下の検索ボタンより、検索することができます！</p>
 
-    <h3 class="text-2xl mt-7" id="manual_h3">全画面表示</h3>
+      <h3 class="text-2xl mt-7" id="manual_h3">全画面表示</h3>
 
-    <p class="mt-5">左上の全画面表示ボタンより、地球儀が全画面表示に切り替わります！</p>
+      <p class="mt-5">左上の全画面表示ボタンより、地球儀が全画面表示に切り替わります！</p>
 
-    <p class="mt-5">このアプリは、パソコン、スマホ、タブレット、あらゆるデバイスに対応しています。</p>
+      <p class="mt-5">このアプリは、パソコン、スマホ、タブレット、あらゆるデバイスに対応しています。</p>
 
-    <p class="mt-5">デジタル地球儀をグリグリと動かして、子ども達から大人まで、楽しんで地理を学んでみませんか？</p>
+      <p class="mt-5">デジタル地球儀をグリグリと動かして、子ども達から大人まで、楽しんで地理を学んでみませんか？</p>
 
-    <p class="mt-5">齋藤　仁志. </p>
+      <p class="mt-5">齋藤　仁志. </p>
     </div>
 
   </div>
 
   <div id="search" class="text-center"><span id="closed-btn2">×</span>
-    <h3 class="text-2xl text-center mb-3">検　索</h3>
+    <h3 class="text-2xl text-center mb-3"><i class="fa-solid fa-magnifying-glass"></i> 検　索</h3>
 
     <input type="text" name="text1" id="text" class="mb-3 pl-3" size="15" autocomplete="off" autofocus
       placeholder="キーワード検索" />
@@ -589,6 +633,14 @@
 
     <div class="search_list1 overflow-y-scroll h-72 mt-5"></div>
 
+  </div>
+
+  <div id="update" class="text-center"><span id="closed-btn3">×</span>
+    <h3 class="text-2xl text-center mb-3">更新情報</h3>
+
+    <div class="search_list1 overflow-y-scroll h-72 mt-5">
+      2024.3.17 アプリリリース
+    </div>
 
   </div>
 
@@ -606,7 +658,7 @@
     </div>
 
     <p class="text-xs mt-1"><a href="https://github.com/linkevery2s/nationalflag" target="_blank">src on GitHub</a>.
-      &copy <a href="https://hitoshi2s.netlify.app/" target="_blank">齋藤 仁志</a>.</p>
+      &copy <a href="https://hitoshi2s.netlify.app/" target="_blank">齋藤 仁志</a>. <span id="update-btn">更新情報</span></p>
 
   </div>
 

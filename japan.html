@@ -8,8 +8,6 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <script src="https://unpkg.com/deck.gl@^8.1.0/dist.min.js"></script>
 
-  <script src="./data/worldgis1.json"></script>
-
   <style type="text/css">
     html {
       margin: 0;
@@ -51,10 +49,10 @@
 </body>
 
 <script type="module">
-  const { DeckGL, _GlobeView, TileLayer, BitmapLayer, COORDINATE_SYSTEM, SolidPolygonLayer, ScatterplotLayer, GeoJsonLayer } = deck;
+  const { DeckGL, _GlobeView, TileLayer, BitmapLayer, COORDINATE_SYSTEM, GeoJsonLayer } = deck;
 
-  const COUNTRIES =
-    'https://d2ad6b4ur7yvpq.cloudfront.net/naturalearth-3.3.0/ne_50m_admin_0_scale_rank.geojson';
+  const heiya = "./data/ja_heiya.geojson";
+  const river = "./data/ja_river.geojson";
 
   let lat; let lon; let zoom; let center;
 
@@ -88,7 +86,7 @@
     latitude: lat,
     longitude: lon,
     zoom: zoom,
-    minZoom: 1,
+    minZoom: .6,
     maxZoom: 7
   };
 
@@ -97,7 +95,7 @@
     if (!d || !d.object) return null;
     let obj = d.object;
 
-    const html_tr = ["<table>", "名称：" + obj.name + "<br>概要：" + obj.description, "</table>"].join("\n");
+    const html_tr = ["<table>", "名称：" + obj.properties.name + "<br>概要：" + obj.properties.description, "</table>"].join("\n");
 
     return {
       html: html_tr,
@@ -110,8 +108,7 @@
   };
 
   const tile = new TileLayer({
-    //data: 'https://cyberjapandata.gsi.go.jp/xyz/seamlessphoto/{z}/{x}/{y}.jpg',
-    data: "https://cyberjapandata.gsi.go.jp/xyz/pale/{z}/{x}/{y}.png",
+    data: 'https://cyberjapandata.gsi.go.jp/xyz/seamlessphoto/{z}/{x}/{y}.jpg',
     minZoom: 0,
     maxZoom: 19,
     tileSize: 256,
@@ -138,7 +135,38 @@
     controller: true,
     getTooltip: tooltip,
     layers: [
-      tile
+      tile,
+      new GeoJsonLayer({
+        id: 'heiya',
+        data: heiya,
+        filled: true,
+        lineWidthMinPixels: 1,
+        pointRadiusMinPixels: 10,
+        pointRadiusScale: 2000,
+        getPointRadius: 10,
+        getFillColor: [56, 180, 139],
+        getLineColor: [255, 255, 255],
+        getLineWidth: 10,
+        opacity: 0.8,
+        pickable: true,
+        autoHighlight: true
+      }),
+
+      new GeoJsonLayer({
+        id: 'river',
+        data: river,
+        filled: true,
+        lineWidthMinPixels: 1,
+        pointRadiusMinPixels: 5,
+        pointRadiusScale: 2000,
+        getPointRadius: 5,
+        getFillColor: [160,216,239],
+        getLineColor: [255, 255, 255],
+        getLineWidth: 10,
+        opacity: 0.8,
+        pickable: true,
+        autoHighlight: true
+      })
     ]
   });
 </script>
