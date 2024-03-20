@@ -245,6 +245,7 @@
       background: rgba(131, 204, 210, 1);
       border-radius: .3em;
       color: #ffffff;
+      cursor: pointer;
     }
 
     .item {
@@ -509,6 +510,8 @@
       $('#search').fadeOut();
 
       document.getElementById("main").innerHTML = '<iframe src="./flag.html#!' + x + "/" + y + '"></iframe>';
+      source.innerHTML = '地図データ：<a href="https://geojson.xyz/" target="_blank">geojson.xyz</a>';
+      source2.innerHTML = '地図データ：<a href="https://geojson.xyz/" target="_blank">geojson.xyz</a>';
 
       search_list1.innerHTML = "";
 
@@ -533,6 +536,8 @@
       $('#search').fadeOut();
 
       document.getElementById("main").innerHTML = '<iframe src="./worldgis1.html#!' + x + "/" + y + '"></iframe>';
+      source.innerHTML = '地図データ：<a href="https://maps.gsi.go.jp/development/ichiran.html" target="_blank">地理院タイル</a>';
+      source2.innerHTML = '地図データ：<a href="https://maps.gsi.go.jp/development/ichiran.html" target="_blank">地理院タイル</a>';
 
       search_list1.innerHTML = "";
 
