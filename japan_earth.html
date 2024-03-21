@@ -43,9 +43,6 @@
 <script type="module">
   const { DeckGL, _GlobeView, TileLayer, BitmapLayer, COORDINATE_SYSTEM, GeoJsonLayer } = deck;
 
-  const heiya = "./data/ja_heiya.geojson";
-  const river = "./data/ja_river.geojson";
-
   let lat; let lon; let zoom; let center;
 
   const url_hash = location.hash;
@@ -141,32 +138,6 @@
         autoHighlight: true,
         highlightColor: [215, 0, 58 ,128]
       })
-
-      /*new GeoJsonLayer({
-        id: 'heiya',
-        data: heiya,
-        filled: true,
-        pointRadiusMinPixels: 10,
-        pointRadiusScale: 2000,
-        getPointRadius: 10,
-        getFillColor: [56, 180, 139],
-        opacity: 0.8,
-        pickable: true,
-        autoHighlight: true
-      }),
-
-      new GeoJsonLayer({
-        id: 'river',
-        data: river,
-        filled: true,
-        pointRadiusMinPixels: 5,
-        pointRadiusScale: 2000,
-        getPointRadius: 5,
-        getFillColor: [160,216,239],
-        opacity: 0.8,
-        pickable: true,
-        autoHighlight: true
-      })*/
     ]
   });
 </script>
