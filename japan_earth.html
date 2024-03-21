@@ -1,6 +1,6 @@
 <!DOCTYPE HTML>
 <html lang="ja">
-<title>日本の地理</title>
+<title>日本の都道府県</title>
 
 <head prefix="og: http://ogp.me/ns# fb: http://ogp.me/ns/fb# article: http://ogp.me/ns/article#">
   <meta charset="UTF-8" name="viewport"
@@ -21,7 +21,7 @@
     }
 
     body {
-      background: #ffffff;
+      background: radial-gradient(#ffffff, #000000);
       margin: 0;
       padding: 0;
     }
@@ -30,14 +30,6 @@
       width: 100%;
       height: 100%;
       z-index: 10;
-    }
-
-    .header {
-      background: rgba(0, 0, 0, 0.8);
-      z-index: 100;
-      position: fixed;
-      top: 0;
-      padding: 5px;
     }
   </style>
 </head>
@@ -87,7 +79,7 @@
     longitude: lon,
     zoom: zoom,
     minZoom: .6,
-    maxZoom: 7
+    maxZoom: 5
   };
 
   const tooltip = (d) => {
@@ -95,7 +87,7 @@
     if (!d || !d.object) return null;
     let obj = d.object;
 
-    const html_tr = ["<table>", "名称：" + obj.properties.name + "<br>概要：" + obj.properties.description, "</table>"].join("\n");
+    const html_tr = ["<table>", obj.properties.name, "</table>"].join("\n");
 
     return {
       html: html_tr,
@@ -108,7 +100,7 @@
   };
 
   const tile = new TileLayer({
-    data: 'https://cyberjapandata.gsi.go.jp/xyz/seamlessphoto/{z}/{x}/{y}.jpg',
+    data: 'https://basemap.nationalmap.gov/arcgis/rest/services/USGSImageryOnly/MapServer/tile/{z}/{y}/{x}',
     minZoom: 0,
     maxZoom: 19,
     tileSize: 256,
@@ -137,16 +129,26 @@
     layers: [
       tile,
       new GeoJsonLayer({
+        id: 'prefectures',
+        data: "./data/prefectures.geojson",
+        filled: true,
+        lineWidthMinPixels: 2,
+        getFillColor: [255, 255, 255],
+        getLineColor: [255, 255, 255],
+        getLineWidth: 2,
+        opacity: 0.01,
+        pickable: true,
+        autoHighlight: true
+      })
+
+      /*new GeoJsonLayer({
         id: 'heiya',
         data: heiya,
         filled: true,
-        lineWidthMinPixels: 1,
         pointRadiusMinPixels: 10,
         pointRadiusScale: 2000,
         getPointRadius: 10,
         getFillColor: [56, 180, 139],
-        getLineColor: [255, 255, 255],
-        getLineWidth: 10,
         opacity: 0.8,
         pickable: true,
         autoHighlight: true
@@ -156,17 +158,14 @@
         id: 'river',
         data: river,
         filled: true,
-        lineWidthMinPixels: 1,
         pointRadiusMinPixels: 5,
         pointRadiusScale: 2000,
         getPointRadius: 5,
         getFillColor: [160,216,239],
-        getLineColor: [255, 255, 255],
-        getLineWidth: 10,
         opacity: 0.8,
         pickable: true,
         autoHighlight: true
-      })
+      })*/
     ]
   });
 </script>

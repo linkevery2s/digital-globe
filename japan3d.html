@@ -1,0 +1,63 @@
+<!DOCTYPE HTML>
+<html lang="ja">
+<title>日本の3D地形</title>
+
+<head prefix="og: http://ogp.me/ns# fb: http://ogp.me/ns/fb# article: http://ogp.me/ns/article#">
+  <meta charset="UTF-8" name="viewport"
+    content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+  <style>
+    html,body {
+      margin: 0;
+      padding: 0;
+      width: 100%;
+      height: 100%;
+      background: #000000;
+    }
+  </style>
+
+</head>
+
+<body>
+  <script type="module">
+    import { deck } from 'https://code4fukui.github.io/deck-es/deck.js';
+    import { GsiTerrainLayer } from "https://code4fukui.github.io/deckgl-gsi-terrain-layer/index.js";
+
+    // 地理院タイル
+    const TERRAIN_IMAGE = 'https://cyberjapandata.gsi.go.jp/xyz/dem_png/{z}/{x}/{y}.png';
+    const SURFACE_IMAGE = 'https://cyberjapandata.gsi.go.jp/xyz/seamlessphoto/{z}/{x}/{y}.jpg';
+
+    // RGB標高変換パラメータ
+    const ELEVATION_DECODER = {
+      scaler: 0.02,
+      offset: 0
+    };
+
+    const layer = new GsiTerrainLayer({
+      id: 'gsiTerrain',
+      minZoom: 0,
+      maxZoom: 20,
+      elevationDecoder: ELEVATION_DECODER,
+      elevationData: TERRAIN_IMAGE,
+      texture: SURFACE_IMAGE,
+    });
+
+    const INITIAL_VIEW_STATE = {
+      longitude: 135.98,
+      latitude: 35,
+      zoom: 8.5,
+      minZoom: 8.5,
+      pitch: 50,
+      maxPitch: 85,
+    };
+
+    new deck.Deck({
+      initialViewState: INITIAL_VIEW_STATE,
+      controller: true,
+      layers: [
+        layer
+      ]
+    });
+  </script>
+</body>
+
+</html>
