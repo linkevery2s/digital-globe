@@ -87,7 +87,7 @@
     if (!d || !d.object) return null;
     let obj = d.object;
 
-    const html_tr = ["<table>", obj.properties.name, "</table>"].join("\n");
+    const html_tr = ["<table>", "都道府県名：" + obj.properties.name + "<br>県庁所在地：", "</table>"].join("\n");
 
     return {
       html: html_tr,
@@ -136,9 +136,10 @@
         getFillColor: [255, 255, 255],
         getLineColor: [255, 255, 255],
         getLineWidth: 2,
-        opacity: 0.01,
+        opacity: 0.02,
         pickable: true,
-        autoHighlight: true
+        autoHighlight: true,
+        highlightColor: [215, 0, 58 ,128]
       })
 
       /*new GeoJsonLayer({
