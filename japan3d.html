@@ -6,7 +6,8 @@
   <meta charset="UTF-8" name="viewport"
     content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
   <style>
-    html,body {
+    html,
+    body {
       margin: 0;
       padding: 0;
       width: 100%;
@@ -41,6 +42,52 @@
       texture: SURFACE_IMAGE,
     });
 
+    const offices = new deck.ScenegraphLayer({
+      id: 'scenegraph-layer',
+      data: "./data/prefectures.json",
+      pickable: true,
+      scenegraph: 'https://raw.githubusercontent.com/KhronosGroup/glTF-Sample-Models/master/2.0/BoxAnimated/glTF-Binary/BoxAnimated.glb',
+      getPosition: d => [Number(d.lng), Number(d.lat)],
+      getOrientation: d => [0, Math.random() * 180, 90],
+      _animations: { '*': { speed: 5 } },
+      sizeScale: 3000,
+      _lighting: 'pbr'
+    });
+
+    /*const prefectures_line = new deck.GeoJsonLayer({
+      id: 'prefectures',
+      data: "./data/prefectures_line.geojson",
+      filled: true,
+      stroked: true,
+      lineWidthMinPixels: 5,
+      getFillColor: [255, 255, 255],
+      getLineColor: [255, 255, 255],
+      getLineWidth: 5,
+      opacity: 1,
+      pickable: true,
+      autoHighlight: true,
+      highlightColor: [215, 0, 58, 128],
+      extruded: true,
+      getElevation: 1000
+    });*/
+
+    const tooltip = (d) => {
+
+      if (!d || !d.object) return null;
+      let obj = d.object;
+
+      const html_tr = ["<table>", "都道府県名：" + obj.prefectures + "<br>県庁所在地：" + obj.offices, "</table>"].join("\n");
+
+      return {
+        html: html_tr,
+        style: {
+          background: "rgba(0,0,0,0.7)",
+          color: "#ffffff",
+          width: "180px"
+        }
+      };
+    };
+
     const INITIAL_VIEW_STATE = {
       longitude: 135.98,
       latitude: 35,
@@ -53,8 +100,9 @@
     new deck.Deck({
       initialViewState: INITIAL_VIEW_STATE,
       controller: true,
+      getTooltip: tooltip,
       layers: [
-        layer
+        layer, offices
       ]
     });
   </script>
