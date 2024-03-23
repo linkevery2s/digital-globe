@@ -102,6 +102,14 @@
       border-bottom: 1px dotted #fff;
     }
 
+    li:last-child {
+      border: none;
+    }
+
+    li:hover {
+      background: rgba(56, 180, 139, .8);
+    }
+
     nav {
       background: rgba(0, 110, 84, 0.8);
       position: absolute;
@@ -144,7 +152,7 @@
     .source {
       position: absolute;
       color: #38b48b;
-      top: -30px;
+      top: -20px;
       right: 5px;
       z-index: 10;
       border-bottom: 1px dotted #38b48b;
@@ -193,6 +201,10 @@
       z-index: 11;
       background: #ffffff;
       padding: .3em;
+    }
+
+    #manual{
+      height: 450px;
     }
 
     #closed-btn,
@@ -262,6 +274,23 @@
       border-bottom: 3px dotted #a0d8ef;
       padding-bottom: 3px;
     }
+
+    .japan_side_menu {
+      position: absolute;
+      top: 50%;
+      transform: translate(10px, -50%);
+      z-index: 1;
+      display: none;
+    }
+
+    .japan_earth, .japan_terrain, .japan_text {
+      cursor: pointer;
+      color: #000000;
+      background: rgba(255, 255, 255, .8);
+      border: 1px solid #000000;
+      padding: .3em;
+      border-radius: .5em;
+    }
   </style>
 
   <link rel="manifest" href="./manifest.json">
@@ -324,13 +353,15 @@
     const gis1 = document.querySelector('.gis1');
     const simple = document.querySelector('.simple');
     const earthquake = document.querySelector('.earthquake');
-    //const japan = document.querySelector('.japan');
+    const japan = document.querySelector('.japan');
+    const japan_side_menu = document.querySelector('.japan_side_menu');
 
     flag.addEventListener('click', () => {
       $('#navi').hide();
       document.getElementById("main").innerHTML = '<iframe src="./flag.html"></iframe>';
       source.innerHTML = '地図データ：<a href="https://geojson.xyz/" target="_blank">geojson.xyz</a>';
       source2.innerHTML = '地図データ：<a href="https://geojson.xyz/" target="_blank">geojson.xyz</a>';
+      japan_side_menu.style.display = "none";
     });
 
     gis1.addEventListener('click', () => {
@@ -338,6 +369,7 @@
       document.getElementById("main").innerHTML = '<iframe src="./worldgis1.html"></iframe>';
       source.innerHTML = '地図データ：<a href="https://maps.gsi.go.jp/development/ichiran.html" target="_blank">地理院タイル</a>';
       source2.innerHTML = '地図データ：<a href="https://maps.gsi.go.jp/development/ichiran.html" target="_blank">地理院タイル</a>';
+      japan_side_menu.style.display = "none";
     });
 
     simple.addEventListener('click', () => {
@@ -345,6 +377,7 @@
       document.getElementById("main").innerHTML = '<iframe src="./simple.html"></iframe>';
       source.innerHTML = '地図データ：<a href="https://geojson.xyz/" target="_blank">geojson.xyz</a>';
       source2.innerHTML = '地図データ：<a href="https://geojson.xyz/" target="_blank">geojson.xyz</a>';
+      japan_side_menu.style.display = "none";
     });
 
     earthquake.addEventListener('click', () => {
@@ -352,14 +385,16 @@
       document.getElementById("main").innerHTML = '<iframe src="./earthquake.html"></iframe>';
       source.innerHTML = 'データ出典：<a href="https://github.com/nagix/japan-eq-locator" target="_blank">Japan EQ Locator</a>';
       source2.innerHTML = 'データ出典：<a href="https://github.com/nagix/japan-eq-locator" target="_blank">Japan EQ Locator</a>';
+      japan_side_menu.style.display = "none";
     });
 
-    /*japan.addEventListener('click', () => {
+    japan.addEventListener('click', () => {
       $('#navi').hide();
-      document.getElementById("main").innerHTML = '<iframe src="./japan.html"></iframe>';
-      source.innerHTML = '<a href="https://maps.gsi.go.jp/development/ichiran.html" target="_blank">地理院タイル</a>';
-      source2.innerHTML = '<a href="https://maps.gsi.go.jp/development/ichiran.html" target="_blank">地理院タイル</a>';
-    });*/
+      document.getElementById("main").innerHTML = '<iframe src="./japan_earth.html"></iframe>';
+      source.innerHTML = '<a href="https://usgs.gov/" target="_blank">U.S. Geological Survey</a>,<a href="https://maps.gsi.go.jp/development/ichiran.html" target="_blank">地理院タイル</a>,<a href="https://github.com/code4fukui/deckgl-gsi-terrain-layer" target="_blank">deckgl-gsi-terrain-layer</a>';
+      source2.innerHTML = '<a href="https://usgs.gov/" target="_blank">U.S. Geological Survey</a>,<a href="https://maps.gsi.go.jp/development/ichiran.html" target="_blank">地理院タイル</a>,<a href="https://github.com/code4fukui/deckgl-gsi-terrain-layer" target="_blank">deckgl-gsi-terrain-layer</a>';
+      japan_side_menu.style.display = "block";
+    });
 
     /* 全画面表示の切り替え */
     const zoom = document.querySelector('.zoom');
@@ -377,6 +412,23 @@
       $('#footer').fadeIn();
       zoom2.style.display = "none";
       source2.style.display = "none";
+    });
+
+    /* 日本の地図切り替え */
+    const japan_earth = document.querySelector('.japan_earth');
+    const japan_terrain = document.querySelector('.japan_terrain');
+    const japan_text = document.querySelector('.japan_text');
+
+    japan_earth.addEventListener('click', () => {
+      document.getElementById("main").innerHTML = '<iframe src="./japan_earth.html"></iframe>';
+    });
+
+    japan_terrain.addEventListener('click', () => {
+      document.getElementById("main").innerHTML = '<iframe src="./japan_terrain.html"></iframe>';
+    });
+
+    japan_text.addEventListener('click', () => {
+      document.getElementById("main").innerHTML = '<iframe src="./japan_text.html"></iframe>';
     });
 
     /* 使い方のポップアップ表示 */
@@ -577,7 +629,7 @@
         <ul>
           <li class="flag">世界の国々</li>
           <li class="gis1">世界の地理</li>
-          <!--<li class="japan">日本の地理</li>-->
+          <li class="japan">日本の地図</li>
           <li class="simple">赤道・太平洋ベルト・国境</li>
           <li class="earthquake">世界の地震</li>
         </ul>
@@ -586,12 +638,17 @@
 
   </div>
 
+  <span class="japan_side_menu">
+    <div class="japan_earth"><i class="fa-solid fa-lg fa-earth-asia"></i></div>
+    <div class="japan_terrain my-1"><i class="fa-solid fa-lg fa-image"></i></div>
+    <div class="japan_text"><i class="fa-solid fa-lg fa-book"></i></div>
+  </span>
+
   <!-- メインコンテンツ -->
   <div id="main">
   </div>
 
-  <!-- mapの出典 -->
-  <div class="source2"></div>
+
 
   <!-- ポップアップ用のoverlay -->
   <div id="overlay"></div>
@@ -599,7 +656,7 @@
   <div id="manual"><span id="closed-btn">×</span>
     <h3 class="text-2xl text-center"><i class="fa-solid fa-book"></i> 使い方</h3>
 
-    <div class="overflow-y-scroll h-80 mt-5 mx-5">
+    <div class="overflow-y-scroll h-96 mt-5 mx-2">
       <img src="./gis.jpg" width="100%">
 
       <h3 class="text-2xl mt-5" id="manual_h3">デジタル地球儀で、地理を楽しんで学ぼう！</h3>
@@ -659,15 +716,19 @@
     <h3 class="text-2xl text-center mb-3">更新情報</h3>
 
     <div class="search_list1 overflow-y-scroll h-72 mt-5">
+      2024.3.23 日本の地図追加<br><br>
       2024.3.17 アプリリリース
     </div>
 
   </div>
 
+  <!-- mapの出典 -->
+  <div class="source2 text-xs px-2"></div>
+
   <!-- フッター -->
   <div id="footer" class="footer p-2 text-center">
 
-    <div class="source" id="source"></div>
+    <div class="source text-xs px-2" id="source"></div>
 
     <div class="grid gap-4 grid-cols-3 grid-rows-1">
       <div class="search-btn"><i class="fa-solid fa-magnifying-glass"></i> 検　索</div>

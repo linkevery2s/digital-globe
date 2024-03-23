@@ -76,7 +76,7 @@
     opacity: 0.02,
     pickable: true,
     autoHighlight: true,
-    highlightColor: [215, 0, 58, 128]
+    highlightColor: [230, 0, 51, 128]
   });
 
   const prefectures_line = new GeoJsonLayer({
@@ -94,7 +94,7 @@
   const offices = new ScenegraphLayer({
     id: 'scenegraph-layer',
     data: "./data/prefectures.json",
-    pickable: true,
+    pickable: false,
     scenegraph: 'https://raw.githubusercontent.com/KhronosGroup/glTF-Sample-Models/master/2.0/BoxAnimated/glTF-Binary/BoxAnimated.glb',
     getPosition: d => [Number(d.lng), Number(d.lat)],
     getOrientation: d => [0, Math.random() * 180, 90],
@@ -110,7 +110,7 @@
     controller: true,
     getTooltip: tooltip,
     layers: [
-      offices, prefectures_line, prefectures
+      prefectures_line, prefectures, offices
     ]
   });
 </script>
