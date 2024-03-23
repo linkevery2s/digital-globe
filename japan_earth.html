@@ -1,6 +1,6 @@
 <!DOCTYPE HTML>
 <html lang="ja">
-<title>日本の都道府県</title>
+<title>日本の地形テキスト</title>
 
 <head prefix="og: http://ogp.me/ns# fb: http://ogp.me/ns/fb# article: http://ogp.me/ns/article#">
   <meta charset="UTF-8" name="viewport"
@@ -84,7 +84,7 @@
     if (!d || !d.object) return null;
     let obj = d.object;
 
-    const html_tr = ["<table>", "都道府県名：" + obj.properties.name + "<br>県庁所在地：", "</table>"].join("\n");
+    const html_tr = ["<table>", "都道府県名：" + obj.properties.name + "<br>県庁所在地：" + obj.properties.offices, "</table>"].join("\n");
 
     return {
       html: html_tr,
@@ -126,6 +126,17 @@
     layers: [
       tile,
       new GeoJsonLayer({
+        id: 'prefectures_line',
+        data: "./data/prefectures_line.geojson",
+        filled: true,
+        lineWidthMinPixels: 2,
+        getFillColor: [255, 255, 255],
+        getLineColor: [255, 255, 255],
+        getLineWidth: 2,
+        opacity: 1,
+        pickable: false
+      }),
+      new GeoJsonLayer({
         id: 'prefectures',
         data: "./data/prefectures.geojson",
         filled: true,
@@ -136,8 +147,9 @@
         opacity: 0.02,
         pickable: true,
         autoHighlight: true,
-        highlightColor: [215, 0, 58 ,128]
-      })
+        highlightColor: [215, 0, 58, 128]
+      }),
+
     ]
   });
 </script>
