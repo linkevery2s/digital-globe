@@ -96,6 +96,7 @@
 
     new deck.Deck({
       initialViewState: INITIAL_VIEW_STATE,
+      onViewStateChange: ({ viewState }) => { console.log(Math.round(viewState.zoom * 10) / 10 + "," + Math.round(viewState.latitude * 1000)/1000 + "," + Math.round(viewState.longitude *1000)/1000 )},
       controller: {
         touchRotate: true
       },
