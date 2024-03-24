@@ -15,10 +15,20 @@
       background: #000000;
     }
 
-    html{
+    html {
       font-family: "Meiryo", "Hiragino Maru Gothic Pro", sans-serif;
     }
   </style>
+
+  <!-- Google tag (gtag.js) -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-MPP84V2NHB"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag() { dataLayer.push(arguments); }
+    gtag('js', new Date());
+
+    gtag('config', 'G-MPP84V2NHB');
+  </script>
 
 </head>
 
@@ -86,7 +96,9 @@
 
     new deck.Deck({
       initialViewState: INITIAL_VIEW_STATE,
-      controller: true,
+      controller: {
+        touchRotate: true
+      },
       getTooltip: tooltip,
       layers: [
         layer, offices
