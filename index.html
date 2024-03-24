@@ -34,6 +34,10 @@
       background: #ffffff;
     }
 
+    html{
+      font-family: "Meiryo", "Hiragino Maru Gothic Pro", sans-serif;
+    }
+
     .header {
       background: rgba(25, 68, 142, 0.8);
       color: #ffffff;
@@ -384,8 +388,8 @@
     japan.addEventListener('click', () => {
       $('#navi').hide();
       document.getElementById("main").innerHTML = '<iframe src="./japan_earth.html"></iframe>';
-      source.innerHTML = '<a href="https://usgs.gov/" target="_blank">U.S. Geological Survey</a>,<a href="https://maps.gsi.go.jp/development/ichiran.html" target="_blank">地理院タイル</a>,<a href="https://github.com/code4fukui/deckgl-gsi-terrain-layer" target="_blank">deckgl-gsi-terrain-layer</a>';
-      source2.innerHTML = '<a href="https://usgs.gov/" target="_blank">U.S. Geological Survey</a>,<a href="https://maps.gsi.go.jp/development/ichiran.html" target="_blank">地理院タイル</a>,<a href="https://github.com/code4fukui/deckgl-gsi-terrain-layer" target="_blank">deckgl-gsi-terrain-layer</a>';
+      source.innerHTML = '<a href="https://maps.gsi.go.jp/development/ichiran.html" target="_blank">地理院タイル</a>,<a href="https://github.com/gsi-cyberjapan/gsimaps-vector-experiment" target="_blank">国土地理院ベクトルタイル提供実験</a><br><a href="https://usgs.gov/" target="_blank">U.S. Geological Survey</a>,<a href="https://github.com/code4fukui/deckgl-gsi-terrain-layer" target="_blank">deckgl-gsi-terrain-layer</a>';
+      source2.innerHTML = '<a href="https://maps.gsi.go.jp/development/ichiran.html" target="_blank">地理院タイル</a>,<a href="https://github.com/gsi-cyberjapan/gsimaps-vector-experiment" target="_blank">国土地理院ベクトルタイル提供実験</a><br><a href="https://usgs.gov/" target="_blank">U.S. Geological Survey</a>,<a href="https://github.com/code4fukui/deckgl-gsi-terrain-layer" target="_blank">deckgl-gsi-terrain-layer</a>';
       japan_side_menu.style.display = "block";
     });
 
@@ -622,9 +626,9 @@
         <ul>
           <li class="flag">世界の国々</li>
           <li class="gis1">世界の地理</li>
-          <li class="japan">日本の地図</li>
           <li class="simple">赤道・太平洋ベルト・国境</li>
           <li class="earthquake">世界の地震</li>
+          <li class="japan">日本の地図</li>
         </ul>
       </nav>
     </div>
