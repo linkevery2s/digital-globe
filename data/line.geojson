@@ -1,1 +1,1 @@
-{"type":"FeatureCollection","features":[{"type":"Feature","properties":{"name":"太平洋ベルト"},"geometry":{"coordinates":[[-180,35.8],[180,35.8]],"type":"LineString"},"id":0}]}
+{"type":"FeatureCollection","features":[{"type":"Feature","properties":{"name":"日本と同緯度の地域"},"geometry":{"coordinates":[[-180,35.8],[180,35.8]],"type":"LineString"},"id":0}]}
