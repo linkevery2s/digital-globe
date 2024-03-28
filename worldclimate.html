@@ -1,0 +1,169 @@
+<!DOCTYPE HTML>
+<html lang="ja">
+<title>世界の首都・国旗</title>
+
+<head prefix="og: http://ogp.me/ns# fb: http://ogp.me/ns/fb# article: http://ogp.me/ns/article#">
+  <meta charset="UTF-8" name="viewport"
+    content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <!-- deck.gl standalone bundle -->
+  <script src="https://unpkg.com/deck.gl@^8.1.0/dist.min.js"></script>
+  <script src="https://cdn.tailwindcss.com"></script>
+
+  <style type="text/css">
+    html {
+      margin: 0;
+      padding: 0
+    }
+
+    html,
+    body {
+      width: 100%;
+      height: 100%;
+    }
+
+    body {
+      background: radial-gradient(#ffffff, #a0d8ef);
+      margin: 0;
+      padding: 0;
+    }
+
+    #container {
+      width: 100%;
+      height: 100%;
+      z-index: 10;
+    }
+  </style>
+
+  <!-- Google tag (gtag.js) -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-MPP84V2NHB"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag() { dataLayer.push(arguments); }
+    gtag('js', new Date());
+
+    gtag('config', 'G-MPP84V2NHB');
+  </script>
+
+</head>
+
+<body>
+
+  <div id="container"></div>
+
+</body>
+
+<script type="module">
+
+  const COUNTRIES =
+    'https://d2ad6b4ur7yvpq.cloudfront.net/naturalearth-3.3.0/ne_50m_admin_0_scale_rank.geojson'; //eslint-disable-line
+
+  const AREA = "./data/climate.geojson";
+
+  let lat; let lon; let zoom; let center;
+
+  const url_hash = location.hash;
+  let hash_last;
+
+  if (url_hash === "") {
+    lat = 12.983;
+    lon = 142.502;
+    zoom = .4;
+    center = [];
+
+  } else {
+    console.log(url_hash);
+
+    hash_last = url_hash.split("!");
+
+    lat = Number(hash_last[1].split("/")[1]);
+    lon = Number(hash_last[1].split("/")[0]);
+
+    zoom = 3;
+
+    center = [{
+      "lat": lat,
+      "lng": lon
+    }];
+
+  }
+
+  const INITIAL_VIEW_STATE = {
+    latitude: lat,
+    longitude: lon,
+    zoom: zoom
+  };
+
+  const tooltip = (d) => {
+
+    if (!d || !d.object) return null;
+    let obj = d.object;
+
+    let html_tr;
+
+    html_tr = ["<table>", obj.properties.GRIDCODE, "</table>"].join("\n");
+
+    return {
+      html: html_tr,
+      style: {
+        background: "rgba(0,0,0,0.7)",
+        color: "#ffffff"
+      }
+    };
+
+  };
+
+  const deckgl = new deck.DeckGL({
+    container: 'container',
+    views: new deck._GlobeView(),
+    initialViewState: INITIAL_VIEW_STATE,
+    controller: true,
+    getTooltip: tooltip,
+    layers: [
+      /*new deck.SolidPolygonLayer({
+        id: 'background',
+        data: [
+          [
+            [-180, 90],
+            [0, 90],
+            [180, 90],
+            [180, -90],
+            [0, -90],
+            [-180, -90]
+          ]
+        ],
+        opacity: 0.01,
+        getPolygon: d => d,
+        stroked: false,
+        filled: true,
+        getFillColor: [255, 255, 255, 128]
+      }),*/
+
+      new deck.GeoJsonLayer({
+        id: 'airports',
+        data: AREA,
+        filled: true,
+        lineWidthMinPixels: 0,
+        getFillColor: [232, 57, 41],
+        getLineColor: [255, 255, 255],
+        getLineWidth: 0,
+        opacity: 0.8,
+        pickable: true,
+        autoHighlight: true
+      }),
+
+      new deck.GeoJsonLayer({
+        id: 'base-map',
+        data: COUNTRIES,
+        stroked: true,
+        filled: false,
+        lineWidthMinPixels: 1,
+        getLineColor: [255, 255, 255],
+        opacity: .5
+      })
+
+    ]
+  });
+</script>
+
+</html>
