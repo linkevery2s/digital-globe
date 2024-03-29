@@ -23,7 +23,7 @@
     }
 
     body {
-      background: radial-gradient(#ffffff, #a0d8ef);
+      background: radial-gradient(#000000, #ffffff);
       margin: 0;
       padding: 0;
     }
@@ -113,6 +113,70 @@
 
   };
 
+  let color = (f) => {
+
+    let value = f.properties.GRIDCODE;
+
+    if (value == "11") {
+
+      return [160, 140, 25];
+
+    } else if (value == "12") {
+
+      return [17, 255, 250];
+
+    } else if (value == "13") {
+
+      return [10, 255, 225];
+
+    } else if (value == "14") {
+
+      return [10, 255, 215];
+
+    } else if (value == "21" || value == "22") {
+
+      return [170, 25, 5];
+
+    } else if (value == "26" || value == "27") {
+
+      return [170, 255, 65];
+
+    } else if (value == "31" || value == "32" || value == "33") {
+
+      return [170, 25, 95];
+
+    } else if (value == "34" || value == "35" || value == "36") {
+
+      return [170, 25, 3];
+
+    } else if (value == "37" || value == "38" || value == "39") {
+
+      return [170, 65, 255];
+
+    } else if (value == "31" || value == "32" || value == "33" || value == "33") {
+      
+      return [170, 5, 255];
+
+    } else if (value == "31" || value == "32" || value == "33" || value == "33") {
+
+      return [170, 55, 255];
+
+    } else if (value == "31" || value == "32" || value == "33" || value == "33") {
+
+      return [170, 255, 255];
+
+    } else if (value == "61") {
+
+      return [17, 255, 255];
+
+    } else if (value == "62") {
+
+      return [1, 255, 255];
+    
+    }else{}
+
+  };
+
   const deckgl = new deck.DeckGL({
     container: 'container',
     views: new deck._GlobeView(),
@@ -120,36 +184,15 @@
     controller: true,
     getTooltip: tooltip,
     layers: [
-      /*new deck.SolidPolygonLayer({
-        id: 'background',
-        data: [
-          [
-            [-180, 90],
-            [0, 90],
-            [180, 90],
-            [180, -90],
-            [0, -90],
-            [-180, -90]
-          ]
-        ],
-        opacity: 0.01,
-        getPolygon: d => d,
-        stroked: false,
-        filled: true,
-        getFillColor: [255, 255, 255, 128]
-      }),*/
-
       new deck.GeoJsonLayer({
         id: 'airports',
         data: AREA,
         filled: true,
         lineWidthMinPixels: 0,
-        getFillColor: [232, 57, 41],
-        getLineColor: [255, 255, 255],
+        getFillColor: color,
         getLineWidth: 0,
         opacity: 0.8,
-        pickable: true,
-        autoHighlight: true
+        pickable: true
       }),
 
       new deck.GeoJsonLayer({
