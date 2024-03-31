@@ -106,18 +106,18 @@
       border-radius: .3em;
     }
 
-    li {
+    nav li {
       height: 50px;
       line-height: 50px;
       cursor: pointer;
       border-bottom: 1px dotted #fff;
     }
 
-    li:last-child {
+    nav li:last-child {
       border: none;
     }
 
-    li:hover {
+    nav li:hover {
       background: rgba(56, 180, 139, .8);
     }
 
@@ -211,7 +211,8 @@
     #manual,
     #search,
     #update,
-    #data-source {
+    #data-source,
+    #usage-guide {
       left: 50%;
       position: absolute;
       top: 50%;
@@ -247,7 +248,8 @@
     #closed-btn,
     #closed-btn2,
     #closed-btn3,
-    #closed-btn4 {
+    #closed-btn4,
+    #closed-btn5 {
       position: absolute;
       top: 5px;
       right: 5px;
@@ -279,6 +281,12 @@
     }
 
     #closed-btn4:hover {
+      background: rgba(0, 0, 0, .5);
+      color: #ffffff;
+      border: 1px solid #ffffff;
+    }
+
+    #closed-btn5:hover {
       background: rgba(0, 0, 0, .5);
       color: #ffffff;
       border: 1px solid #ffffff;
@@ -319,7 +327,8 @@
       padding-bottom: 3px;
     }
 
-    .japan_side_menu {
+    .japan_side_menu,
+    .usage_guide_side_menu {
       position: absolute;
       top: 50%;
       transform: translate(10px, -50%);
@@ -350,8 +359,19 @@
       position: absolute;
       right: 1em;
       color: #ffffff;
-
     }
+
+    #usage-guide li {
+      height: 40px;
+      line-height: 40px;
+      cursor: pointer;
+      list-style: none;
+    }
+
+    #usage-guide li:nth-child(odd) {
+      background: rgba(242, 242, 242, .5);
+    }
+
   </style>
 
   <link rel="manifest" href="./manifest.json">
@@ -411,6 +431,7 @@
     const japan_pref = document.querySelector('.japan_pref');
     const japan_gis = document.querySelector('.japan_gis');
     const japan_side_menu = document.querySelector('.japan_side_menu');
+    const usage_guide_side_menu = document.querySelector('.usage_guide_side_menu');
 
     flag.addEventListener('click', () => {
       $('#navi').hide();
@@ -419,6 +440,7 @@
       //source.innerHTML = '地図データ：<a href="https://geojson.xyz/" target="_blank">geojson.xyz</a>';
       //source2.innerHTML = '地図データ：<a href="https://geojson.xyz/" target="_blank">geojson.xyz</a>';
       japan_side_menu.style.display = "none";
+      usage_guide_side_menu.style.display = "none";
     });
 
     gis1.addEventListener('click', () => {
@@ -428,6 +450,7 @@
       //source.innerHTML = '地図データ：<a href="https://maps.gsi.go.jp/development/ichiran.html" target="_blank">地理院タイル</a>';
       //source2.innerHTML = '地図データ：<a href="https://maps.gsi.go.jp/development/ichiran.html" target="_blank">地理院タイル</a>';
       japan_side_menu.style.display = "none";
+      usage_guide_side_menu.style.display = "none";
     });
 
     simple.addEventListener('click', () => {
@@ -437,6 +460,7 @@
       //source.innerHTML = '地図データ：<a href="https://geojson.xyz/" target="_blank">geojson.xyz</a>';
       //source2.innerHTML = '地図データ：<a href="https://geojson.xyz/" target="_blank">geojson.xyz</a>';
       japan_side_menu.style.display = "none";
+      usage_guide_side_menu.style.display = "none";
     });
 
     world_climate.addEventListener('click', () => {
@@ -446,6 +470,7 @@
       //source.innerHTML = 'データ出典：<a href="https://github.com/nagix/japan-eq-locator" target="_blank">Japan EQ Locator</a>';
       //source2.innerHTML = 'データ出典：<a href="https://github.com/nagix/japan-eq-locator" target="_blank">Japan EQ Locator</a>';
       japan_side_menu.style.display = "none";
+      usage_guide_side_menu.style.display = "block";
     });
 
     earthquake.addEventListener('click', () => {
@@ -455,6 +480,7 @@
       //source.innerHTML = 'データ出典：<a href="https://github.com/nagix/japan-eq-locator" target="_blank">Japan EQ Locator</a>';
       //source2.innerHTML = 'データ出典：<a href="https://github.com/nagix/japan-eq-locator" target="_blank">Japan EQ Locator</a>';
       japan_side_menu.style.display = "none";
+      usage_guide_side_menu.style.display = "none";
     });
 
     japan_pref.addEventListener('click', () => {
@@ -464,6 +490,7 @@
       //source.innerHTML = '<a href="https://maps.gsi.go.jp/development/ichiran.html" target="_blank">地理院タイル</a>,<a href="https://github.com/gsi-cyberjapan/gsimaps-vector-experiment" target="_blank">国土地理院ベクトルタイル提供実験</a><br><a href="https://usgs.gov/" target="_blank">U.S. Geological Survey</a>,<a href="https://github.com/code4fukui/deckgl-gsi-terrain-layer" target="_blank">deckgl-gsi-terrain-layer</a>';
       //source2.innerHTML = '<a href="https://maps.gsi.go.jp/development/ichiran.html" target="_blank">地理院タイル</a>,<a href="https://github.com/gsi-cyberjapan/gsimaps-vector-experiment" target="_blank">国土地理院ベクトルタイル提供実験</a><br><a href="https://usgs.gov/" target="_blank">U.S. Geological Survey</a>,<a href="https://github.com/code4fukui/deckgl-gsi-terrain-layer" target="_blank">deckgl-gsi-terrain-layer</a>';
       japan_side_menu.style.display = "none";
+      usage_guide_side_menu.style.display = "none";
     });
 
     japan_gis.addEventListener('click', () => {
@@ -473,6 +500,7 @@
       //source.innerHTML = '<a href="https://maps.gsi.go.jp/development/ichiran.html" target="_blank">地理院タイル</a>,<a href="https://github.com/gsi-cyberjapan/gsimaps-vector-experiment" target="_blank">国土地理院ベクトルタイル提供実験</a><br><a href="https://usgs.gov/" target="_blank">U.S. Geological Survey</a>,<a href="https://github.com/code4fukui/deckgl-gsi-terrain-layer" target="_blank">deckgl-gsi-terrain-layer</a>';
       //source2.innerHTML = '<a href="https://maps.gsi.go.jp/development/ichiran.html" target="_blank">地理院タイル</a>,<a href="https://github.com/gsi-cyberjapan/gsimaps-vector-experiment" target="_blank">国土地理院ベクトルタイル提供実験</a><br><a href="https://usgs.gov/" target="_blank">U.S. Geological Survey</a>,<a href="https://github.com/code4fukui/deckgl-gsi-terrain-layer" target="_blank">deckgl-gsi-terrain-layer</a>';
       japan_side_menu.style.display = "block";
+      usage_guide_side_menu.style.display = "none";
     });
 
     /* 全画面表示の切り替え */
@@ -515,6 +543,12 @@
       document.getElementById("main").innerHTML = '<iframe src="./japan_text.html"></iframe>';
     });
 
+    const usage_guide = document.querySelector('.usage_guide_side_menu');
+    usage_guide.addEventListener('click', () => {
+      $('#overlay').fadeIn();
+      $('#usage-guide').fadeIn();
+    });
+
     /* 使い方のポップアップ表示 */
     const manual_btn = document.querySelector('.manual-btn');
     const search_btn = document.querySelector('.search-btn');
@@ -527,6 +561,7 @@
     const closed_btn2 = document.querySelector("#closed-btn2");
     const closed_btn3 = document.querySelector("#closed-btn3");
     const closed_btn4 = document.querySelector("#closed-btn4");
+    const closed_btn5 = document.querySelector("#closed-btn5");
 
     manual_btn.addEventListener('click', () => {
       $('#overlay').fadeIn();
@@ -554,6 +589,7 @@
       $('#search').fadeOut();
       $('#update').fadeOut();
       $('#data-source').fadeOut();
+      $('#usage-guide').fadeOut();
     });
 
     closed_btn.addEventListener('click', () => {
@@ -574,6 +610,11 @@
     closed_btn4.addEventListener('click', () => {
       $('#overlay').fadeOut();
       $('#data-source').fadeOut();
+    });
+
+    closed_btn5.addEventListener('click', () => {
+      $('#overlay').fadeOut();
+      $('#usage-guide').fadeOut();
     });
 
     /* 検索機能 */
@@ -719,7 +760,7 @@
 
     <span class="zoom"> <i class="fa-solid fa-xl fa-expand"></i> </span>
 
-    <div class="last_update text-xs px-1"><time datetime="2024-03-30" itemprop="modified">最終更新日：2024.3.30</time> ver 1.3
+    <div class="last_update text-xs px-1"><time datetime="2024-03-31" itemprop="modified">最終更新日：2024.3.31</time> ver 1.4
     </div>
 
     <button class="btn-menu">MENU</button>
@@ -739,9 +780,14 @@
 
   </div>
 
+  <!-- 日本の地形メニュー -->
   <span class="japan_side_menu">
     <div class="japan_terrain mb-1"><i class="fa-solid fa-lg fa-image"></i></div>
     <div class="japan_text"><i class="fa-solid fa-lg fa-font"></i></div>
+  </span>
+
+  <span class="usage_guide_side_menu">
+    <div class="japan_terrain mb-1">凡例</div>
   </span>
 
   <!-- メインコンテンツ -->
@@ -751,6 +797,7 @@
   <!-- ポップアップ用のoverlay -->
   <div id="overlay"></div>
 
+  <!-- 使い方 -->
   <div id="manual"><span id="closed-btn">×</span>
     <h3 class="text-2xl text-center"><i class="fa-solid fa-book"></i> 使い方</h3>
 
@@ -800,6 +847,7 @@
 
   </div>
 
+  <!-- 検索 -->
   <div id="search" class="text-center"><span id="closed-btn2">×</span>
     <h3 class="text-2xl text-center mb-3"><i class="fa-solid fa-magnifying-glass"></i> 検　索</h3>
 
@@ -820,6 +868,7 @@
     <h3 class="text-2xl text-center mb-3">更新情報</h3>
 
     <div class="search_list1 overflow-y-scroll h-72 mt-5 text-left pl-3">
+      <p class="mb-5">2024.3.31 世界の気候追加</p>
       <p class="mb-5">2024.3.30 インストール方法追加</p>
       <p class="mb-5">2024.3.27 マップデータ表記変更、Facebookシェアボタン設置</p>
       <p class="mb-5">2024.3.24 アプリ内フォントの変更</p>
@@ -858,6 +907,12 @@
 
       ・<a href="https://github.com/code4fukui/deckgl-gsi-terrain-layer" target="_blank">deckgl-gsi-terrain-layer</a>
 
+      <h3 class="text-2xl my-5" id="manual_h3">世界の国々</h3>
+
+      ・<a href="https://amano-tec.com/data/world.html" target="_blank">世界の首都の位置データ</a><br><br>
+
+      ・<a href="https://amano-tec.com/data/worldflags.html" target="_blank">世界の国旗</a>
+
       <h3 class="text-2xl my-5" id="manual_h3">日本の都道府県</h3>
 
       ・<a href="https://linkdata.org/work/rdf1s4540i" target="_blank">都道府県庁</a>
@@ -870,9 +925,50 @@
 
   </div>
 
-  <!-- mapの出典 
-  <div class="source2 text-xs px-2"></div>-->
+  <!-- 世界の気候、凡例 -->
+  <div id="usage-guide" class="text-center"><span id="closed-btn5">×</span>
+    <h3 class="text-2xl text-center mb-3"><i class="fa-solid fa-book"></i> 凡　例</h3>
 
+    <div class="text-left overflow-y-scroll h-72 my-5 mx-3">
+
+      <li><span style="background: #e2041b;">　</span>　熱帯雨林気候（Af）</li>
+      <li><span style="background: #e83929;">　</span>　熱帯モンスーン気候（Am）</li>
+      <li><span style="background: #d7003a;">　</span>　熱帯夏季少雨気候（As）</li>
+      <li><span style="background: #f08300;">　</span>　サバナ気候（Aw）</li>
+      <li><span style="background: #ffea00;">　</span>　砂漠気候（BWh）</li>
+      <li><span style="background: #fef263;">　</span>　砂漠気候（BWk）</li>
+      <li><span style="background: #f7c114;">　</span>　ステップ気候（BSk）</li>
+      <li><span style="background: #f8b500;">　</span>　ステップ気候（BSh）</li>
+      <li><span style="background: #c7dc68;">　</span>　温暖湿潤気候（Cfa）</li>
+      <li><span style="background: #98d98e;">　</span>　西岸海洋性気候（Cfb）</li>
+      <li><span style="background: #88cb7f;">　</span>　西岸海洋性気候（Cfc）</li>
+      <li><span style="background: #00a497;">　</span>　地中海性気候（Csa）</li>
+      <li><span style="background: #00a381;">　</span>　地中海性気候（Csb）</li>
+      <li><span style="background: #38b48b;">　</span>　地中海性気候（Csc）</li>
+      <li><span style="background: #028760;">　</span>　温帯夏雨気候（Cwa）</li>
+      <li><span style="background: #3b7960;">　</span>　温帯夏雨気候（Cwb）</li>
+      <li><span style="background: #00552e;">　</span>　温帯夏雨気候（Cwc）</li>
+      <li><span style="background: #c1e4e9;">　</span>　亜寒帯湿潤気候（Dfa）</li>
+      <li><span style="background: #a0d8ef;">　</span>　亜寒帯湿潤気候（Dfb）</li>
+      <li><span style="background: #bce2e8;">　</span>　亜寒帯湿潤気候（Dfc）</li>
+      <li><span style="background: #a2d7dd;">　</span>　亜寒帯湿潤気候（Dfd）</li>
+      <li><span style="background: #f09199;">　</span>　高地地中海性気候（Dsa）</li>
+      <li><span style="background: #f2a0a1;">　</span>　高地地中海性気候（Dsb）</li>
+      <li><span style="background: #f4b3c2;">　</span>　高地地中海性気候（Dsc）</li>
+      <li><span style="background: #eebbcb;">　</span>　高地地中海性気候（Dsd）</li>
+      <li><span style="background: #aa4c8f;">　</span>　亜寒帯冬季少雨気候（Dwa）</li>
+      <li><span style="background: #b44c97;">　</span>　亜寒帯冬季少雨気候（Dwb）</li>
+      <li><span style="background: #bc64a4;">　</span>　亜寒帯冬季少雨気候（Dwc）</li>
+      <li><span style="background: #cc7eb1;">　</span>　亜寒帯冬季少雨気候（Dwd）</li>
+      <li><span style="background: #2ca9e1;">　</span>　ツンドラ気候（EF）</li>
+      <li><span style="background: #bbc8e6;">　</span>　氷雪気候（ET）</li>
+
+    </div>
+
+  </div>
+
+
+  <!-- mapの出典 -->
   <div class="source text-xs px-2" id="source">マップデータについて</div>
 
   <div class="sns-fb">
@@ -901,6 +997,7 @@
 
   </div>
 
+  <!-- Facebookシェアボタン -->
   <div id="fb-root"></div>
   <script async defer crossorigin="anonymous" src="https://connect.facebook.net/ja_JP/sdk.js#xfbml=1&version=v19.0"
     nonce="FIk6WnRQ"></script>
