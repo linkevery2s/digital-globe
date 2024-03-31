@@ -371,7 +371,6 @@
     #usage-guide li:nth-child(odd) {
       background: rgba(242, 242, 242, .5);
     }
-
   </style>
 
   <link rel="manifest" href="./manifest.json">
@@ -699,8 +698,8 @@
       $('#search').fadeOut();
 
       document.getElementById("main").innerHTML = '<iframe src="./flag.html#!' + x + "/" + y + '"></iframe>';
-      source.innerHTML = '地図データ：<a href="https://geojson.xyz/" target="_blank">geojson.xyz</a>';
-      source2.innerHTML = '地図データ：<a href="https://geojson.xyz/" target="_blank">geojson.xyz</a>';
+      japan_side_menu.style.display = "none";
+      usage_guide_side_menu.style.display = "none";
 
       search_list1.innerHTML = "";
 
@@ -725,8 +724,8 @@
       $('#search').fadeOut();
 
       document.getElementById("main").innerHTML = '<iframe src="./worldgis1.html#!' + x + "/" + y + '"></iframe>';
-      source.innerHTML = '地図データ：<a href="https://maps.gsi.go.jp/development/ichiran.html" target="_blank">地理院タイル</a>';
-      source2.innerHTML = '地図データ：<a href="https://maps.gsi.go.jp/development/ichiran.html" target="_blank">地理院タイル</a>';
+      japan_side_menu.style.display = "none";
+      usage_guide_side_menu.style.display = "none";
 
       search_list1.innerHTML = "";
 
@@ -885,9 +884,9 @@
 
       <img src="./book.jpg" width="100%" alt="データ出典の写真">
 
-      このデジタル地球儀アプリは、次のデータをもとに開発しました。
+      <p class="mt-5">このデジタル地球儀アプリは、次のデータをもとに開発しました。</p>
 
-      <h3 class="text-2xl my-5" id="manual_h3">地図データ</h3>
+      <h3 class="text-2xl mt-10 mb-5" id="manual_h3">地図データ</h3>
 
       ・<a href="https://geojson.xyz/" class="link" target="_blank">geojson.xyz</a><br><br>
 
@@ -907,19 +906,23 @@
 
       ・<a href="https://github.com/code4fukui/deckgl-gsi-terrain-layer" target="_blank">deckgl-gsi-terrain-layer</a>
 
-      <h3 class="text-2xl my-5" id="manual_h3">世界の国々</h3>
+      <h3 class="text-2xl mt-10 mb-5" id="manual_h3">世界の国々</h3>
 
       ・<a href="https://amano-tec.com/data/world.html" target="_blank">世界の首都の位置データ</a><br><br>
 
       ・<a href="https://amano-tec.com/data/worldflags.html" target="_blank">世界の国旗</a>
 
-      <h3 class="text-2xl my-5" id="manual_h3">日本の都道府県</h3>
+      <h3 class="text-2xl mt-10 mb-5" id="manual_h3">世界の気候</h3>
+      ・<a href="https://koeppen-geiger.vu-wien.ac.at/shifts.htm" target="_blank">OBSERVED AND PROJECTED CLIMATE SHIFTS 1901-2100
+        DEPICTED BY WORLD MAPS OF THE KÖPPEN-GEIGER CLIMATE CLASSIFICATION</a>
 
-      ・<a href="https://linkdata.org/work/rdf1s4540i" target="_blank">都道府県庁</a>
-
-      <h3 class="text-2xl my-5" id="manual_h3">世界の地震</h3>
+      <h3 class="text-2xl mt-10 mb-5" id="manual_h3">世界の地震</h3>
 
       ・<a href="https://github.com/nagix/japan-eq-locator" target="_blank">Japan EQ Locator</a>
+
+      <h3 class="text-2xl mt-10 mb-5" id="manual_h3">日本の都道府県</h3>
+
+      ・<a href="https://linkdata.org/work/rdf1s4540i" target="_blank">都道府県庁</a>
 
     </div>
 
