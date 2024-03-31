@@ -1,0 +1,88 @@
+<!DOCTYPE HTML>
+<html lang="ja">
+<title>各地点の気温・降雨量</title>
+
+<head prefix="og: http://ogp.me/ns# fb: http://ogp.me/ns/fb# article: http://ogp.me/ns/article#">
+	<meta charset="UTF-8" name="viewport"
+		content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<script src="https://cdn.tailwindcss.com"></script>
+	<script src="https://cdn.jsdelivr.net/npm/apexcharts"></script>
+	<style>
+		html,
+		body {
+			width: 100%;
+			height: 100%;
+			padding: 0;
+			margin: 0;
+		}
+
+		#chart {
+			max-width: 400px;
+		}
+	</style>
+
+	<!-- Google tag (gtag.js) -->
+	<script async src="https://www.googletagmanager.com/gtag/js?id=G-MPP84V2NHB"></script>
+	<script>
+		window.dataLayer = window.dataLayer || [];
+		function gtag() { dataLayer.push(arguments); }
+		gtag('js', new Date());
+
+		gtag('config', 'G-MPP84V2NHB');
+	</script>
+
+	<script type="module">
+		let options = {
+			series: [{
+				name: '降雨量',
+				type: 'column',
+				data: [440, 505, 414, 671, 227, 413, 201, 352, 752, 320, 257, 160]
+			}, {
+				name: '気温',
+				type: 'line',
+				data: [23, 42, 35, 27, 43, 22, 17, 31, 22, 22, 12, 16]
+			}],
+			chart: {
+				height: 350,
+				type: 'line'
+			},
+			stroke: {
+				width: [0, 4]
+			},
+			title: {
+				text: '気温と降雨量'
+			},
+			dataLabels: {
+				enabled: false,
+				enabledOnSeries: [1]
+			},
+			labels: ['1月', '2月', '3月', '4月', '5月', '6月', '7月', '8月', '9月', '10月', '11月', '12月'],
+			xaxis: {
+				type: 'month'
+			},
+			yaxis: [{
+				title: {
+					text: '降雨量',
+				},
+
+			}, {
+				opposite: true,
+				title: {
+					text: '気温'
+				}
+			}]
+		};
+
+		let chart = new ApexCharts(document.querySelector("#chart"), options);
+		chart.render();
+	</script>
+</head>
+
+<body>
+	<center>
+	<div id="chart"></div>
+	</center>
+</body>
+
+</html>
