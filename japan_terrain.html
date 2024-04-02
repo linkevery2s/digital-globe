@@ -96,7 +96,13 @@
 
     new deck.Deck({
       initialViewState: INITIAL_VIEW_STATE,
-      onViewStateChange: ({ viewState }) => { console.log(Math.round(viewState.zoom * 10) / 10 + "," + Math.round(viewState.latitude * 1000)/1000 + "," + Math.round(viewState.longitude *1000)/1000 )},
+      onViewStateChange: ({ viewState }) => {
+
+        console.log(Math.round(viewState.zoom * 10) / 10 + "," + Math.round(viewState.latitude * 1000) / 1000 + "," + Math.round(viewState.longitude * 1000) / 1000);
+
+        history.replaceState('','','/japan_terrain.html#!' + Math.round(viewState.latitude * 1000) / 1000 + "/" + Math.round(viewState.longitude * 1000) / 1000 + "/" + Math.round(viewState.zoom * 10) / 10 + "/" + Math.round(viewState.pitch) + "/" + Math.round(viewState.bearing));
+
+      },
       controller: {
         touchRotate: true
       },
