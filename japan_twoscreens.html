@@ -1,0 +1,114 @@
+<!DOCTYPE HTML>
+<html lang="ja">
+<head prefix="og: http://ogp.me/ns# fb: http://ogp.me/ns/fb# article: http://ogp.me/ns/article#">
+    <meta charset='UTF-8' name='viewport' content='width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no'>
+
+
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-MPP84V2NHB"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+
+      gtag('config', 'G-MPP84V2NHB');
+  </script>
+
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.3/dist/leaflet.css" />
+  <script src="https://unpkg.com/leaflet@1.9.3/dist/leaflet.js"></script>
+  <script src="./js/L.Map.Sync.js"></script>
+  <style>
+    html,body{
+       margin: 0;
+       padding: 0;
+       width: 100%;
+       height: 100%;
+   }
+
+   #map_left {
+    float: left;
+    width: 49.8%;
+    height: 100%;
+    margin: 0; padding: 0;
+}
+
+#map_right {
+    float: right;
+    width: 49.8%;
+    height: 100%;
+    margin: 0; padding: 0;
+}
+
+</style>
+<script>
+
+/* 地図初期設定 */
+    let lat = 38.132227;
+    let lng = 139.437103;
+
+
+    const shinsui = new L.tileLayer('https://cyberjapandata.gsi.go.jp/xyz/20220804rain_0804dansaizu/{z}/{x}/{y}.png', {opacity: 0.8});
+
+    const tiri = L.tileLayer('https://cyberjapandata.gsi.go.jp/xyz/seamlessphoto/{z}/{x}/{y}.jpg', {
+       attribution: '&copy; <a href="http://maps.gsi.go.jp/development/ichiran.html" target="_blank">地理院タイル</a>'
+   });
+
+    const layer1 = L.layerGroup([tiri, shinsui]);
+
+
+    const base1 = new L.tileLayer('https://cyberjapandata.gsi.go.jp/xyz/std/{z}/{x}/{y}.png', {
+        attribution: '&copy; <a href="http://maps.gsi.go.jp/development/ichiran.html" target="_blank">地理院タイル</a>'
+    });
+
+    const base2 = new L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+        attribution: '&copy; <a href="http://osm.org/copyright" target="_blank">OpenStreetMap</a> contributors'
+    });
+
+    const base3 = new L.tileLayer('https://cyberjapandata.gsi.go.jp/xyz/relief/{z}/{x}/{y}.png', {
+        attribution: '&copy; <a href="http://maps.gsi.go.jp/development/ichiran.html" target="_blank">地理院タイル</a>'
+    });
+
+    const soutei = new L.tileLayer('https://disaportaldata.gsi.go.jp/raster/01_flood_l2_shinsuishin_data/{z}/{x}/{y}.png', {
+       opacity: 0.8,
+       attribution: '&copy; <a href="https://disaportal.gsi.go.jp/hazardmap/copyright/opendata.html" target="_blank">ハザードマップポータルサイト</a>'
+   });
+
+    const baseMaps = {"標準地図": base1, "OpenStreetMap": base2, "色別標高図": base3};
+
+    const overlayMaps = {"洪水浸水想定区域（想定最大規模）": soutei};
+
+    function ini(){
+
+        const map_left = L.map('map_left', {
+           center: [lat, lng],
+           zoom: 14,
+           maxZoom: 15,
+           layers: layer1
+       });
+
+        const map_right = L.map('map_right', {
+            layers: [base1],
+            center: [lat, lng],
+            zoom: 14,
+            maxZoom: 15,
+            zoomControl: true
+        });
+
+        L.control.layers(baseMaps, overlayMaps).addTo(map_right);
+
+/* 地図連動 */
+        map_left.sync(map_right, {syncCursor: true});
+        map_right.sync(map_left, {syncCursor: true});
+
+    }
+</script>
+<title>日本の地形（２画面表示）</title>
+
+</head>
+<body onLoad='ini()'>
+
+    <div id="map_left"></div>
+    <div id="map_right"></div>
+
+</body>
+</html>
