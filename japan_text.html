@@ -122,13 +122,13 @@
     container: 'container',
     mapStyle: './data/basemap_tiri_photo.json',
     initialViewState: INITIAL_VIEW_STATE,
-    onViewStateChange: ({ viewState }) => { 
+    //onViewStateChange: ({ viewState }) => { 
 
       //console.log(Math.round(viewState.zoom * 10) / 10 + "," + Math.round(viewState.latitude * 1000)/1000 + "," + Math.round(viewState.longitude *1000)/1000 + "," + Math.round(viewState.pitch) + "," + Math.round(viewState.bearing) )
     
-      history.replaceState('','','/japan_text.html#!' + Math.round(viewState.latitude * 1000) / 1000 + "/" + Math.round(viewState.longitude * 1000) / 1000 + "/" + Math.round(viewState.zoom * 10) / 10 + "/" + Math.round(viewState.pitch) + "/" + Math.round(viewState.bearing));
+      //history.replaceState('','','/japan_text.html#!' + Math.round(viewState.latitude * 1000) / 1000 + "/" + Math.round(viewState.longitude * 1000) / 1000 + "/" + Math.round(viewState.zoom * 10) / 10 + "/" + Math.round(viewState.pitch) + "/" + Math.round(viewState.bearing));
 
-    },
+    //},
     controller: {
       touchRotate: true
     },
