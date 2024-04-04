@@ -14,8 +14,7 @@
   <script src="https://code.jquery.com/jquery-3.7.1.min.js"
     integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
 
-
-  <script src="./data/worldgis1.json"></script>
+    <script src="./statistics/temperature.json"></script>
 
   <style type="text/css">
     html {
@@ -55,7 +54,7 @@
       top: 50%;
       transform: translate(-50%, -50%);
       width: 90%;
-      max-width: 600px;
+      max-width: 500px;
       display: none;
       z-index: 11;
       background: #ffffff;
@@ -83,6 +82,13 @@
       height: 30px;
       text-align: center;
     }
+
+    #closed-btn:hover {
+      background: rgba(0, 0, 0, .5);
+      color: #ffffff;
+      border: 1px solid #ffffff;
+    }
+
   </style>
 
   <!-- Google tag (gtag.js) -->
@@ -147,9 +153,14 @@
     zoom: zoom
   };
 
-  let graph_show = () => {
+  let graph_show = (d) => {
 
-    document.getElementById("graph").innerHTML = '<iframe src="./statistics/chart.html" width="100%" height="100%"></iframe>';
+    if (!d || !d.object) return null;
+    let obj = d.object;
+
+    console.log(obj.id-1);
+
+    document.getElementById("graph").innerHTML = '<iframe src="./statistics/chart.html#!' + Number(obj.id-1) + '" width="100%" height="100%"></iframe>';
 
     $('#statis').fadeIn();
 
@@ -191,7 +202,7 @@
       tile,
       new ScatterplotLayer({
         id: 'scatterplot-layer',
-        data: worldgis1,
+        data: temperature,
         pickable: true,
         autoHighlight: true,
         opacity: 0.8,

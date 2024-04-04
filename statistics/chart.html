@@ -8,6 +8,9 @@
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
 	<script src="https://cdn.tailwindcss.com"></script>
 	<script src="https://cdn.jsdelivr.net/npm/apexcharts"></script>
+
+	<script src="./temperature.json"></script>
+
 	<style>
 		html,
 		body {
@@ -33,15 +36,29 @@
 	</script>
 
 	<script type="module">
+
+		console.log(temperature[0].January_temperature);
+
+		const url_hash = location.hash;
+		let hash_last;
+		let i;
+
+		console.log(url_hash);
+
+		hash_last = url_hash.split("!");
+
+		i = hash_last[1];
+
+
 		let options = {
 			series: [{
-				name: '降雨量',
+				name: '降雨量（mm）',
 				type: 'column',
-				data: [440, 505, 414, 671, 227, 413, 201, 352, 752, 320, 257, 160]
+				data: [temperature[i].January_precipitation, temperature[i].February_precipitation, temperature[i].March_precipitation, temperature[i].April_precipitation, temperature[i].May_precipitation, temperature[i].June_precipitation, temperature[i].July_precipitation, temperature[i].August_precipitation, temperature[i].September_precipitation, temperature[i].October_precipitation, temperature[i].November_precipitation, temperature[i].December_precipitation]
 			}, {
-				name: '気温',
+				name: '気温（℃）',
 				type: 'line',
-				data: [23, 42, 35, 27, 43, 22, 17, 31, 22, 22, 12, 16]
+				data: [temperature[i].January_temperature, temperature[i].February_temperature, temperature[i].March_temperature, temperature[i].April_temperature, temperature[i].May_temperature, temperature[i].June_temperature, temperature[i].July_temperature, temperature[i].August_temperature, temperature[i].September_temperature, temperature[i].October_temperature, temperature[i].November_temperature, temperature[i].December_temperature]
 			}],
 			chart: {
 				height: 350,
@@ -52,7 +69,7 @@
 				width: [0, 4]
 			},
 			title: {
-				text: 'エジプト、カイロ'
+				text: temperature[0].place + " - " + temperature[0].country
 			},
 			dataLabels: {
 				enabled: false,
@@ -82,7 +99,7 @@
 
 <body>
 	<center>
-	<div id="chart"></div>
+		<div id="chart"></div>
 	</center>
 </body>
 
