@@ -37,8 +37,6 @@
 
 	<script type="module">
 
-		console.log(temperature[0].January_temperature);
-
 		const url_hash = location.hash;
 		let hash_last;
 		let i;
@@ -69,7 +67,7 @@
 				width: [0, 4]
 			},
 			title: {
-				text: temperature[0].place + " - " + temperature[0].country
+				text: temperature[i].place + " - " + temperature[i].country
 			},
 			dataLabels: {
 				enabled: false,
