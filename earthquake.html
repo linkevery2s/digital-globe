@@ -7,8 +7,15 @@
     content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <!-- deck.gl standalone bundle -->
-  <script src="https://unpkg.com/deck.gl@^8.1.0/dist.min.js"></script>
+  <script src="https://unpkg.com/deck.gl@latest/dist.min.js"></script>
   <script src="https://cdn.tailwindcss.com"></script>
+
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"
+    integrity="sha512-DTOQO9RWCH3ppGqcWaEA1BIZOC6xxalwEsw9c2QQeAIftl+Vegovlnee1c9QX4TctnWMn13TZye+giMm8e2LwA=="
+    crossorigin="anonymous" referrerpolicy="no-referrer" />
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/js/all.min.js"
+    integrity="sha512-GWzVrcGlo0TxTRvz9ttioyYJ+Wwk9Ck0G81D+eO63BaqHaJ3YZX9wuqjwgfcV/MrB2PhaVX9DkYVhbFpStnqpQ=="
+    crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 
   <style type="text/css">
     html {
@@ -31,7 +38,24 @@
     #container {
       width: 100%;
       height: 100%;
-      z-index: 10;
+      z-index: 0;
+    }
+
+    .side_menu {
+      position: absolute;
+      top: 50%;
+      transform: translate(10px, -50%);
+      z-index: 15;
+    }
+
+    .button{
+      cursor: pointer;
+      color: #000000;
+      background: rgba(255, 255, 255, .8);
+      border: 1px solid #000000;
+      padding: .3em;
+      border-radius: .5em;
+      border: 1px solid #000000;
     }
   </style>
 
@@ -51,76 +75,52 @@
 
   <div id="container"></div>
 
+  <span class="side_menu">
+    <div class="button mb-1"><i class="fa-solid fa-rotate"></i></div>
+  </span>
+
 </body>
 
 <script type="module">
 
+  const { DeckGL, GeoJsonLayer, ScenegraphLayer, LinearInterpolator } = deck;
+
   const COUNTRIES =
     'https://d2ad6b4ur7yvpq.cloudfront.net/naturalearth-3.3.0/ne_50m_admin_0_scale_rank.geojson'; //eslint-disable-line
 
-  let lat; let lon; let zoom; let center;
-
-  const url_hash = location.hash;
-  let hash_last;
-
-  if (url_hash === "") {
-    lat = 25.983;
-    lon = 142.502;
-    zoom = .4;
-    center = [];
-
-  } else {
-    console.log(url_hash);
-
-    hash_last = url_hash.split("!");
-
-    lat = Number(hash_last[1].split("/")[1]);
-    lon = Number(hash_last[1].split("/")[0]);
-
-    zoom = 1.5;
-
-    center = [{
-      "lat": lat,
-      "lng": lon
-    }]
-
-  }
-
-  const INITIAL_VIEW_STATE = {
-    latitude: lat,
-    longitude: lon,
-    zoom: zoom
+  let initialViewState = {
+    latitude: 20.983,
+    longitude: 142.502,
+    zoom: .4
   };
 
-  /*const tooltip = (d) => {
-
-    if (!d || !d.object) return null;
-    let obj = d.object;
-
-    let html_tr;
-
-    html_tr = ["<table>", "<center>" + obj.properties.name, "</table>"].join("\n");
-
-    return {
-      html: html_tr,
-      style: {
-        background: "rgba(0,0,0,0.7)",
-        color: "#ffffff",
-        width: "180px"
-      }
+  let rotateCamera = () => {
+    initialViewState = {
+      ...initialViewState,
+      longitude: initialViewState.longitude + 10,
+      transitionDuration: 1000,
+      transitionInterpolator: new LinearInterpolator(['longitude']),
+      onTransitionEnd: rotateCamera
     };
-
-  };*/
+    deckgl.setProps({ initialViewState });
+  };
 
   const deckgl = new deck.DeckGL({
     container: 'container',
     views: new deck._GlobeView(),
-    initialViewState: INITIAL_VIEW_STATE,
+    initialViewState,
+    onViewStateChange: ({ viewState }) => {
+
+      initialViewState.longitude = viewState.longitude;
+      initialViewState.latitude = viewState.latitude;
+      initialViewState.zoom = viewState.zoom;
+
+    },
     controller: true,
     getTooltip: "",
     layers: [
 
-    new deck.ScatterplotLayer({
+      new deck.ScatterplotLayer({
         id: 'scatterplot-layer',
         data: "./data/hypocenters.json",
         pickable: false,
@@ -143,13 +143,20 @@
         stroked: true,
         filled: true,
         lineWidthMinPixels: 2,
-        getLineColor: [255,255,255],
+        getLineColor: [255, 255, 255],
         opacity: 0.1,
-        getFillColor: [255,255,252],
+        getFillColor: [255, 255, 252],
       })
 
     ]
   });
+
+  const button = document.querySelector('.button');
+
+  button.addEventListener('click', () => {
+    rotateCamera();
+  });
+
 </script>
 
 </html>
