@@ -96,7 +96,14 @@
     if (!d || !d.object) return null;
     let obj = d.object;
 
-    const html_tr = ["<table>", "都道府県名：" + obj.properties.name + "<br>県庁所在地：" + obj.properties.offices, "</table>"].join("\n");
+    let html_tr;
+
+    if (obj.properties.offices == null) {
+      html_tr = ["<table>", obj.properties.name, "</table>"].join("\n");
+    } else {
+
+      html_tr = ["<table>", "都道府県名：" + obj.properties.name + "<br>県庁所在地：" + obj.properties.offices, "</table>"].join("\n");
+    }
 
     return {
       html: html_tr,
@@ -105,6 +112,23 @@
         color: "#000000"
       }
     };
+  };
+
+  let graph_show = (d) => {
+
+    if (!d || !d.object) return null;
+    let obj = d.object;
+
+    const html_tr = ["<table>", "島の名前：" + obj.properties.name, "</table>"].join("\n");
+
+    return {
+      html: html_tr,
+      style: {
+        background: "rgba(255,255,255,0.8)",
+        color: "#000000"
+      }
+    };
+
   };
 
   const tile = new TileLayer({
@@ -159,6 +183,23 @@
         pickable: true,
         autoHighlight: true,
         highlightColor: [230, 0, 51, 128]
+      }),
+      new GeoJsonLayer({
+        id: 'island',
+        data: "./data/island.geojson",
+        filled: true,
+        lineWidthMinPixels: 1,
+        pointRadiusMinPixels: 10,
+        pointRadiusScale: 2000,
+        getPointRadius: 17,
+        getFillColor: [0, 149, 217],
+        getLineColor: [255, 255, 255],
+        getLineWidth: 1,
+        opacity: .5,
+        pickable: true,
+        autoHighlight: true,
+        highlightColor: [230, 0, 51, 128],
+        onClick: graph_show
       })
 
     ]

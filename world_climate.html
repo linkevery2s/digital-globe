@@ -7,8 +7,20 @@
     content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <!-- deck.gl standalone bundle -->
-  <script src="https://unpkg.com/deck.gl@^8.1.0/dist.min.js"></script>
+  <script src="https://unpkg.com/deck.gl@latest/dist.min.js"></script>
   <script src="https://cdn.tailwindcss.com"></script>
+
+  <link rel="stylesheet" href="./css/add.css" />
+
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"
+    integrity="sha512-DTOQO9RWCH3ppGqcWaEA1BIZOC6xxalwEsw9c2QQeAIftl+Vegovlnee1c9QX4TctnWMn13TZye+giMm8e2LwA=="
+    crossorigin="anonymous" referrerpolicy="no-referrer" />
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/js/all.min.js"
+    integrity="sha512-GWzVrcGlo0TxTRvz9ttioyYJ+Wwk9Ck0G81D+eO63BaqHaJ3YZX9wuqjwgfcV/MrB2PhaVX9DkYVhbFpStnqpQ=="
+    crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+
+  <script src="https://code.jquery.com/jquery-3.7.1.min.js"
+    integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
 
   <style type="text/css">
     html {
@@ -33,6 +45,50 @@
       height: 100%;
       z-index: 10;
     }
+
+    #usage-guide {
+      left: 50%;
+      position: absolute;
+      top: 50%;
+      transform: translate(-50%, -50%);
+      width: 85%;
+      max-width: 600px;
+      display: none;
+      z-index: 16;
+      background: #ffffff;
+      padding: .3em;
+    }
+
+    #usage-guide li {
+      height: 40px;
+      line-height: 40px;
+      cursor: pointer;
+      list-style: none;
+    }
+
+    #usage-guide li:nth-child(odd) {
+      background: rgba(242, 242, 242, .5);
+    }
+
+    #closed-btn {
+      position: absolute;
+      top: 5px;
+      right: 5px;
+      border-radius: 100%;
+      color: #000000;
+      border: 1px solid #000000;
+      cursor: pointer;
+      width: 30px;
+      height: 30px;
+      text-align: center;
+    }
+
+    #closed-btn:hover {
+      background: rgba(0, 0, 0, .5);
+      color: #ffffff;
+      border: 1px solid #ffffff;
+    }
+
   </style>
 
   <!-- Google tag (gtag.js) -->
@@ -51,9 +107,61 @@
 
   <div id="container"></div>
 
+  <span class="side_menu">
+    <div class="button mb-1 usage_guide">
+      <p class="text-xs">凡例</p>
+    </div>
+    <div class="button rotate"><i class="fa-solid fa-xl fa-rotate"></i></div>
+  </span>
+
+  <!-- 世界の気候、凡例 -->
+  <div id="usage-guide" class="text-center"><span id="closed-btn">×</span>
+    <h3 class="text-2xl text-center mb-3"><i class="fa-solid fa-book"></i> 凡　例</h3>
+
+    <div class="text-left overflow-y-scroll h-72 my-5 mx-3">
+
+      <li><span style="background: #e2041b;">　</span>　熱帯雨林気候（Af）</li>
+      <li><span style="background: #e83929;">　</span>　熱帯モンスーン気候（Am）</li>
+      <li><span style="background: #d7003a;">　</span>　熱帯夏季少雨気候（As）</li>
+      <li><span style="background: #f08300;">　</span>　サバナ気候（Aw）</li>
+      <li><span style="background: #ffea00;">　</span>　砂漠気候（BWh）</li>
+      <li><span style="background: #fef263;">　</span>　砂漠気候（BWk）</li>
+      <li><span style="background: #f7c114;">　</span>　ステップ気候（BSk）</li>
+      <li><span style="background: #f8b500;">　</span>　ステップ気候（BSh）</li>
+      <li><span style="background: #c7dc68;">　</span>　温暖湿潤気候（Cfa）</li>
+      <li><span style="background: #98d98e;">　</span>　西岸海洋性気候（Cfb）</li>
+      <li><span style="background: #88cb7f;">　</span>　西岸海洋性気候（Cfc）</li>
+      <li><span style="background: #00a497;">　</span>　地中海性気候（Csa）</li>
+      <li><span style="background: #00a381;">　</span>　地中海性気候（Csb）</li>
+      <li><span style="background: #38b48b;">　</span>　地中海性気候（Csc）</li>
+      <li><span style="background: #028760;">　</span>　温帯夏雨気候（Cwa）</li>
+      <li><span style="background: #3b7960;">　</span>　温帯夏雨気候（Cwb）</li>
+      <li><span style="background: #00552e;">　</span>　温帯夏雨気候（Cwc）</li>
+      <li><span style="background: #c1e4e9;">　</span>　冷帯湿潤気候（Dfa）</li>
+      <li><span style="background: #a0d8ef;">　</span>　冷帯湿潤気候（Dfb）</li>
+      <li><span style="background: #bce2e8;">　</span>　冷帯湿潤気候（Dfc）</li>
+      <li><span style="background: #a2d7dd;">　</span>　冷帯湿潤気候（Dfd）</li>
+      <li><span style="background: #f09199;">　</span>　高地地中海性気候（Dsa）</li>
+      <li><span style="background: #f2a0a1;">　</span>　高地地中海性気候（Dsb）</li>
+      <li><span style="background: #f4b3c2;">　</span>　高地地中海性気候（Dsc）</li>
+      <li><span style="background: #eebbcb;">　</span>　高地地中海性気候（Dsd）</li>
+      <li><span style="background: #aa4c8f;">　</span>　冷帯冬季少雨気候（Dwa）</li>
+      <li><span style="background: #b44c97;">　</span>　冷帯冬季少雨気候（Dwb）</li>
+      <li><span style="background: #bc64a4;">　</span>　冷帯冬季少雨気候（Dwc）</li>
+      <li><span style="background: #cc7eb1;">　</span>　冷帯冬季少雨気候（Dwd）</li>
+      <li><span style="background: #2ca9e1;">　</span>　ツンドラ気候（EF）</li>
+      <li><span style="background: #bbc8e6;">　</span>　氷雪気候（ET）</li>
+
+    </div>
+
+  </div>
+
+
 </body>
 
 <script type="module">
+
+  const { DeckGL, _GlobeView, TileLayer, BitmapLayer, COORDINATE_SYSTEM, SolidPolygonLayer, ScatterplotLayer, LinearInterpolator } = deck;
 
   const COUNTRIES =
     'https://d2ad6b4ur7yvpq.cloudfront.net/naturalearth-3.3.0/ne_50m_admin_0_scale_rank.geojson'; //eslint-disable-line
@@ -88,10 +196,21 @@
 
   }
 
-  const INITIAL_VIEW_STATE = {
+  let initialViewState = {
     latitude: lat,
     longitude: lon,
     zoom: zoom
+  };
+
+  let rotateCamera = () => {
+    initialViewState = {
+      ...initialViewState,
+      longitude: initialViewState.longitude + 10,
+      transitionDuration: 1000,
+      transitionInterpolator: new LinearInterpolator(['longitude']),
+      onTransitionEnd: rotateCamera
+    };
+    deckgl.setProps({ initialViewState });
   };
 
   const tooltip = (d) => {
@@ -111,7 +230,7 @@
 
     } else if (value == "12") {
 
-      html_tr = ["<table>",'<span style="background: #e83929;">　</span>　熱帯モンスーン気候（Am）', "</table>"].join("\n");
+      html_tr = ["<table>", '<span style="background: #e83929;">　</span>　熱帯モンスーン気候（Am）', "</table>"].join("\n");
 
     } else if (value == "13") {
 
@@ -376,7 +495,12 @@
   const deckgl = new deck.DeckGL({
     container: 'container',
     views: new deck._GlobeView(),
-    initialViewState: INITIAL_VIEW_STATE,
+    initialViewState,
+    onViewStateChange: ({ viewState }) => {
+      initialViewState.longitude = viewState.longitude;
+      initialViewState.latitude = viewState.latitude;
+      initialViewState.zoom = viewState.zoom;
+    },
     controller: true,
     getTooltip: tooltip,
     layers: [
@@ -401,6 +525,22 @@
 
     ]
   });
+
+  const button = document.querySelector('.rotate');
+  button.addEventListener('click', () => {
+    rotateCamera();
+  });
+
+  const usage_guide = document.querySelector('.usage_guide');
+  usage_guide.addEventListener('click', () => {
+    $('#usage-guide').fadeIn();
+  });
+
+  const closed_btn = document.querySelector("#closed-btn");
+  closed_btn.addEventListener('click', () => {
+    $('#usage-guide').fadeOut();
+  });
+
 </script>
 
 </html>

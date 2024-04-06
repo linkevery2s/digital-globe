@@ -286,12 +286,6 @@
       border: 1px solid #ffffff;
     }
 
-    #closed-btn5:hover {
-      background: rgba(0, 0, 0, .5);
-      color: #ffffff;
-      border: 1px solid #ffffff;
-    }
-
     input {
       color: rgba(0, 119, 184, 0.5);
       border: 1px solid rgba(0, 0, 0, .5);
@@ -327,8 +321,7 @@
       padding-bottom: 3px;
     }
 
-    .japan_side_menu,
-    .usage_guide_side_menu {
+    .japan_side_menu {
       position: absolute;
       top: 50%;
       transform: translate(10px, -50%);
@@ -406,10 +399,6 @@
     document.getElementById("main").innerHTML = '<iframe src="./flag.html"></iframe>';
 
     const source = document.querySelector(".source");
-    //const source2 = document.querySelector(".source2");
-
-    //source.innerHTML = '<a href="https://geojson.xyz/" target="_blank">geojson.xyz</a>';
-    //source2.innerHTML = '<a href="https://geojson.xyz/" target="_blank">geojson.xyz</a>';
 
     /* ナビゲーション表示 */
     const btn = document.querySelector('.btn-menu');
@@ -430,76 +419,47 @@
     const japan_pref = document.querySelector('.japan_pref');
     const japan_gis = document.querySelector('.japan_gis');
     const japan_side_menu = document.querySelector('.japan_side_menu');
-    const usage_guide_side_menu = document.querySelector('.usage_guide_side_menu');
 
     flag.addEventListener('click', () => {
       $('#navi').hide();
       document.getElementById("main").innerHTML = '<iframe src="./flag.html"></iframe>';
-      //source.style.top = "-20px";
-      //source.innerHTML = '地図データ：<a href="https://geojson.xyz/" target="_blank">geojson.xyz</a>';
-      //source2.innerHTML = '地図データ：<a href="https://geojson.xyz/" target="_blank">geojson.xyz</a>';
       japan_side_menu.style.display = "none";
-      usage_guide_side_menu.style.display = "none";
     });
 
     gis1.addEventListener('click', () => {
       $('#navi').hide();
       document.getElementById("main").innerHTML = '<iframe src="./worldgis1.html"></iframe>';
-      //source.style.top = "-20px";
-      //source.innerHTML = '地図データ：<a href="https://maps.gsi.go.jp/development/ichiran.html" target="_blank">地理院タイル</a>';
-      //source2.innerHTML = '地図データ：<a href="https://maps.gsi.go.jp/development/ichiran.html" target="_blank">地理院タイル</a>';
       japan_side_menu.style.display = "none";
-      usage_guide_side_menu.style.display = "none";
     });
 
     simple.addEventListener('click', () => {
       $('#navi').hide();
       document.getElementById("main").innerHTML = '<iframe src="./simple.html"></iframe>';
-      //source.style.top = "-20px";
-      //source.innerHTML = '地図データ：<a href="https://geojson.xyz/" target="_blank">geojson.xyz</a>';
-      //source2.innerHTML = '地図データ：<a href="https://geojson.xyz/" target="_blank">geojson.xyz</a>';
       japan_side_menu.style.display = "none";
-      usage_guide_side_menu.style.display = "none";
     });
 
     world_climate.addEventListener('click', () => {
       $('#navi').hide();
       document.getElementById("main").innerHTML = '<iframe src="./world_climate.html"></iframe>';
-      //source.style.top = "-20px";
-      //source.innerHTML = 'データ出典：<a href="https://github.com/nagix/japan-eq-locator" target="_blank">Japan EQ Locator</a>';
-      //source2.innerHTML = 'データ出典：<a href="https://github.com/nagix/japan-eq-locator" target="_blank">Japan EQ Locator</a>';
       japan_side_menu.style.display = "none";
-      usage_guide_side_menu.style.display = "block";
     });
 
     earthquake.addEventListener('click', () => {
       $('#navi').hide();
       document.getElementById("main").innerHTML = '<iframe src="./earthquake.html"></iframe>';
-      //source.style.top = "-20px";
-      //source.innerHTML = 'データ出典：<a href="https://github.com/nagix/japan-eq-locator" target="_blank">Japan EQ Locator</a>';
-      //source2.innerHTML = 'データ出典：<a href="https://github.com/nagix/japan-eq-locator" target="_blank">Japan EQ Locator</a>';
       japan_side_menu.style.display = "none";
-      usage_guide_side_menu.style.display = "none";
     });
 
     japan_pref.addEventListener('click', () => {
       $('#navi').hide();
       document.getElementById("main").innerHTML = '<iframe src="./japan_earth.html"></iframe>';
-      //source.style.top = "-35px";
-      //source.innerHTML = '<a href="https://maps.gsi.go.jp/development/ichiran.html" target="_blank">地理院タイル</a>,<a href="https://github.com/gsi-cyberjapan/gsimaps-vector-experiment" target="_blank">国土地理院ベクトルタイル提供実験</a><br><a href="https://usgs.gov/" target="_blank">U.S. Geological Survey</a>,<a href="https://github.com/code4fukui/deckgl-gsi-terrain-layer" target="_blank">deckgl-gsi-terrain-layer</a>';
-      //source2.innerHTML = '<a href="https://maps.gsi.go.jp/development/ichiran.html" target="_blank">地理院タイル</a>,<a href="https://github.com/gsi-cyberjapan/gsimaps-vector-experiment" target="_blank">国土地理院ベクトルタイル提供実験</a><br><a href="https://usgs.gov/" target="_blank">U.S. Geological Survey</a>,<a href="https://github.com/code4fukui/deckgl-gsi-terrain-layer" target="_blank">deckgl-gsi-terrain-layer</a>';
       japan_side_menu.style.display = "none";
-      usage_guide_side_menu.style.display = "none";
     });
 
     japan_gis.addEventListener('click', () => {
       $('#navi').hide();
       document.getElementById("main").innerHTML = '<iframe src="./japan_terrain.html"></iframe>';
-      //source.style.top = "-35px";
-      //source.innerHTML = '<a href="https://maps.gsi.go.jp/development/ichiran.html" target="_blank">地理院タイル</a>,<a href="https://github.com/gsi-cyberjapan/gsimaps-vector-experiment" target="_blank">国土地理院ベクトルタイル提供実験</a><br><a href="https://usgs.gov/" target="_blank">U.S. Geological Survey</a>,<a href="https://github.com/code4fukui/deckgl-gsi-terrain-layer" target="_blank">deckgl-gsi-terrain-layer</a>';
-      //source2.innerHTML = '<a href="https://maps.gsi.go.jp/development/ichiran.html" target="_blank">地理院タイル</a>,<a href="https://github.com/gsi-cyberjapan/gsimaps-vector-experiment" target="_blank">国土地理院ベクトルタイル提供実験</a><br><a href="https://usgs.gov/" target="_blank">U.S. Geological Survey</a>,<a href="https://github.com/code4fukui/deckgl-gsi-terrain-layer" target="_blank">deckgl-gsi-terrain-layer</a>';
       japan_side_menu.style.display = "block";
-      usage_guide_side_menu.style.display = "none";
     });
 
     /* 全画面表示の切り替え */
@@ -512,7 +472,6 @@
       $('#footer').fadeOut();
       zoom2.style.display = "block";
       source.style.bottom = "5px";
-      //source2.style.display = "block";
       sns_fb.style.display = "none";
     });
 
@@ -521,7 +480,6 @@
       $('#footer').fadeIn();
       zoom2.style.display = "none";
       source.style.bottom = "64px";
-      //source2.style.display = "none";
       sns_fb.style.display = "block";
     });
 
@@ -538,12 +496,6 @@
       document.getElementById("main").innerHTML = '<iframe src="./japan_text.html"></iframe>';
     });
 
-    const usage_guide = document.querySelector('.usage_guide_side_menu');
-    usage_guide.addEventListener('click', () => {
-      $('#overlay').fadeIn();
-      $('#usage-guide').fadeIn();
-    });
-
     /* 使い方のポップアップ表示 */
     const manual_btn = document.querySelector('.manual-btn');
     const search_btn = document.querySelector('.search-btn');
@@ -556,7 +508,6 @@
     const closed_btn2 = document.querySelector("#closed-btn2");
     const closed_btn3 = document.querySelector("#closed-btn3");
     const closed_btn4 = document.querySelector("#closed-btn4");
-    const closed_btn5 = document.querySelector("#closed-btn5");
 
     manual_btn.addEventListener('click', () => {
       $('#overlay').fadeIn();
@@ -605,11 +556,6 @@
     closed_btn4.addEventListener('click', () => {
       $('#overlay').fadeOut();
       $('#data-source').fadeOut();
-    });
-
-    closed_btn5.addEventListener('click', () => {
-      $('#overlay').fadeOut();
-      $('#usage-guide').fadeOut();
     });
 
     /* 検索機能 */
@@ -755,7 +701,8 @@
 
     <span class="zoom"> <i class="fa-solid fa-xl fa-expand"></i> </span>
 
-    <div class="last_update text-xs px-1"><time datetime="2024-04-05" itemprop="modified">最終更新日：2024.04.05</time> ver 1.5
+    <div class="last_update text-xs px-1"><time datetime="2024-04-06" itemprop="modified">最終更新日：2024.04.06</time> ver
+      1.6
     </div>
 
     <button class="btn-menu">MENU</button>
@@ -781,9 +728,10 @@
     <div class="japan_text"><i class="fa-solid fa-lg fa-font"></i></div>
   </span>
 
+  <!--
   <span class="usage_guide_side_menu">
     <div class="japan_terrain mb-1">凡例</div>
-  </span>
+  </span>-->
 
   <!-- メインコンテンツ -->
   <div id="main">
@@ -800,41 +748,27 @@
       <img src="./gis.jpg" width="100%" alt="地球儀の写真">
 
       <h3 class="text-2xl mt-5" id="manual_h3">デジタル地球儀で、地理を楽しんで学ぼう！</h3>
-
       <p class="mt-5">世界には様々な国や地形があります。</p>
-
       <p class="mt-5">日本とは、どんな違いがあるでしょうか？</p>
-
       <p class="mt-5">日本と同じ緯度、経度の国々は？</p>
-
       <p class="mt-5">赤道直下の国々は？</p>
-
       <p class="mt-5">世界の山、山脈、半島はどのような特徴があるでしょうか？</p>
 
       <h3 class="text-2xl mt-7" id="manual_h3">インストール方法</h3>
-
       <p class="mt-5">PWAに対応しているので、iPhone、Androidともに、WEBブラウザの「ホーム画面に追加」からインストールできます。</p>
-
       <img src="./install.png" width="100%" class="mt-5" alt="インストール方法の画像">
 
       <h3 class="text-2xl mt-7" id="manual_h3">MENUボタン</h3>
-
       <p class="mt-5">右上のMENUボタンより、様々な地球儀を切り替えて表示できます！</p>
 
       <h3 class="text-2xl mt-7" id="manual_h3">検索ボタン</h3>
-
       <p class="mt-5">ワールドカップやオリンピックで、世界中の選手が登場します。</p>
-
       <p class="mt-5">「この国はどこらへんにあるんだろう？」</p>
-
       <p class="mt-5">左下の検索ボタンより、検索することができます！</p>
 
       <h3 class="text-2xl mt-7" id="manual_h3">全画面表示</h3>
-
       <p class="mt-5">左上の全画面表示ボタンより、地球儀が全画面表示に切り替わります！</p>
-
       <p class="mt-5">このアプリは、パソコン、スマホ、タブレット、あらゆるデバイスに対応しています。</p>
-
       <p class="mt-5">デジタル地球儀をグリグリと動かして、子ども達から大人まで、楽しんで地理を学んでみませんか？</p>
 
       <p class="mt-5">齋藤　仁志. </p>
@@ -863,12 +797,13 @@
     <h3 class="text-2xl text-center mb-3">更新情報</h3>
 
     <div class="search_list1 overflow-y-scroll h-72 mt-5 text-left pl-3">
-      <p class="mb-5">2024.4.5  世界の地震、アニメーション機能実装</p>
-      <p class="mb-5">2024.3.31 世界の気候追加</p>
-      <p class="mb-5">2024.3.30 インストール方法追加</p>
-      <p class="mb-5">2024.3.27 マップデータ表記変更、Facebookシェアボタン設置</p>
-      <p class="mb-5">2024.3.24 アプリ内フォントの変更</p>
-      <p class="mb-5">2024.3.23 日本の地理追加</p>
+      <p class="mb-5">2024.04.05 全ての地球儀、アニメーション機能実装</p>
+      <p class="mb-5">2024.04.05 世界の地震、アニメーション機能実装</p>
+      <p class="mb-5">2024.03.31 世界の気候追加</p>
+      <p class="mb-5">2024.03.30 インストール方法追加</p>
+      <p class="mb-5">2024.03.27 マップデータ表記変更、Facebookシェアボタン設置</p>
+      <p class="mb-5">2024.03.24 アプリ内フォントの変更</p>
+      <p class="mb-5">2024.03.23 日本の地理追加</p>
       <p>2024.3.17 アプリリリース</p>
     </div>
 
@@ -910,7 +845,8 @@
       ・<a href="https://amano-tec.com/data/worldflags.html" target="_blank">世界の国旗</a>
 
       <h3 class="text-2xl mt-10 mb-5" id="manual_h3">世界の気候</h3>
-      ・<a href="https://koeppen-geiger.vu-wien.ac.at/shifts.htm" target="_blank">OBSERVED AND PROJECTED CLIMATE SHIFTS 1901-2100
+      ・<a href="https://koeppen-geiger.vu-wien.ac.at/shifts.htm" target="_blank">OBSERVED AND PROJECTED CLIMATE SHIFTS
+        1901-2100
         DEPICTED BY WORLD MAPS OF THE KÖPPEN-GEIGER CLIMATE CLASSIFICATION</a>
 
       <h3 class="text-2xl mt-10 mb-5" id="manual_h3">世界の地震</h3>
@@ -925,7 +861,7 @@
 
   </div>
 
-  <!-- 世界の気候、凡例 -->
+  <!-- 世界の気候、凡例 
   <div id="usage-guide" class="text-center"><span id="closed-btn5">×</span>
     <h3 class="text-2xl text-center mb-3"><i class="fa-solid fa-book"></i> 凡　例</h3>
 
@@ -965,7 +901,7 @@
 
     </div>
 
-  </div>
+  </div>-->
 
 
   <!-- mapの出典 -->
