@@ -17,6 +17,8 @@
     integrity="sha512-GWzVrcGlo0TxTRvz9ttioyYJ+Wwk9Ck0G81D+eO63BaqHaJ3YZX9wuqjwgfcV/MrB2PhaVX9DkYVhbFpStnqpQ=="
     crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 
+    <link rel="stylesheet" href="./css/add.css" />
+
   <style type="text/css">
     html {
       margin: 0;
@@ -41,22 +43,6 @@
       z-index: 0;
     }
 
-    .side_menu {
-      position: absolute;
-      top: 50%;
-      transform: translate(10px, -50%);
-      z-index: 15;
-    }
-
-    .button{
-      cursor: pointer;
-      color: #000000;
-      background: rgba(255, 255, 255, .8);
-      border: 1px solid #000000;
-      padding: .5em;
-      border-radius: .5em;
-      border: 1px solid #000000;
-    }
   </style>
 
   <!-- Google tag (gtag.js) -->
@@ -152,7 +138,6 @@
   });
 
   const button = document.querySelector('.button');
-
   button.addEventListener('click', () => {
     rotateCamera();
   });
