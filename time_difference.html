@@ -1,15 +1,16 @@
 <!DOCTYPE HTML>
 <html lang="ja">
-<title>世界の地理</title>
+<title>世界の時差</title>
 
 <head prefix="og: http://ogp.me/ns# fb: http://ogp.me/ns/fb# article: http://ogp.me/ns/article#">
   <meta charset="UTF-8" name="viewport"
     content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <!-- deck.gl standalone bundle -->
   <script src="https://unpkg.com/deck.gl@latest/dist.min.js"></script>
-  <script src="./data/worldgis1.json"></script>
-  <link rel="stylesheet" href="./css/add.css" />
   <script src="https://cdn.tailwindcss.com"></script>
+
+  <link rel="stylesheet" href="./css/add.css" />
 
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"
     integrity="sha512-DTOQO9RWCH3ppGqcWaEA1BIZOC6xxalwEsw9c2QQeAIftl+Vegovlnee1c9QX4TctnWMn13TZye+giMm8e2LwA=="
@@ -31,7 +32,7 @@
     }
 
     body {
-      background: #ffffff;
+      background: radial-gradient(#a0d8ef, #000000);
       margin: 0;
       padding: 0;
     }
@@ -40,14 +41,6 @@
       width: 100%;
       height: 100%;
       z-index: 10;
-    }
-
-    .header {
-      background: rgba(0, 0, 0, 0.8);
-      z-index: 100;
-      position: fixed;
-      top: 0;
-      padding: 5px;
     }
   </style>
 
@@ -75,40 +68,19 @@
 
 <script type="module">
 
-  const { DeckGL, _GlobeView, TileLayer, BitmapLayer, COORDINATE_SYSTEM, SolidPolygonLayer, ScatterplotLayer, LinearInterpolator } = deck;
+  const { DeckGL, _GlobeView, TileLayer, BitmapLayer, COORDINATE_SYSTEM, SolidPolygonLayer, LinearInterpolator } = deck;
 
-  let lat; let lon; let zoom; let center;
+  const COUNTRIES =
+    'https://d2ad6b4ur7yvpq.cloudfront.net/naturalearth-3.3.0/ne_50m_admin_0_scale_rank.geojson'; //eslint-disable-line
 
-  const url_hash = location.hash;
-  let hash_last;
+  /*const AREA = "./data/nationalflag.geojson";*/
 
-  if (url_hash === "") {
-    lat = 12.983;
-    lon = 142.502;
-    zoom = .4;
-    center = [];
-
-  } else {
-    console.log(url_hash);
-
-    hash_last = url_hash.split("!");
-
-    lat = Number(hash_last[1].split("/")[1]);
-    lon = Number(hash_last[1].split("/")[0]);
-
-    zoom = 3;
-
-    center = [{
-      "lat": lat,
-      "lng": lon
-    }]
-
-  }
+  const CENTER = "./data/center.geojson";
 
   let initialViewState = {
-    latitude: lat,
-    longitude: lon,
-    zoom: zoom
+    latitude: 20.983,
+    longitude: 142.502,
+    zoom: .4
   };
 
   let rotateCamera = () => {
@@ -127,41 +99,23 @@
     if (!d || !d.object) return null;
     let obj = d.object;
 
-    const html_tr = ["<table>", "名称：" + obj.name + "<br>概要：" + obj.description, "</table>"].join("\n");
+    let html_tr;
+
+    html_tr = ["<table>", "<center><img src='./data/img/" + obj.properties.country_code + "@3x.png'></center>" + "国名：" + obj.properties.name_jps + "<br>首都：" + obj.properties.capital_jp, "</table>"].join("\n");
 
     return {
       html: html_tr,
       style: {
         background: "rgba(0,0,0,0.7)",
-        color: "#ffffff",
-        width: "180px"
+        color: "#ffffff"
       }
     };
+
   };
 
-  const tile = new TileLayer({
-    data: 'https://cyberjapandata.gsi.go.jp/xyz/std/{z}/{x}/{y}.png',
-    minZoom: 0,
-    maxZoom: 19,
-    tileSize: 256,
-
-    renderSubLayers: props => {
-      const {
-        bbox: { west, south, east, north }
-      } = props.tile;
-
-      return new BitmapLayer(props, {
-        data: null,
-        image: props.data,
-        _imageCoordinateSystem: COORDINATE_SYSTEM.CARTESIAN,
-        bounds: [west, south, east, north]
-      });
-    }
-  });
-
-  const deckgl = new DeckGL({
+  const deckgl = new deck.DeckGL({
     container: 'container',
-    views: new _GlobeView(),
+    views: new deck._GlobeView(),
     initialViewState,
     onViewStateChange: ({ viewState }) => {
       initialViewState.longitude = viewState.longitude;
@@ -171,23 +125,44 @@
     controller: true,
     getTooltip: tooltip,
     layers: [
-      tile,
-      new ScatterplotLayer({
-        id: 'scatterplot-layer',
-        data: worldgis1,
-        pickable: true,
-        opacity: 0.8,
+      new deck.GeoJsonLayer({
+        id: 'line_center',/* 赤道 */
+        data: CENTER,
+        filled: true,
+        lineWidthMinPixels: 3,
+        getLineColor: [240, 0, 40],
+        getLineWidth: 3,
+        opacity: 0.5,
+        pickable: false
+      }),
+
+      new deck.GeoJsonLayer({
+        id: 'base-map',
+        data: COUNTRIES,
         stroked: true,
         filled: true,
-        radiusScale: 6,
-        radiusMinPixels: 10,
-        radiusMaxPixels: 10,
+        lineWidthMinPixels: 2,
+        getLineColor: [0, 0, 0],
+        opacity: 0.2,
+        getFillColor: [255, 255, 252],
+      }),
+
+      /*new deck.GeoJsonLayer({
+        id: 'airports',
+        data: AREA,
+        filled: true,
         lineWidthMinPixels: 1,
-        getPosition: d => [d.lng, d.lat],
-        getRadius: d => 15,
-        getFillColor: d => [232, 57, 41],
-        getLineColor: d => [255, 255, 255]
-      })
+        pointRadiusMinPixels: 10,
+        pointRadiusScale: 2000,
+        getPointRadius: 17,
+        getFillColor: [240, 131, 0],
+        getLineColor: [255, 255, 255],
+        getLineWidth: 10,
+        opacity: 0.8,
+        pickable: true,
+        autoHighlight: true
+      })*/
+
     ]
   });
 
