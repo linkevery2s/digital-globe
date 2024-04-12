@@ -106,6 +106,20 @@
       border-radius: .3em;
     }
 
+    .question {
+      position: fixed;
+      top: 10px;
+      left: 5px;
+      border: 1px solid #ffffff;
+      background: transparent;
+      color: #ffffff;
+      padding: .5rem;
+      font-size: 1rem;
+      cursor: pointer;
+      line-height: 1;
+      border-radius: .3em;
+    }
+
     nav li {
       height: 50px;
       line-height: 50px;
@@ -174,28 +188,6 @@
       border: 1px solid #000000;
       background: rgba(255, 255, 255, .7);
     }
-
-    .last_update {
-      position: absolute;
-      color: #000000;
-      top: 63px;
-      right: 3px;
-      z-index: 5;
-      cursor: pointer;
-      border-bottom: 1px dotted #000000;
-      background: rgba(255, 255, 255, .7);
-    }
-
-    /*.source2 {
-      position: absolute;
-      color: #000000;
-      bottom: 5px;
-      right: 5px;
-      z-index: 10;
-      cursor: pointer;
-      display: none;
-      background: rgba(255, 255, 255, .7);
-    }*/
 
     #overlay {
       width: 100%;
@@ -701,9 +693,8 @@
 
     <span class="zoom"> <i class="fa-solid fa-xl fa-expand"></i> </span>
 
-    <div class="last_update text-xs px-1"><time datetime="2024-04-06" itemprop="modified">最終更新日：2024.04.06</time> ver
-      1.6
-    </div>
+    <a href="https://docs.google.com/forms/d/e/1FAIpQLSf-WMoBJRTdA1bmN_SmQ-bsNGeLs1l737d3c9BUNuErjH-KBw/viewform"
+        target="_blank"><button class="question"><i class="fa-regular fa-comments"></i></button></a>
 
     <button class="btn-menu">MENU</button>
     <div id="navi">
@@ -797,6 +788,7 @@
     <h3 class="text-2xl text-center mb-3">更新情報</h3>
 
     <div class="search_list1 overflow-y-scroll h-72 mt-5 text-left pl-3">
+      <p class="mb-5">2024.04.12 トップページ画面、仕様変更</p>
       <p class="mb-5">2024.04.06 全ての地球儀、アニメーション機能実装</p>
       <p class="mb-5">2024.04.05 世界の地震、アニメーション機能実装</p>
       <p class="mb-5">2024.03.31 世界の気候追加</p>
@@ -861,51 +853,8 @@
 
   </div>
 
-  <!-- 世界の気候、凡例 
-  <div id="usage-guide" class="text-center"><span id="closed-btn5">×</span>
-    <h3 class="text-2xl text-center mb-3"><i class="fa-solid fa-book"></i> 凡　例</h3>
-
-    <div class="text-left overflow-y-scroll h-72 my-5 mx-3">
-
-      <li><span style="background: #e2041b;">　</span>　熱帯雨林気候（Af）</li>
-      <li><span style="background: #e83929;">　</span>　熱帯モンスーン気候（Am）</li>
-      <li><span style="background: #d7003a;">　</span>　熱帯夏季少雨気候（As）</li>
-      <li><span style="background: #f08300;">　</span>　サバナ気候（Aw）</li>
-      <li><span style="background: #ffea00;">　</span>　砂漠気候（BWh）</li>
-      <li><span style="background: #fef263;">　</span>　砂漠気候（BWk）</li>
-      <li><span style="background: #f7c114;">　</span>　ステップ気候（BSk）</li>
-      <li><span style="background: #f8b500;">　</span>　ステップ気候（BSh）</li>
-      <li><span style="background: #c7dc68;">　</span>　温暖湿潤気候（Cfa）</li>
-      <li><span style="background: #98d98e;">　</span>　西岸海洋性気候（Cfb）</li>
-      <li><span style="background: #88cb7f;">　</span>　西岸海洋性気候（Cfc）</li>
-      <li><span style="background: #00a497;">　</span>　地中海性気候（Csa）</li>
-      <li><span style="background: #00a381;">　</span>　地中海性気候（Csb）</li>
-      <li><span style="background: #38b48b;">　</span>　地中海性気候（Csc）</li>
-      <li><span style="background: #028760;">　</span>　温帯夏雨気候（Cwa）</li>
-      <li><span style="background: #3b7960;">　</span>　温帯夏雨気候（Cwb）</li>
-      <li><span style="background: #00552e;">　</span>　温帯夏雨気候（Cwc）</li>
-      <li><span style="background: #c1e4e9;">　</span>　冷帯湿潤気候（Dfa）</li>
-      <li><span style="background: #a0d8ef;">　</span>　冷帯湿潤気候（Dfb）</li>
-      <li><span style="background: #bce2e8;">　</span>　冷帯湿潤気候（Dfc）</li>
-      <li><span style="background: #a2d7dd;">　</span>　冷帯湿潤気候（Dfd）</li>
-      <li><span style="background: #f09199;">　</span>　高地地中海性気候（Dsa）</li>
-      <li><span style="background: #f2a0a1;">　</span>　高地地中海性気候（Dsb）</li>
-      <li><span style="background: #f4b3c2;">　</span>　高地地中海性気候（Dsc）</li>
-      <li><span style="background: #eebbcb;">　</span>　高地地中海性気候（Dsd）</li>
-      <li><span style="background: #aa4c8f;">　</span>　冷帯冬季少雨気候（Dwa）</li>
-      <li><span style="background: #b44c97;">　</span>　冷帯冬季少雨気候（Dwb）</li>
-      <li><span style="background: #bc64a4;">　</span>　冷帯冬季少雨気候（Dwc）</li>
-      <li><span style="background: #cc7eb1;">　</span>　冷帯冬季少雨気候（Dwd）</li>
-      <li><span style="background: #2ca9e1;">　</span>　ツンドラ気候（EF）</li>
-      <li><span style="background: #bbc8e6;">　</span>　氷雪気候（ET）</li>
-
-    </div>
-
-  </div>-->
-
-
   <!-- mapの出典 -->
-  <div class="source text-xs px-2" id="source">マップデータについて</div>
+  <div class="source text-xs px-2" id="source">マップデータの出典</div>
 
   <div class="sns-fb">
 
@@ -927,9 +876,7 @@
     </div>
 
     <p class="text-xs mt-1"><a href="https://github.com/linkevery2s/nationalflag" target="_blank">src on GitHub</a>.
-      &copy <a href="https://hitoshi2s.netlify.app/" target="_blank">齋藤 仁志</a>.　<span id="update-btn">更新情報</span>　<a
-        href="https://docs.google.com/forms/d/e/1FAIpQLSf-WMoBJRTdA1bmN_SmQ-bsNGeLs1l737d3c9BUNuErjH-KBw/viewform"
-        target="_blank">お問い合わせ</a></p>
+      &copy <a href="https://hitoshi2s.netlify.app/" target="_blank">齋藤 仁志</a>.　<span id="update-btn">更新情報</span>　ver 1.7</p>
 
   </div>
 
