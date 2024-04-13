@@ -106,10 +106,10 @@
       border-radius: .3em;
     }
 
-    .question {
+    .share {
       position: fixed;
-      top: 10px;
-      left: 5px;
+      top: 7px;
+      left: 10px;
       border: 1px solid #ffffff;
       background: transparent;
       color: #ffffff;
@@ -117,7 +117,7 @@
       font-size: 1rem;
       cursor: pointer;
       line-height: 1;
-      border-radius: .3em;
+      border-radius: 100%;
     }
 
     nav li {
@@ -189,6 +189,17 @@
       background: rgba(255, 255, 255, .7);
     }
 
+    .last_update {
+      position: absolute;
+      color: #000000;
+      top: 63px;
+      right: 3px;
+      z-index: 5;
+      cursor: pointer;
+      border-bottom: 1px dotted #000000;
+      background: rgba(255, 255, 255, .7);
+    }
+
     #overlay {
       width: 100%;
       height: 120vh;
@@ -204,7 +215,7 @@
     #search,
     #update,
     #data-source,
-    #usage-guide {
+    #sns-share {
       left: 50%;
       position: absolute;
       top: 50%;
@@ -278,6 +289,12 @@
       border: 1px solid #ffffff;
     }
 
+    #closed-btn5:hover {
+      background: rgba(0, 0, 0, .5);
+      color: #ffffff;
+      border: 1px solid #ffffff;
+    }
+
     input {
       color: rgba(0, 119, 184, 0.5);
       border: 1px solid rgba(0, 0, 0, .5);
@@ -346,16 +363,6 @@
       color: #ffffff;
     }
 
-    #usage-guide li {
-      height: 40px;
-      line-height: 40px;
-      cursor: pointer;
-      list-style: none;
-    }
-
-    #usage-guide li:nth-child(odd) {
-      background: rgba(242, 242, 242, .5);
-    }
   </style>
 
   <link rel="manifest" href="./manifest.json">
@@ -495,11 +502,13 @@
     const manual = document.querySelector('#manual');
     const search = document.querySelector('#search');
     const update_btn = document.querySelector('#update-btn');
+    const sns_share = document.querySelector(".share");
 
     const closed_btn = document.querySelector("#closed-btn");
     const closed_btn2 = document.querySelector("#closed-btn2");
     const closed_btn3 = document.querySelector("#closed-btn3");
     const closed_btn4 = document.querySelector("#closed-btn4");
+    const closed_btn5 = document.querySelector("#closed-btn5");
 
     manual_btn.addEventListener('click', () => {
       $('#overlay').fadeIn();
@@ -521,13 +530,18 @@
       $('#data-source').fadeIn();
     })
 
+    sns_share.addEventListener('click', () => {
+      $('#overlay').fadeIn();
+      $('#sns-share').fadeIn();
+    })
+
     overlay.addEventListener('click', () => {
       $('#overlay').fadeOut();
       $('#manual').fadeOut();
       $('#search').fadeOut();
       $('#update').fadeOut();
       $('#data-source').fadeOut();
-      $('#usage-guide').fadeOut();
+      $('#sns-share').fadeOut();
     });
 
     closed_btn.addEventListener('click', () => {
@@ -548,6 +562,11 @@
     closed_btn4.addEventListener('click', () => {
       $('#overlay').fadeOut();
       $('#data-source').fadeOut();
+    });
+
+    closed_btn5.addEventListener('click', () => {
+      $('#overlay').fadeOut();
+      $('#sns-share').fadeOut();
     });
 
     /* 検索機能 */
@@ -691,10 +710,11 @@
   <div id="header" class="header text-center py-3">
     <h3 class="text-2xl"><a href="./index.html">デジタル地球儀</a></h3>
 
-    <span class="zoom"> <i class="fa-solid fa-xl fa-expand"></i> </span>
+    <span class="zoom"> <i class="fa-solid fa-lg fa-expand"></i> </span>
 
-    <a href="https://docs.google.com/forms/d/e/1FAIpQLSf-WMoBJRTdA1bmN_SmQ-bsNGeLs1l737d3c9BUNuErjH-KBw/viewform"
-        target="_blank"><button class="question"><i class="fa-regular fa-comments"></i></button></a>
+    <div class="last_update text-xs px-1"><time datetime="2024-04-12" itemprop="modified">最終更新日：2024.04.12</time> ver
+      1.6
+    </div>
 
     <button class="btn-menu">MENU</button>
     <div id="navi">
@@ -711,6 +731,8 @@
       </nav>
     </div>
 
+    <button class="share"><i class="fa-regular fa-xl fa-comments"></i></button>
+
   </div>
 
   <!-- 日本の地形メニュー -->
@@ -718,11 +740,6 @@
     <div class="japan_terrain mb-1"><i class="fa-solid fa-lg fa-image"></i></div>
     <div class="japan_text"><i class="fa-solid fa-lg fa-font"></i></div>
   </span>
-
-  <!--
-  <span class="usage_guide_side_menu">
-    <div class="japan_terrain mb-1">凡例</div>
-  </span>-->
 
   <!-- メインコンテンツ -->
   <div id="main">
@@ -853,6 +870,26 @@
 
   </div>
 
+  <div id="sns-share" class="text-center"><span id="closed-btn5">×</span>
+    <h3 class="text-2xl text-center mb-3"><i class="fa-regular fa-comments"></i> シェア</h3>
+
+    <div class="overflow-y-scroll mt-5 h-96 text-left px-3">
+
+      <h3 class="text-2xl mb-5" id="manual_h3">アプリURL</h3>
+
+      <p class="mt-5">https://digital-globe.netlify.app/</p>
+      
+      <h3 class="text-2xl my-5" id="manual_h3">QRコード</h3>
+
+      <img src="./qr.png" alt="QRコード">
+
+      <p class="mt-5">※「QRコード」は株式会社デンソーウェーブの登録商標です。</p>
+
+    </div>
+
+  </div>
+
+
   <!-- mapの出典 -->
   <div class="source text-xs px-2" id="source">マップデータの出典</div>
 
@@ -876,7 +913,9 @@
     </div>
 
     <p class="text-xs mt-1"><a href="https://github.com/linkevery2s/nationalflag" target="_blank">src on GitHub</a>.
-      &copy <a href="https://hitoshi2s.netlify.app/" target="_blank">齋藤 仁志</a>.　<span id="update-btn">更新情報</span>　ver 1.7</p>
+      &copy <a href="https://hitoshi2s.netlify.app/" target="_blank">齋藤 仁志</a>.　<span id="update-btn">更新情報</span>　<a
+        href="https://docs.google.com/forms/d/e/1FAIpQLSf-WMoBJRTdA1bmN_SmQ-bsNGeLs1l737d3c9BUNuErjH-KBw/viewform"
+        target="_blank">お問い合わせ</a></p>
 
   </div>
 
