@@ -3,8 +3,7 @@
 <title>デジタル地球儀</title>
 
 <head prefix="og: http://ogp.me/ns# fb: http://ogp.me/ns/fb# article: http://ogp.me/ns/article#">
-  <meta charset="UTF-8" name="viewport"
-    content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+  <meta charset="UTF-8" name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta property="og:title" content="デジタル地球儀" />
   <meta property="og:type" content="website" />
@@ -415,6 +414,7 @@
     const simple = document.querySelector('.simple');
     const earthquake = document.querySelector('.earthquake');
     const world_climate = document.querySelector('.world_climate');
+    const world_temperature = document.querySelector('.world_temperature');
     const japan_pref = document.querySelector('.japan_pref');
     const japan_gis = document.querySelector('.japan_gis');
     const japan_side_menu = document.querySelector('.japan_side_menu');
@@ -440,6 +440,12 @@
     world_climate.addEventListener('click', () => {
       $('#navi').hide();
       document.getElementById("main").innerHTML = '<iframe src="./world_climate.html"></iframe>';
+      japan_side_menu.style.display = "none";
+    });
+
+    world_temperature.addEventListener('click', () => {
+      $('#navi').hide();
+      document.getElementById("main").innerHTML = '<iframe src="./world_temperature.html"></iframe>';
       japan_side_menu.style.display = "none";
     });
 
@@ -712,7 +718,7 @@
 
     <span class="zoom"> <i class="fa-solid fa-xl fa-expand"></i> </span>
 
-    <div class="last_update text-xs px-1"><time datetime="2024-04-14" itemprop="modified">最終更新日：2024.04.14</time> ver 1.8
+    <div class="last_update text-xs px-1"><time datetime="2024-04-16" itemprop="modified">最終更新日：2024.04.16</time> ver 1.9
     </div>
 
     <button class="btn-menu">MENU</button>
@@ -722,6 +728,7 @@
           <li class="flag">世界の国々</li>
           <li class="world_gis">世界の地形</li>
           <li class="world_climate">世界の気候</li>
+          <li class="world_temperature">世界の気温・降水量</li>
           <li class="earthquake">世界の地震</li>
           <li class="japan_pref">日本の都道府県・島</li>
           <li class="japan_gis">日本の地形</li>
@@ -804,6 +811,7 @@
     <h3 class="text-2xl text-center mb-3">更新情報</h3>
 
     <div class="search_list1 overflow-y-scroll h-72 mt-5 text-left pl-3">
+      <p class="mb-5">2024.04.16 世界の気温・降水量追加</p>
       <p class="mb-5">2024.04.14 軽微な修正、世界の気候のアイコン変更、日本の島の解説追加</p>
       <p class="mb-5">2024.04.12 トップページ画面、仕様変更</p>
       <p class="mb-5">2024.04.06 全ての地球儀、アニメーション機能実装</p>
