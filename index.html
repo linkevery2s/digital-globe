@@ -426,49 +426,49 @@
     flag.addEventListener('click', () => {
       $('#navi').hide();
       document.getElementById("main").innerHTML = '<iframe src="./flag.html"></iframe>';
-      japan_side_menu.style.display = "none";
+
     });
 
     gis1.addEventListener('click', () => {
       $('#navi').hide();
       document.getElementById("main").innerHTML = '<iframe src="./worldgis1.html"></iframe>';
-      japan_side_menu.style.display = "none";
+
     });
 
     simple.addEventListener('click', () => {
       $('#navi').hide();
       document.getElementById("main").innerHTML = '<iframe src="./simple.html"></iframe>';
-      japan_side_menu.style.display = "none";
+
     });
 
     world_climate.addEventListener('click', () => {
       $('#navi').hide();
       document.getElementById("main").innerHTML = '<iframe src="./world_climate.html"></iframe>';
-      japan_side_menu.style.display = "none";
+
     });
 
     world_temperature.addEventListener('click', () => {
       $('#navi').hide();
       document.getElementById("main").innerHTML = '<iframe src="./world_temperature.html"></iframe>';
-      japan_side_menu.style.display = "none";
+
     });
 
     earthquake.addEventListener('click', () => {
       $('#navi').hide();
       document.getElementById("main").innerHTML = '<iframe src="./earthquake.html"></iframe>';
-      japan_side_menu.style.display = "none";
+
     });
 
     japan_pref.addEventListener('click', () => {
       $('#navi').hide();
       document.getElementById("main").innerHTML = '<iframe src="./japan_earth.html"></iframe>';
-      japan_side_menu.style.display = "none";
+
     });
 
     japan_gis.addEventListener('click', () => {
       $('#navi').hide();
       document.getElementById("main").innerHTML = '<iframe src="./japan_terrain.html"></iframe>';
-      japan_side_menu.style.display = "block";
+
     });
 
     /* 全画面表示の切り替え */
@@ -490,19 +490,6 @@
       zoom2.style.display = "none";
       source.style.bottom = "64px";
       sns_fb.style.display = "block";
-    });
-
-    /* 日本の地図切り替え */
-    /*const japan_earth = document.querySelector('.japan_earth');*/
-    const japan_terrain = document.querySelector('.japan_terrain');
-    const japan_text = document.querySelector('.japan_text');
-
-    japan_terrain.addEventListener('click', () => {
-      document.getElementById("main").innerHTML = '<iframe src="./japan_terrain.html"></iframe>';
-    });
-
-    japan_text.addEventListener('click', () => {
-      document.getElementById("main").innerHTML = '<iframe src="./japan_text.html"></iframe>';
     });
 
     /* 使い方のポップアップ表示 */
@@ -816,6 +803,7 @@
     <h3 class="text-2xl text-center mb-3">更新情報</h3>
 
     <div class="search_list1 overflow-y-scroll h-72 mt-5 text-left pl-3">
+      <p class="mb-5">2024.05.17 日本の地形、マップ切り替えの仕様変更</p>
       <p class="mb-5">2024.04.16 世界の気温・降水量追加</p>
       <p class="mb-5">2024.04.14 軽微な修正、世界の気候のアイコン変更、日本の島の解説追加</p>
       <p class="mb-5">2024.04.12 トップページ画面、仕様変更</p>

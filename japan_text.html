@@ -10,6 +10,15 @@
   <script src='https://unpkg.com/maplibre-gl@2.4.0/dist/maplibre-gl.js'></script>
   <link href='https://unpkg.com/maplibre-gl@2.4.0/dist/maplibre-gl.css' rel='stylesheet' />
 
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"
+    integrity="sha512-DTOQO9RWCH3ppGqcWaEA1BIZOC6xxalwEsw9c2QQeAIftl+Vegovlnee1c9QX4TctnWMn13TZye+giMm8e2LwA=="
+    crossorigin="anonymous" referrerpolicy="no-referrer" />
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/js/all.min.js"
+    integrity="sha512-GWzVrcGlo0TxTRvz9ttioyYJ+Wwk9Ck0G81D+eO63BaqHaJ3YZX9wuqjwgfcV/MrB2PhaVX9DkYVhbFpStnqpQ=="
+    crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+
+  <script src="https://cdn.tailwindcss.com"></script>
+
   <style type="text/css">
     html,
     body {
@@ -32,6 +41,23 @@
       height: 100%;
       z-index: 10;
     }
+
+    .japan_side_menu {
+      position: absolute;
+      top: 50%;
+      transform: translate(10px, -50%);
+      z-index: 10000;
+    }
+
+    .japan_terrain,
+    .japan_text {
+      cursor: pointer;
+      color: #000000;
+      background: rgba(255, 255, 255, .8);
+      border: 1px solid #000000;
+      padding: .3em;
+      border-radius: .5em;
+    }
   </style>
 
   <!-- Google tag (gtag.js) -->
@@ -50,18 +76,49 @@
 
   <div id="container"></div>
 
+  <!-- 日本の地形メニュー -->
+  <span class="japan_side_menu">
+    <div class="japan_terrain"><i class="fa-solid fa-lg fa-image"></i></div>
+  </span>
+
 </body>
 
 <script type="module">
   const { DeckGL, GeoJsonLayer, ScenegraphLayer } = deck;
 
+  let lat; let lon; let zoom; let pitch; let bearing;
+
+  const url_hash = location.hash;
+  let hash_last;
+
+  if (url_hash === "") {
+    lat = 35.666;
+    lon = 139.779;
+    zoom = 8.5;
+    pitch = 50;
+    bearing = 0;
+
+  } else {
+    console.log(url_hash);
+
+    hash_last = url_hash.split("!");
+
+    lat = Number(hash_last[1].split("/")[0]);
+    lon = Number(hash_last[1].split("/")[1]);
+    zoom = Number(hash_last[1].split("/")[2]);
+    pitch = Number(hash_last[1].split("/")[3]);
+    bearing = Number(hash_last[1].split("/")[4]);
+
+  }
+
   const INITIAL_VIEW_STATE = {
-    longitude: 139.779,
-    latitude: 35.666,
-    zoom: 8.5,
+    longitude: lon,
+    latitude: lat,
+    zoom: zoom,
     minZoom: 3,
-    pitch: 50,
-    maxPitch: 85
+    pitch: pitch,
+    maxPitch: 85,
+    bearing: bearing
   };
 
   const tooltip = (d) => {
@@ -122,13 +179,15 @@
     container: 'container',
     mapStyle: './data/basemap_tiri_photo.json',
     initialViewState: INITIAL_VIEW_STATE,
-    //onViewStateChange: ({ viewState }) => { 
+    onViewStateChange: ({ viewState }) => {
 
-      //console.log(Math.round(viewState.zoom * 10) / 10 + "," + Math.round(viewState.latitude * 1000)/1000 + "," + Math.round(viewState.longitude *1000)/1000 + "," + Math.round(viewState.pitch) + "," + Math.round(viewState.bearing) )
-    
-      //history.replaceState('','','/japan_text.html#!' + Math.round(viewState.latitude * 1000) / 1000 + "/" + Math.round(viewState.longitude * 1000) / 1000 + "/" + Math.round(viewState.zoom * 10) / 10 + "/" + Math.round(viewState.pitch) + "/" + Math.round(viewState.bearing));
+      zoom = Math.round(viewState.zoom * 10) / 10;
+      lat = Math.round(viewState.latitude * 1000) / 1000;
+      lon = Math.round(viewState.longitude * 1000) / 1000;
+      pitch = Math.round(viewState.pitch * 10) / 10;
+      bearing = Math.round(viewState.bearing * 100) / 100;
 
-    //},
+    },
     controller: {
       touchRotate: true
     },
@@ -137,6 +196,13 @@
       prefectures_line, prefectures, offices
     ]
   });
+
+  const japan_terrain = document.querySelector('.japan_terrain');
+
+  japan_terrain.addEventListener('click', () => {
+    location.href = "./japan_terrain.html#!" + lat + "/" + lon + "/" + zoom + "/" + pitch + "/" + bearing;
+  });
+
 </script>
 
 </html>
