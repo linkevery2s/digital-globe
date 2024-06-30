@@ -257,12 +257,10 @@
       position: absolute;
       top: 5px;
       right: 5px;
-      border-radius: 100%;
-      color: #000000;
-      border: 1px solid #000000;
+      border-radius: .3em;
+      color: #ffffff;
+      background: rgba(25, 68, 142, 0.8);
       cursor: pointer;
-      width: 30px;
-      height: 30px;
       text-align: center;
     }
 
@@ -271,9 +269,9 @@
     #closed-btn3:hover,
     #closed-btn4:hover,
     #closed-btn5:hover {
-      background: rgba(0, 0, 0, .5);
-      color: #ffffff;
-      border: 1px solid #ffffff;
+      background: #ffffff;
+      color: rgba(25, 68, 142, 0.8);
+      border: 1px solid rgba(25, 68, 142, 0.8);
     }
 
     input {
@@ -402,7 +400,8 @@
     const world_temperature = document.querySelector('.world_temperature');
     const japan_pref = document.querySelector('.japan_pref');
     const japan_gis = document.querySelector('.japan_gis');
-    const japan_side_menu = document.querySelector('.japan_side_menu');
+    const japan_two_screens = document.querySelector('.japan_two_screens');
+    //const japan_side_menu = document.querySelector('.japan_side_menu');
 
     flag.addEventListener('click', () => {
       $('#navi').hide();
@@ -449,6 +448,17 @@
     japan_gis.addEventListener('click', () => {
       $('#navi').hide();
       document.getElementById("main").innerHTML = '<iframe src="./japan_terrain.html"></iframe>';
+
+    });
+
+    japan_two_screens.addEventListener('click', () =>{
+      $('#navi').hide();
+      document.getElementById("main").innerHTML = '<iframe src="./japan_twoscreens.html"></iframe>';
+      $('#header').fadeOut();
+      $('#footer').fadeOut();
+      zoom2.style.display = "block";
+      source.style.bottom = "5px";
+      sns_fb.style.display = "none";
 
     });
 
@@ -690,21 +700,21 @@
 
     <span class="zoom"> <i class="fa-solid fa-xl fa-expand"></i> </span>
 
-    <div class="last_update text-xs px-1"><time datetime="2024-05-30" itemprop="modified">最終更新日：2024.05.30</time> ver
-      2.1
+    <div class="last_update text-xs px-1"><time datetime="2024-06-30" itemprop="modified">最終更新日：2024.06.30</time> ver 2.2
     </div>
 
     <button class="btn-menu">MENU</button>
     <div id="navi">
       <nav>
         <ul>
-          <li class="flag">世界の国々</li>
+          <li class="flag">世界の首都・国旗</li>
           <li class="world_gis">世界の地形</li>
           <li class="world_climate">世界の気候</li>
           <li class="world_temperature">世界の気温・降水量</li>
           <li class="earthquake">世界の地震</li>
           <li class="japan_pref">日本の都道府県・島</li>
           <li class="japan_gis">日本の地形</li>
+          <li class="japan_two_screens">日本の地理（２画面表示）</li>
           <li class="simple">赤道・緯度・経度・国境</li>
         </ul>
       </nav>
@@ -728,7 +738,7 @@
   <div id="overlay"></div>
 
   <!-- 使い方 -->
-  <div id="manual"><span id="closed-btn">×</span>
+  <div id="manual"><span id="closed-btn" class="py-2 px-3 text-xs">閉じる</span>
     <h3 class="text-2xl text-center"><i class="fa-solid fa-book"></i> 使い方</h3>
 
     <div class="overflow-y-scroll overview mt-5 mx-2">
@@ -764,7 +774,7 @@
   </div>
 
   <!-- 検索 -->
-  <div id="search" class="text-center"><span id="closed-btn2">×</span>
+  <div id="search" class="text-center"><span id="closed-btn2" class="py-2 px-3 text-xs">閉じる</span>
     <h3 class="text-2xl text-center mb-3"><i class="fa-solid fa-magnifying-glass"></i> 検　索</h3>
 
     <p class="mb-3">世界の国々や地形を検索できます。</p>
@@ -780,10 +790,11 @@
 
   </div>
 
-  <div id="update" class="text-center"><span id="closed-btn3">×</span>
+  <div id="update" class="text-center"><span id="closed-btn3" class="py-2 px-3 text-xs">閉じる</span>
     <h3 class="text-2xl text-center mb-3">更新情報</h3>
 
     <div class="search_list1 overflow-y-scroll overview mt-5 text-left pl-3">
+      <p class="mb-5">2024.06.30 日本の地理（２画面表示）追加</p>
       <p class="mb-5">2024.05.30 使い方のUIについて、高さ調整</p>
       <p class="mb-5">2024.05.17 日本の地形、マップ切り替えの仕様変更</p>
       <p class="mb-5">2024.04.16 世界の気温・降水量追加</p>
@@ -801,10 +812,10 @@
 
   </div>
 
-  <div id="data-source" class="text-center"><span id="closed-btn4">×</span>
+  <div id="data-source" class="text-center"><span id="closed-btn4" class="py-2 px-3 text-xs">閉じる</span>
     <h3 class="text-2xl text-center mb-3">マップデータについて</h3>
 
-    <div class="overflow-y-scroll mt-5 overview text-left px-3">
+    <div class="overflow-y-scroll mt-5 overview text-left px-3 pb-5">
 
       <img src="./book.jpg" width="100%" alt="データ出典の写真">
 
@@ -830,7 +841,7 @@
 
       ・<a href="https://github.com/code4fukui/deckgl-gsi-terrain-layer" target="_blank">deckgl-gsi-terrain-layer</a>
 
-      <h3 class="text-2xl mt-10 mb-5" id="manual_h3">世界の国々</h3>
+      <h3 class="text-2xl mt-10 mb-5" id="manual_h3">世界の首都・国旗</h3>
 
       ・<a href="https://amano-tec.com/data/world.html" target="_blank">世界の首都の位置データ</a><br><br>
 
@@ -853,11 +864,20 @@
 
       ・<a href="https://linkdata.org/work/rdf1s4540i" target="_blank">都道府県庁</a>
 
+      <h3 class="text-2xl mt-10 mb-5" id="manual_h3">日本の地理（２画面表示）</h3>
+
+      ・<a href="https://maps.gsi.go.jp/development/ichiran.html" target="_blank">地理院タイル</a><br><br>
+
+      ・<a href="http://osm.org/copyright" target="_blank">OpenStreetMap</a> contributors
+
+
+
+
     </div>
 
   </div>
 
-  <div id="sns-share" class="text-center"><span id="closed-btn5">×</span>
+  <div id="sns-share" class="text-center"><span id="closed-btn5" class="py-2 px-3 text-xs">閉じる</span>
     <h3 class="text-2xl text-center mb-3"><i class="fa-regular fa-comments"></i> シェア</h3>
 
     <div class="mt-5 h-96 text-left px-3">
@@ -876,7 +896,7 @@
 
 
   <!-- mapの出典 -->
-  <div class="source text-xs px-2" id="source">マップデータの出典</div>
+  <div class="source text-xs px-1" id="source">マップデータの出典</div>
 
   <div class="sns-fb">
 
