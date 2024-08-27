@@ -6,8 +6,8 @@
   <meta charset="UTF-8" name="viewport"
     content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <!-- deck.gl standalone bundle -->
-  <script src="https://unpkg.com/deck.gl@latest/dist.min.js"></script>
+
+  <script src="https://unpkg.com/deck.gl@^8.9.0/dist.min.js"></script>
   <script src="https://cdn.tailwindcss.com"></script>
 
   <link rel="stylesheet" href="./css/add.css" />
@@ -108,8 +108,9 @@
 
   <span class="side_menu">
     <center>
-    <div class="button mb-1 usage_guide"><i class="fa-solid fa-xl fa-clipboard-list"></i></div>
-    <div class="button rotate"><i class="fa-solid fa-xl fa-rotate"></i></div>
+      <div class="button mb-1 usage_guide"><i class="fa-solid fa-xl fa-clipboard-list"></i></div>
+      <div class="button rotate" id="rotate"><i class="fa-solid fa-xl fa-rotate"></i></div>
+      <div class="button2" id="button2"><i class="fa-solid fa-xl fa-stop"></i></div>
     </center>
   </span>
 
@@ -210,6 +211,18 @@
       onTransitionEnd: rotateCamera
     };
     deckgl.setProps({ initialViewState });
+  };
+
+  let stop = () => {
+    initialViewState = {
+      ...initialViewState,
+      longitude: initialViewState.longitude + 0.01,
+      transitionDuration: 0,
+      transitionInterpolator: new LinearInterpolator(['longitude']),
+      onTransitionEnd: stop
+    };
+    deckgl.setProps({ initialViewState });
+
   };
 
   const tooltip = (d) => {
@@ -526,8 +539,17 @@
   });
 
   const button = document.querySelector('.rotate');
+  const button2 = document.querySelector('.button2');
   button.addEventListener('click', () => {
     rotateCamera();
+    $("#rotate").hide();
+    $("#button2").show();
+  });
+
+  button2.addEventListener('click', () => {
+    stop();
+    $("#button2").hide();
+    $("#rotate").show();
   });
 
   const usage_guide = document.querySelector('.usage_guide');

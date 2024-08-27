@@ -15,6 +15,11 @@
 
   <script src="https://cdn.tailwindcss.com"></script>
 
+  <script src="https://code.jquery.com/jquery-3.7.1.min.js"
+    integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
+
+  <link rel="stylesheet" href="./css/add.css" />
+
   <style>
     html,
     body {
@@ -46,6 +51,27 @@
       padding: .3em;
       border-radius: .5em;
     }
+
+    .button {
+      cursor: pointer;
+      color: #000000;
+      background: rgba(255, 255, 255, .8);
+      border: 1px solid #000000;
+      padding: .3em;
+      border-radius: .5em;
+      border: 1px solid #000000;
+    }
+
+    .button2 {
+      cursor: pointer;
+      color: #000000;
+      background: rgba(255, 255, 255, .8);
+      border: 1px solid #000000;
+      padding: .3em .4em .3em .4em;
+      display: none;
+      border-radius: .5em;
+      border: 1px solid #000000;
+    }
   </style>
 
   <!-- Google tag (gtag.js) -->
@@ -64,7 +90,9 @@
 
   <!-- 日本の地形メニュー -->
   <span class="japan_side_menu">
-    <div class="japan_text"><i class="fa-solid fa-lg fa-font"></i></div>
+    <div class="japan_text mb-1"><i class="fa-solid fa-lg fa-font"></i></div>
+    <div class="button" id="button"><i class="fa-solid fa-lg fa-rotate"></i></div>
+    <div class="button2" id="button2"><i class="fa-solid fa-lg fa-stop"></i></div>
   </span>
 
   <script type="module">
@@ -143,7 +171,7 @@
 
     }
 
-    const INITIAL_VIEW_STATE = {
+    let initialViewState = {
       longitude: lon,
       latitude: lat,
       zoom: zoom,
@@ -153,8 +181,31 @@
       bearing: bearing
     };
 
-    new deck.Deck({
-      initialViewState: INITIAL_VIEW_STATE,
+    let rotateCamera = () => {
+      initialViewState = {
+        ...initialViewState,
+        bearing: initialViewState.bearing - 10,
+        transitionDuration: 1000,
+        transitionInterpolator: new deck.LinearInterpolator(['bearing']),
+        onTransitionEnd: rotateCamera
+      };
+      deckgl.setProps({ initialViewState });
+    };
+
+    let stop = () => {
+      initialViewState = {
+        ...initialViewState,
+        bearing: initialViewState.bearing - 0.01,
+        transitionDuration: 0,
+        transitionInterpolator: new deck.LinearInterpolator(['bearing']),
+        onTransitionEnd: stop
+      };
+      deckgl.setProps({ initialViewState });
+
+    };
+
+    const deckgl = new deck.Deck({
+      initialViewState: initialViewState,
       onViewStateChange: ({ viewState }) => {
 
         zoom = Math.round(viewState.zoom * 10) / 10;
@@ -178,6 +229,21 @@
     japan_text.addEventListener('click', () => {
       location.href = "./japan_text.html#!" + lat + "/" + lon + "/" + zoom + "/" + pitch + "/" + bearing;
     });
+
+    const button = document.querySelector('.button');
+    const button2 = document.querySelector('.button2');
+    button.addEventListener('click', () => {
+      rotateCamera();
+      $("#button").hide();
+      $("#button2").show();
+    });
+
+    button2.addEventListener('click', () => {
+      stop();
+      $("#button2").hide();
+      $("#button").show();
+    });
+
   </script>
 </body>
 

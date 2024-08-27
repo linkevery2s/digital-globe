@@ -6,7 +6,7 @@
   <meta charset="UTF-8" name="viewport"
     content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <script src="https://unpkg.com/deck.gl@latest/dist.min.js"></script>
+  <script src="https://unpkg.com/deck.gl@^8.9.0/dist.min.js"></script>
   <script src='https://unpkg.com/maplibre-gl@2.4.0/dist/maplibre-gl.js'></script>
   <link href='https://unpkg.com/maplibre-gl@2.4.0/dist/maplibre-gl.css' rel='stylesheet' />
 
@@ -18,6 +18,9 @@
     crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 
   <script src="https://cdn.tailwindcss.com"></script>
+
+  <script src="https://code.jquery.com/jquery-3.7.1.min.js"
+    integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
 
   <style type="text/css">
     html,
@@ -58,6 +61,27 @@
       padding: .3em;
       border-radius: .5em;
     }
+
+    .button {
+        cursor: pointer;
+        color: #000000;
+        background: rgba(255, 255, 255, .8);
+        border: 1px solid #000000;
+        padding: .3em;
+        border-radius: .5em;
+        border: 1px solid #000000;
+    }
+
+    .button2 {
+        cursor: pointer;
+        color: #000000;
+        background: rgba(255, 255, 255, .8);
+        border: 1px solid #000000;
+        padding: .3em .4em .3em .4em;
+        display: none;
+        border-radius: .5em;
+        border: 1px solid #000000;
+    }
   </style>
 
   <!-- Google tag (gtag.js) -->
@@ -78,13 +102,15 @@
 
   <!-- 日本の地形メニュー -->
   <span class="japan_side_menu">
-    <div class="japan_terrain"><i class="fa-solid fa-lg fa-image"></i></div>
+    <div class="japan_terrain mb-1"><i class="fa-solid fa-lg fa-image"></i></div>
+    <div class="button" id="button"><i class="fa-solid fa-lg fa-rotate"></i></div>
+    <div class="button2" id="button2"><i class="fa-solid fa-lg fa-stop"></i></div>
   </span>
 
 </body>
 
 <script type="module">
-  const { DeckGL, GeoJsonLayer, ScenegraphLayer } = deck;
+  const { DeckGL, GeoJsonLayer, ScenegraphLayer, LinearInterpolator } = deck;
 
   let lat; let lon; let zoom; let pitch; let bearing;
 
@@ -111,7 +137,7 @@
 
   }
 
-  const INITIAL_VIEW_STATE = {
+  let initialViewState = {
     longitude: lon,
     latitude: lat,
     zoom: zoom,
@@ -119,6 +145,29 @@
     pitch: pitch,
     maxPitch: 85,
     bearing: bearing
+  };
+
+  let rotateCamera = () => {
+    initialViewState = {
+      ...initialViewState,
+      bearing: initialViewState.bearing - 10,
+      transitionDuration: 1000,
+      transitionInterpolator: new LinearInterpolator(['bearing']),
+      onTransitionEnd: rotateCamera
+    };
+    deckgl.setProps({ initialViewState });
+  };
+
+  let stop = () => {
+    initialViewState = {
+      ...initialViewState,
+      bearing: initialViewState.bearing - 0.01,
+      transitionDuration: 0,
+      transitionInterpolator: new LinearInterpolator(['bearing']),
+      onTransitionEnd: stop
+    };
+    deckgl.setProps({ initialViewState });
+
   };
 
   const tooltip = (d) => {
@@ -178,7 +227,7 @@
   const deckgl = new DeckGL({
     container: 'container',
     mapStyle: './data/basemap_tiri_photo.json',
-    initialViewState: INITIAL_VIEW_STATE,
+    initialViewState:  initialViewState,
     onViewStateChange: ({ viewState }) => {
 
       zoom = Math.round(viewState.zoom * 10) / 10;
@@ -201,6 +250,20 @@
 
   japan_terrain.addEventListener('click', () => {
     location.href = "./japan_terrain.html#!" + lat + "/" + lon + "/" + zoom + "/" + pitch + "/" + bearing;
+  });
+
+  const button = document.querySelector('.button');
+  const button2 = document.querySelector('.button2');
+  button.addEventListener('click', () => {
+    rotateCamera();
+    $("#button").hide();
+    $("#button2").show();
+  });
+
+  button2.addEventListener('click', () => {
+    stop();
+    $("#button2").hide();
+    $("#button").show();
   });
 
 </script>

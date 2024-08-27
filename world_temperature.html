@@ -8,7 +8,7 @@
 
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
 
-  <script src="https://unpkg.com/deck.gl@latest/dist.min.js"></script>
+  <script src="https://unpkg.com/deck.gl@^8.9.0/dist.min.js"></script>
 
   <script src="https://cdn.tailwindcss.com"></script>
   <script src="https://code.jquery.com/jquery-3.7.1.min.js"
@@ -21,6 +21,9 @@
   <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/js/all.min.js"
     integrity="sha512-GWzVrcGlo0TxTRvz9ttioyYJ+Wwk9Ck0G81D+eO63BaqHaJ3YZX9wuqjwgfcV/MrB2PhaVX9DkYVhbFpStnqpQ=="
     crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+
+  <script src="https://code.jquery.com/jquery-3.7.1.min.js"
+    integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
 
   <script src="./statistics/temperature.json"></script>
 
@@ -69,7 +72,8 @@
       z-index: 110;
       background: rgba(255, 255, 255, .7);
       height: 380px;
-      border: none;/*1px solid #0095d9;*/
+      border: none;
+      /*1px solid #0095d9;*/
       padding: 5px 0 0 0;
     }
 
@@ -121,7 +125,8 @@
   </div>
 
   <span class="side_menu">
-    <div class="button"><i class="fa-solid fa-xl fa-rotate"></i></div>
+    <div class="button" id="button"><i class="fa-solid fa-xl fa-rotate"></i></div>
+    <div class="button2" id="button2"><i class="fa-solid fa-xl fa-stop"></i></div>
   </span>
 
 </body>
@@ -145,6 +150,18 @@
       onTransitionEnd: rotateCamera
     };
     deckgl.setProps({ initialViewState });
+  };
+
+  let stop = () => {
+    initialViewState = {
+      ...initialViewState,
+      longitude: initialViewState.longitude + 0.01,
+      transitionDuration: 0,
+      transitionInterpolator: new LinearInterpolator(['longitude']),
+      onTransitionEnd: stop
+    };
+    deckgl.setProps({ initialViewState });
+
   };
 
   let graph_show = (d) => {
@@ -221,8 +238,17 @@
   });
 
   const button = document.querySelector('.button');
+  const button2 = document.querySelector('.button2');
   button.addEventListener('click', () => {
     rotateCamera();
+    $("#button").hide();
+    $("#button2").show();
+  });
+
+  button2.addEventListener('click', () => {
+    stop();
+    $("#button2").hide();
+    $("#button").show();
   });
 
 </script>
