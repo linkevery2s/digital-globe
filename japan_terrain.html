@@ -208,6 +208,12 @@
       initialViewState: initialViewState,
       onViewStateChange: ({ viewState }) => {
 
+        initialViewState.longitude = viewState.longitude;
+        initialViewState.latitude = viewState.latitude;
+        initialViewState.zoom = viewState.zoom;
+        initialViewState.pitch = viewState.pitch;
+        initialViewState.bearing = viewState.bearing;
+
         zoom = Math.round(viewState.zoom * 10) / 10;
         lat = Math.round(viewState.latitude * 1000) / 1000;
         lon = Math.round(viewState.longitude * 1000) / 1000;

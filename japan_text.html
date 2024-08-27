@@ -63,24 +63,24 @@
     }
 
     .button {
-        cursor: pointer;
-        color: #000000;
-        background: rgba(255, 255, 255, .8);
-        border: 1px solid #000000;
-        padding: .3em;
-        border-radius: .5em;
-        border: 1px solid #000000;
+      cursor: pointer;
+      color: #000000;
+      background: rgba(255, 255, 255, .8);
+      border: 1px solid #000000;
+      padding: .3em;
+      border-radius: .5em;
+      border: 1px solid #000000;
     }
 
     .button2 {
-        cursor: pointer;
-        color: #000000;
-        background: rgba(255, 255, 255, .8);
-        border: 1px solid #000000;
-        padding: .3em .4em .3em .4em;
-        display: none;
-        border-radius: .5em;
-        border: 1px solid #000000;
+      cursor: pointer;
+      color: #000000;
+      background: rgba(255, 255, 255, .8);
+      border: 1px solid #000000;
+      padding: .3em .4em .3em .4em;
+      display: none;
+      border-radius: .5em;
+      border: 1px solid #000000;
     }
   </style>
 
@@ -227,8 +227,13 @@
   const deckgl = new DeckGL({
     container: 'container',
     mapStyle: './data/basemap_tiri_photo.json',
-    initialViewState:  initialViewState,
+    initialViewState: initialViewState,
     onViewStateChange: ({ viewState }) => {
+      initialViewState.longitude = viewState.longitude;
+      initialViewState.latitude = viewState.latitude;
+      initialViewState.zoom = viewState.zoom;
+      initialViewState.pitch = viewState.pitch;
+      initialViewState.bearing = viewState.bearing;
 
       zoom = Math.round(viewState.zoom * 10) / 10;
       lat = Math.round(viewState.latitude * 1000) / 1000;
