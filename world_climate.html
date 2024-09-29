@@ -552,6 +552,17 @@
     $('#usage-guide').fadeOut();
   });
 
+  const container = document.querySelector('#container');
+  container.addEventListener('click', () => {
+    $("#button2").hide();
+    $("#rotate").show();
+  });
+
+  container.addEventListener('wheel', () => {
+    $("#button2").hide();
+    $("#rotate").show();
+  });
+
 </script>
 
 </html>

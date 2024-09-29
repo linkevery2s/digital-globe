@@ -363,16 +363,6 @@
   <script src="https://code.jquery.com/jquery-3.7.1.min.js"
     integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
 
-  <!-- Google tag (gtag.js) -->
-  <script async src="https://www.googletagmanager.com/gtag/js?id=G-MPP84V2NHB"></script>
-  <script>
-    window.dataLayer = window.dataLayer || [];
-    function gtag() { dataLayer.push(arguments); }
-    gtag('js', new Date());
-
-    gtag('config', 'G-MPP84V2NHB');
-  </script>
-
   <script src="./data/worldgis1.json"></script>
 
   <script type="module">
@@ -453,7 +443,7 @@
 
     });
 
-    japan_two_screens.addEventListener('click', () =>{
+    japan_two_screens.addEventListener('click', () => {
       $('#navi').hide();
       document.getElementById("main").innerHTML = '<iframe src="./japan_twoscreens.html"></iframe>';
       $('#header').fadeOut();
@@ -702,7 +692,7 @@
 
     <span class="zoom"> <i class="fa-solid fa-xl fa-expand"></i> </span>
 
-    <div class="last_update text-xs px-1"><time datetime="2024-06-30" itemprop="modified">最終更新日：2024.06.30</time> ver 2.2
+    <div class="last_update text-xs px-1"><time datetime="2024-09-29" itemprop="modified">最終更新日：2024.09.29</time> ver 2.4
     </div>
 
     <button class="btn-menu">MENU</button>
@@ -796,6 +786,7 @@
     <h3 class="text-2xl text-center mb-3">更新情報</h3>
 
     <div class="search_list1 overflow-y-scroll overview mt-5 text-left pl-3 pb-5">
+      <p class="mb-5">2024.09.29 軽微なバグ修正</p>
       <p class="mb-5">2024.08.27 地球儀の回転について、ストップボタン機能を追加</p>
       <p class="mb-5">2024.06.30 日本の地理（２画面表示）追加</p>
       <p class="mb-5">2024.05.30 使い方のUIについて、高さ調整</p>
@@ -842,8 +833,9 @@
 
       ・<a href="https://usgs.gov/" target="_blank">U.S. Geological Survey</a><br><br>
 
-      ・<a href="https://github.com/code4fukui/deckgl-gsi-terrain-layer" target="_blank">deckgl-gsi-terrain-layer</a><br><br>
-      
+      ・<a href="https://github.com/code4fukui/deckgl-gsi-terrain-layer"
+        target="_blank">deckgl-gsi-terrain-layer</a><br><br>
+
       ・<a href="http://osm.org/copyright" target="_blank">OpenStreetMap</a>
 
       <h3 class="text-2xl mt-10 mb-5" id="manual_h3">世界の首都・国旗</h3>
@@ -927,7 +919,15 @@
   <script async defer crossorigin="anonymous" src="https://connect.facebook.net/ja_JP/sdk.js#xfbml=1&version=v19.0"
     nonce="Pm3nh7PB"></script>
 
+  <!-- Google tag (gtag.js) -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-MPP84V2NHB"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag() { dataLayer.push(arguments); }
+    gtag('js', new Date());
 
+    gtag('config', 'G-MPP84V2NHB');
+  </script>
 
 </body>
 
