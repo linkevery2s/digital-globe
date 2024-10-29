@@ -1,6 +1,7 @@
 ## デジタル地球儀
 
-![デジタル地球儀](./ogp.png)
+![top](https://github.com/user-attachments/assets/bd2995b2-fed0-459c-83ba-8447fcfc54de)
+
 
 世界の国々や地形の情報を、デジタル地球儀にまとめました。地理教育にご利用ください。
 
