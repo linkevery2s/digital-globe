@@ -183,19 +183,19 @@
 
   const prefectures = new GeoJsonLayer({
     id: 'prefectures',
-    data: "./data/aichi.geojson",
+    data: "./data/pref/aichi.geojson",
     filled: true,
-    lineWidthMinPixels: 2,
-    getFillColor: [255, 255, 255],
-    getLineColor: [255, 255, 255],
-    getLineWidth: 2,
-    opacity: 0.02,
+    lineWidthMinPixels: 3,
+    getFillColor: [255, 255, 255, 0],
+    getLineColor: [254, 242, 99],
+    getLineWidth: 3,
+    opacity: 0.8,
     pickable: true,
     autoHighlight: true,
     highlightColor: [230, 0, 51, 128]
   });
 
-  const prefectures_line = new GeoJsonLayer({
+  /*const prefectures_line = new GeoJsonLayer({
     id: 'prefectures_line',
     data: "./data/prefectures_line.geojson",
     filled: true,
@@ -205,7 +205,7 @@
     getLineWidth: 2,
     opacity: 1,
     pickable: false
-  });
+  });*/
 
   const deckgl = new DeckGL({
     container: 'container',
@@ -230,7 +230,7 @@
     },
     getTooltip: tooltip,
     layers: [
-      prefectures_line, prefectures
+      prefectures
     ]
   });
 
