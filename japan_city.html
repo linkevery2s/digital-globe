@@ -252,7 +252,33 @@
     highlightColor: [230, 0, 51, 128]
   });
 
+  const akita = new GeoJsonLayer({
+    id: 'akita',
+    data: "./data/pref/akita.geojson",
+    filled: true,
+    lineWidthMinPixels: line_width,
+    getFillColor: fill_color,
+    getLineColor: line_color,
+    getLineWidth: line_width,
+    opacity: line_opacity,
+    pickable: true,
+    autoHighlight: true,
+    highlightColor: [230, 0, 51, 128]
+  });
 
+  const yamagata = new GeoJsonLayer({
+    id: 'yamagata',
+    data: "./data/pref/yamagata.geojson",
+    filled: true,
+    lineWidthMinPixels: line_width,
+    getFillColor: fill_color,
+    getLineColor: line_color,
+    getLineWidth: line_width,
+    opacity: line_opacity,
+    pickable: true,
+    autoHighlight: true,
+    highlightColor: [230, 0, 51, 128]
+  });
 
 
   const aichi = new GeoJsonLayer({
@@ -304,7 +330,7 @@
     },
     getTooltip: tooltip,
     layers: [
-      hokkaido, aomori, iwate, miyagi, aichi
+      hokkaido, aomori, iwate, miyagi, akita, yamagata, aichi
     ]
   });
 
