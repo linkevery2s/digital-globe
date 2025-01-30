@@ -165,6 +165,16 @@
     if (!d || !d.object) return null;
     let obj = d.object;
 
+    if(obj.properties.N03_003 == null){
+      obj.properties.N03_003 = "";
+    }
+    else{};
+
+    if(obj.properties.N03_004 == null){
+      obj.properties.N03_004 = "";
+    }
+    else{};
+
     if(obj.properties.N03_005 == null){
       obj.properties.N03_005 = "";
     }
@@ -181,15 +191,21 @@
     };
   };
 
-  const prefectures = new GeoJsonLayer({
-    id: 'prefectures',
+  const line_width = 3;
+  const fill_color = [255, 255, 255, 0];
+  const line_color = [254, 242, 99];
+  const line_opacity = 0.8;
+
+
+  const aichi = new GeoJsonLayer({
+    id: 'aichi',
     data: "./data/pref/aichi.geojson",
     filled: true,
-    lineWidthMinPixels: 3,
-    getFillColor: [255, 255, 255, 0],
-    getLineColor: [254, 242, 99],
-    getLineWidth: 3,
-    opacity: 0.8,
+    lineWidthMinPixels: line_width,
+    getFillColor: fill_color,
+    getLineColor: line_color,
+    getLineWidth: line_width,
+    opacity: line_opacity,
     pickable: true,
     autoHighlight: true,
     highlightColor: [230, 0, 51, 128]
@@ -230,7 +246,7 @@
     },
     getTooltip: tooltip,
     layers: [
-      prefectures
+      aichi
     ]
   });
 
