@@ -165,22 +165,22 @@
     if (!d || !d.object) return null;
     let obj = d.object;
 
-    if(obj.properties.N03_003 == null){
+    if (obj.properties.N03_003 == null) {
       obj.properties.N03_003 = "";
     }
-    else{};
+    else { };
 
-    if(obj.properties.N03_004 == null){
+    if (obj.properties.N03_004 == null) {
       obj.properties.N03_004 = "";
     }
-    else{};
+    else { };
 
-    if(obj.properties.N03_005 == null){
+    if (obj.properties.N03_005 == null) {
       obj.properties.N03_005 = "";
     }
-    else{};
+    else { };
 
-    const html_tr = ["<table>", obj.properties.N03_001  + obj.properties.N03_004 +  obj.properties.N03_005 , "</table>"].join("\n");
+    const html_tr = ["<table>", obj.properties.N03_001 + obj.properties.N03_004 + obj.properties.N03_005, "</table>"].join("\n");
 
     return {
       html: html_tr,
@@ -199,6 +199,34 @@
   const hokkaido = new GeoJsonLayer({
     id: 'hokkaido',
     data: "./data/pref/hokkaido.geojson",
+    filled: true,
+    lineWidthMinPixels: line_width,
+    getFillColor: fill_color,
+    getLineColor: line_color,
+    getLineWidth: line_width,
+    opacity: line_opacity,
+    pickable: true,
+    autoHighlight: true,
+    highlightColor: [230, 0, 51, 128]
+  });
+
+  const aomori = new GeoJsonLayer({
+    id: 'aomori',
+    data: "./data/pref/aomori.geojson",
+    filled: true,
+    lineWidthMinPixels: line_width,
+    getFillColor: fill_color,
+    getLineColor: line_color,
+    getLineWidth: line_width,
+    opacity: line_opacity,
+    pickable: true,
+    autoHighlight: true,
+    highlightColor: [230, 0, 51, 128]
+  });
+
+  const iwate = new GeoJsonLayer({
+    id: 'iwate',
+    data: "./data/pref/iwate.geojson",
     filled: true,
     lineWidthMinPixels: line_width,
     getFillColor: fill_color,
@@ -259,7 +287,7 @@
     },
     getTooltip: tooltip,
     layers: [
-      hokkaido, aichi
+      hokkaido, aomori, iwate, aichi
     ]
   });
 
