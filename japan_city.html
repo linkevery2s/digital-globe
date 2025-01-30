@@ -280,6 +280,24 @@
     highlightColor: [230, 0, 51, 128]
   });
 
+  const fukushima = new GeoJsonLayer({
+    id: 'fukushima',
+    data: "./data/pref/fukushima.geojson",
+    filled: true,
+    lineWidthMinPixels: line_width,
+    getFillColor: fill_color,
+    getLineColor: line_color,
+    getLineWidth: line_width,
+    opacity: line_opacity,
+    pickable: true,
+    autoHighlight: true,
+    highlightColor: [230, 0, 51, 128]
+  });
+
+
+
+
+
 
   const aichi = new GeoJsonLayer({
     id: 'aichi',
@@ -330,7 +348,7 @@
     },
     getTooltip: tooltip,
     layers: [
-      hokkaido, aomori, iwate, miyagi, akita, yamagata, aichi
+      hokkaido, aomori, iwate, miyagi, akita, yamagata, fukushima, aichi
     ]
   });
 
