@@ -62,6 +62,16 @@
       border-radius: .5em;
     }
 
+    .japan_city {
+      cursor: pointer;
+      color: #000000;
+      background: rgba(255, 255, 255, .8);
+      border: 1px solid #000000;
+      padding: .5em .4em .5em .4em;
+      border-radius: .5em;
+      border: 1px solid #000000;
+    }
+
     .button {
       cursor: pointer;
       color: #000000;
@@ -93,6 +103,8 @@
   <!-- 日本の地形メニュー -->
   <span class="japan_side_menu">
     <div class="japan_terrain mb-1"><i class="fa-solid fa-lg fa-image"></i></div>
+    <div class="japan_text mb-1"><i class="fa-solid fa-lg fa-font"></i></div>
+    <div class="japan_city mb-1"><i class="fa-solid fa-lg fa-city"></i></div>
     <div class="button" id="button"><i class="fa-solid fa-lg fa-rotate"></i></div>
     <div class="button2" id="button2"><i class="fa-solid fa-lg fa-stop"></i></div>
   </span>
@@ -353,9 +365,19 @@
   });
 
   const japan_terrain = document.querySelector('.japan_terrain');
+  const japan_text = document.querySelector('.japan_text');
+  const japan_city = document.querySelector('.japan_city');
 
   japan_terrain.addEventListener('click', () => {
     location.href = "./japan_terrain.html#!" + lat + "/" + lon + "/" + zoom + "/" + pitch + "/" + bearing;
+  });
+
+  japan_text.addEventListener('click', () => {
+    location.href = "./japan_text.html#!" + lat + "/" + lon + "/" + zoom + "/" + pitch + "/" + bearing;
+  });
+
+  japan_city.addEventListener('click', () => {
+    location.href = "./japan_city.html#!" + lat + "/" + lon + "/" + zoom + "/" + pitch + "/" + bearing;
   });
 
   const button = document.querySelector('.button');
