@@ -196,6 +196,19 @@
   const line_color = [254, 242, 99];
   const line_opacity = 0.8;
 
+  const hokkaido = new GeoJsonLayer({
+    id: 'hokkaido',
+    data: "./data/pref/hokkaido.geojson",
+    filled: true,
+    lineWidthMinPixels: line_width,
+    getFillColor: fill_color,
+    getLineColor: line_color,
+    getLineWidth: line_width,
+    opacity: line_opacity,
+    pickable: true,
+    autoHighlight: true,
+    highlightColor: [230, 0, 51, 128]
+  });
 
   const aichi = new GeoJsonLayer({
     id: 'aichi',
@@ -246,7 +259,7 @@
     },
     getTooltip: tooltip,
     layers: [
-      aichi
+      hokkaido, aichi
     ]
   });
 
