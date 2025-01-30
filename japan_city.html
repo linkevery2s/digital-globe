@@ -325,17 +325,17 @@
     highlightColor: [230, 0, 51, 128]
   });
 
-  /*const prefectures_line = new GeoJsonLayer({
+  const prefectures_line = new GeoJsonLayer({
     id: 'prefectures_line',
     data: "./data/prefectures_line.geojson",
     filled: true,
     lineWidthMinPixels: 2,
     getFillColor: [255, 255, 255],
-    getLineColor: [255, 255, 255],
+    getLineColor: [130, 72, 128],
     getLineWidth: 2,
     opacity: 1,
     pickable: false
-  });*/
+  });
 
   const deckgl = new DeckGL({
     container: 'container',
@@ -360,7 +360,7 @@
     },
     getTooltip: tooltip,
     layers: [
-      hokkaido, aomori, iwate, miyagi, akita, yamagata, fukushima, aichi
+      prefectures_line, hokkaido, aomori, iwate, miyagi, akita, yamagata, fukushima, aichi
     ]
   });
 
