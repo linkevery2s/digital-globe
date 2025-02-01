@@ -477,8 +477,117 @@
     highlightColor: [230, 0, 51, 128]
   });
 
+  const fukuoka = new GeoJsonLayer({
+    id: 'fukuoka',
+    data: "./data/pref/fukuoka.geojson",
+    filled: true,
+    lineWidthMinPixels: line_width,
+    getFillColor: fill_color,
+    getLineColor: line_color,
+    getLineWidth: line_width,
+    opacity: line_opacity,
+    pickable: true,
+    autoHighlight: true,
+    highlightColor: [230, 0, 51, 128]
+  });
 
+  const saga = new GeoJsonLayer({
+    id: 'saga',
+    data: "./data/pref/saga.geojson",
+    filled: true,
+    lineWidthMinPixels: line_width,
+    getFillColor: fill_color,
+    getLineColor: line_color,
+    getLineWidth: line_width,
+    opacity: line_opacity,
+    pickable: true,
+    autoHighlight: true,
+    highlightColor: [230, 0, 51, 128]
+  });
 
+  const nagasaki = new GeoJsonLayer({
+    id: 'nagasaki',
+    data: "./data/pref/nagasaki.geojson",
+    filled: true,
+    lineWidthMinPixels: line_width,
+    getFillColor: fill_color,
+    getLineColor: line_color,
+    getLineWidth: line_width,
+    opacity: line_opacity,
+    pickable: true,
+    autoHighlight: true,
+    highlightColor: [230, 0, 51, 128]
+  });
+
+  const kumamoto = new GeoJsonLayer({
+    id: 'kumamoto',
+    data: "./data/pref/kumamoto.geojson",
+    filled: true,
+    lineWidthMinPixels: line_width,
+    getFillColor: fill_color,
+    getLineColor: line_color,
+    getLineWidth: line_width,
+    opacity: line_opacity,
+    pickable: true,
+    autoHighlight: true,
+    highlightColor: [230, 0, 51, 128]
+  });
+
+  const oita = new GeoJsonLayer({
+    id: 'oita',
+    data: "./data/pref/oita.geojson",
+    filled: true,
+    lineWidthMinPixels: line_width,
+    getFillColor: fill_color,
+    getLineColor: line_color,
+    getLineWidth: line_width,
+    opacity: line_opacity,
+    pickable: true,
+    autoHighlight: true,
+    highlightColor: [230, 0, 51, 128]
+  });
+
+  const miyazaki = new GeoJsonLayer({
+    id: 'miyazaki',
+    data: "./data/pref/miyazaki.geojson",
+    filled: true,
+    lineWidthMinPixels: line_width,
+    getFillColor: fill_color,
+    getLineColor: line_color,
+    getLineWidth: line_width,
+    opacity: line_opacity,
+    pickable: true,
+    autoHighlight: true,
+    highlightColor: [230, 0, 51, 128]
+  });
+
+  const kagoshima = new GeoJsonLayer({
+    id: 'kagoshima',
+    data: "./data/pref/kagoshima.geojson",
+    filled: true,
+    lineWidthMinPixels: line_width,
+    getFillColor: fill_color,
+    getLineColor: line_color,
+    getLineWidth: line_width,
+    opacity: line_opacity,
+    pickable: true,
+    autoHighlight: true,
+    highlightColor: [230, 0, 51, 128]
+  });
+
+  const okinawa = new GeoJsonLayer({
+    id: 'okinawa',
+    data: "./data/pref/okinawa.geojson",
+    filled: true,
+    lineWidthMinPixels: line_width,
+    getFillColor: fill_color,
+    getLineColor: line_color,
+    getLineWidth: line_width,
+    opacity: line_opacity,
+    pickable: true,
+    autoHighlight: true,
+    highlightColor: [230, 0, 51, 128]
+  });
 
 
   const prefectures_line = new GeoJsonLayer({
@@ -516,7 +625,7 @@
     },
     getTooltip: tooltip,
     layers: [
-      hokkaido, aomori, iwate, miyagi, akita, yamagata, fukushima, tochigi, ibaraki, gunma, saitama, tiba, tokyo, kanagawa, aichi, tokushima, kagawa, ehime, kochi, prefectures_line
+      hokkaido, aomori, iwate, miyagi, akita, yamagata, fukushima, tochigi, ibaraki, gunma, saitama, tiba, tokyo, kanagawa, aichi, tokushima, kagawa, ehime, kochi, fukuoka, saga, nagasaki, kumamoto, oita, miyazaki, kagoshima, prefectures_line
     ]
   });
 
