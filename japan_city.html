@@ -197,10 +197,10 @@
     return {
       html: html_tr,
       style: {
-        background: "rgba(255,255,255,0.7)",
+        background: "rgba(255,255,255,0.9)",
         color: "#000000"
       }
-    };
+  };
   };
 
   const line_width = 3;
@@ -628,6 +628,76 @@
     highlightColor: [230, 0, 51, 128]
   });
 
+  const tottori = new GeoJsonLayer({
+    id: 'tottori',
+    data: "./data/pref/tottori.geojson",
+    filled: true,
+    lineWidthMinPixels: line_width,
+    getFillColor: fill_color,
+    getLineColor: line_color,
+    getLineWidth: line_width,
+    opacity: line_opacity,
+    pickable: true,
+    autoHighlight: true,
+    highlightColor: [230, 0, 51, 128]
+  });
+
+  const okayama = new GeoJsonLayer({
+    id: 'okayama',
+    data: "./data/pref/okayama.geojson",
+    filled: true,
+    lineWidthMinPixels: line_width,
+    getFillColor: fill_color,
+    getLineColor: line_color,
+    getLineWidth: line_width,
+    opacity: line_opacity,
+    pickable: true,
+    autoHighlight: true,
+    highlightColor: [230, 0, 51, 128]
+  });
+
+  const shimane = new GeoJsonLayer({
+    id: 'shimane',
+    data: "./data/pref/shimane.geojson",
+    filled: true,
+    lineWidthMinPixels: line_width,
+    getFillColor: fill_color,
+    getLineColor: line_color,
+    getLineWidth: line_width,
+    opacity: line_opacity,
+    pickable: true,
+    autoHighlight: true,
+    highlightColor: [230, 0, 51, 128]
+  });
+
+  const hiroshima = new GeoJsonLayer({
+    id: 'hiroshima',
+    data: "./data/pref/hiroshima.geojson",
+    filled: true,
+    lineWidthMinPixels: line_width,
+    getFillColor: fill_color,
+    getLineColor: line_color,
+    getLineWidth: line_width,
+    opacity: line_opacity,
+    pickable: true,
+    autoHighlight: true,
+    highlightColor: [230, 0, 51, 128]
+  });
+
+  const yamaguchi = new GeoJsonLayer({
+    id: 'yamaguchi',
+    data: "./data/pref/yamaguchi.geojson",
+    filled: true,
+    lineWidthMinPixels: line_width,
+    getFillColor: fill_color,
+    getLineColor: line_color,
+    getLineWidth: line_width,
+    opacity: line_opacity,
+    pickable: true,
+    autoHighlight: true,
+    highlightColor: [230, 0, 51, 128]
+  });
+
 
   const tokushima = new GeoJsonLayer({
     id: 'tokushima',
@@ -833,7 +903,7 @@
     },
     getTooltip: tooltip,
     layers: [
-      hokkaido, aomori, iwate, miyagi, akita, yamagata, fukushima, tochigi, ibaraki, gunma, saitama, tiba, tokyo, kanagawa, nigata, toyama, ishikawa, fukui, yamanashi, nagano, gifu, shizuoka, aichi, mie, shiga, kyoto, osaka, hyogo, nara, wakayama, tokushima, kagawa, ehime, kochi, fukuoka, saga, nagasaki, kumamoto, oita, miyazaki, kagoshima, okinawa, prefectures_line
+      hokkaido, aomori, iwate, miyagi, akita, yamagata, fukushima, tochigi, ibaraki, gunma, saitama, tiba, tokyo, kanagawa, nigata, toyama, ishikawa, fukui, yamanashi, nagano, gifu, shizuoka, aichi, mie, shiga, kyoto, osaka, hyogo, nara, wakayama, tottori, shimane, okayama, hiroshima, yamaguchi, tokushima, kagawa, ehime, kochi, fukuoka, saga, nagasaki, kumamoto, oita, miyazaki, kagoshima, okinawa, prefectures_line
     ]
   });
 
