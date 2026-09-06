@@ -70,23 +70,21 @@
       background: rgba(242, 242, 242, .5);
     }
 
-    #closed-btn {
+    #closed-btn{
       position: absolute;
       top: 5px;
       right: 5px;
-      border-radius: 100%;
-      color: #000000;
-      border: 1px solid #000000;
+      border-radius: .3em;
+      color: #ffffff;
+      background: #2ca9e1;
       cursor: pointer;
-      width: 30px;
-      height: 30px;
       text-align: center;
     }
 
-    #closed-btn:hover {
-      background: rgba(0, 0, 0, .5);
-      color: #ffffff;
-      border: 1px solid #ffffff;
+    #closed-btn:hover{
+      background: #ffffff;
+      color: rgba(25, 68, 142, 0.8);
+      border: 1px solid rgba(25, 68, 142, 0.8);
     }
   </style>
 
@@ -105,7 +103,7 @@
   </span>
 
   <!-- 世界の気候、凡例 -->
-  <div id="usage-guide" class="text-center"><span id="closed-btn">×</span>
+  <div id="usage-guide" class="text-center"><span id="closed-btn" class="py-2 px-3 text-xs">閉じる</span>
     <h3 class="text-2xl text-center mb-3"><i class="fa-solid fa-lg fa-clipboard-list"></i>　凡　例</h3>
 
     <div class="text-left overflow-y-scroll h-72 my-5 mx-3">

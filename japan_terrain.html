@@ -42,6 +42,7 @@
       z-index: 10000;
     }
 
+    .usage_guide,
     .japan_terrain,
     .japan_text {
       cursor: pointer;
@@ -82,6 +83,43 @@
       border-radius: .5em;
       border: 1px solid #000000;
     }
+
+    #usage-guide {
+      left: 50%;
+      position: absolute;
+      top: 50%;
+      transform: translate(-50%, -50%);
+      width: 70%;
+      max-width: 600px;
+      display: none;
+      z-index: 16;
+      background: #ffffff;
+      padding: .3em;
+    }
+
+    #usage-guide li {
+      height: 40px;
+      line-height: 40px;
+      cursor: pointer;
+      list-style: none;
+    }
+
+    #closed-btn {
+      position: absolute;
+      top: 5px;
+      right: 5px;
+      border-radius: .3em;
+      color: #ffffff;
+      background: #2ca9e1;
+      cursor: pointer;
+      text-align: center;
+    }
+
+    #closed-btn:hover {
+      background: #ffffff;
+      color: rgba(25, 68, 142, 0.8);
+      border: 1px solid rgba(25, 68, 142, 0.8);
+    }
   </style>
 
 </head>
@@ -90,12 +128,26 @@
 
   <!-- 日本の地形メニュー -->
   <span class="japan_side_menu">
+    <div class="usage_guide mb-1 "><i class="fa-solid fa-xl fa-clipboard-list"></i></div>
     <div class="japan_terrain mb-1"><i class="fa-solid fa-lg fa-image"></i></div>
     <div class="japan_text mb-1"><i class="fa-solid fa-lg fa-font"></i></div>
     <div class="japan_city mb-1"><i class="fa-solid fa-lg fa-city"></i></div>
     <div class="button" id="button"><i class="fa-solid fa-lg fa-rotate"></i></div>
     <div class="button2" id="button2"><i class="fa-solid fa-lg fa-stop"></i></div>
   </span>
+
+  <div id="usage-guide"><span id="closed-btn" class="py-2 px-3 text-xs">閉じる</span>
+    <h3 class="text-2xl mb-3 pl-3"><i class="fa-solid fa-lg fa-clipboard-list"></i> メニュー</h3>
+
+    <div class="text-left h-72 my-5 mx-3">
+
+      <li><i class="fa-solid fa-lg fa-image"></i>　３D表示モード</li>
+      <li><i class="fa-solid fa-lg fa-font"></i>　テキスト表示モード</li>
+      <li><i class="fa-solid fa-lg fa-city"></i>　市区町村表示モード</li>
+
+    </div>
+
+  </div>
 
   <script type="module">
     import { deck } from 'https://code4fukui.github.io/deck-es/deck.js';
@@ -262,18 +314,28 @@
       $("#button").show();
     });
 
-  </script>
-  
-  <!-- Google tag (gtag.js) -->
-<script async src="https://www.googletagmanager.com/gtag/js?id=G-XJRVSHG1RZ"></script>
-<script>
-  window.dataLayer = window.dataLayer || [];
-  function gtag(){dataLayer.push(arguments);}
-  gtag('js', new Date());
+    const usage_guide = document.querySelector('.usage_guide');
+    usage_guide.addEventListener('click', () => {
+      $('#usage-guide').fadeIn();
+    });
 
-  gtag('config', 'G-XJRVSHG1RZ');
-</script>
-  
+    const closed_btn = document.querySelector("#closed-btn");
+    closed_btn.addEventListener('click', () => {
+      $('#usage-guide').fadeOut();
+    });
+
+  </script>
+
+  <!-- Google tag (gtag.js) -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-XJRVSHG1RZ"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag() { dataLayer.push(arguments); }
+    gtag('js', new Date());
+
+    gtag('config', 'G-XJRVSHG1RZ');
+  </script>
+
 </body>
 
 </html>
