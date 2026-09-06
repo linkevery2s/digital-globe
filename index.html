@@ -312,24 +312,6 @@
       padding-bottom: 3px;
     }
 
-    .japan_side_menu {
-      position: absolute;
-      top: 50%;
-      transform: translate(10px, -50%);
-      z-index: 1;
-      display: none;
-    }
-
-    .japan_terrain,
-    .japan_text {
-      cursor: pointer;
-      color: #000000;
-      background: rgba(255, 255, 255, .8);
-      border: 1px solid #000000;
-      padding: .3em;
-      border-radius: .5em;
-    }
-
     .sns-fb {
       position: absolute;
       left: 3px;
@@ -393,8 +375,6 @@
     const world_temperature = document.querySelector('.world_temperature');
     const japan_pref = document.querySelector('.japan_pref');
     const japan_gis = document.querySelector('.japan_gis');
-    const japan_two_screens = document.querySelector('.japan_two_screens');
-    //const japan_side_menu = document.querySelector('.japan_side_menu');
 
     flag.addEventListener('click', () => {
       $('#navi').hide();
@@ -441,12 +421,6 @@
     japan_gis.addEventListener('click', () => {
       $('#navi').hide();
       document.getElementById("main").innerHTML = '<iframe src="./japan_terrain.html"></iframe>';
-
-    });
-
-    japan_two_screens.addEventListener('click', () => {
-      $('#navi').hide();
-      document.getElementById("main").innerHTML = '<iframe src="./japan_twoscreens.html"></iframe>';
 
     });
 
@@ -627,7 +601,6 @@
       $('#search').fadeOut();
 
       document.getElementById("main").innerHTML = '<iframe src="./flag.html#!' + x + "/" + y + '"></iframe>';
-      japan_side_menu.style.display = "none";
       usage_guide_side_menu.style.display = "none";
 
       search_list1.innerHTML = "";
@@ -653,7 +626,6 @@
       $('#search').fadeOut();
 
       document.getElementById("main").innerHTML = '<iframe src="./worldgis1.html#!' + x + "/" + y + '"></iframe>';
-      japan_side_menu.style.display = "none";
       usage_guide_side_menu.style.display = "none";
 
       search_list1.innerHTML = "";
@@ -713,7 +685,6 @@
           <li class="earthquake">世界の地震</li>
           <li class="japan_pref">日本の都道府県・島</li>
           <li class="japan_gis">日本の地形</li>
-          <li class="japan_two_screens">日本の地理（２画面表示）</li>
           <li class="simple">赤道・緯度・経度・国境</li>
         </ul>
       </nav>
@@ -722,12 +693,6 @@
     <button class="share"><i class="fa-regular fa-xl fa-comments"></i></button>
 
   </div>
-
-  <!-- 日本の地形メニュー -->
-  <span class="japan_side_menu">
-    <div class="japan_terrain mb-1"><i class="fa-solid fa-lg fa-image"></i></div>
-    <div class="japan_text"><i class="fa-solid fa-lg fa-font"></i></div>
-  </span>
 
   <!-- メインコンテンツ -->
   <div id="main">
