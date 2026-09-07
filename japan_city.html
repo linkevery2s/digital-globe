@@ -54,7 +54,8 @@
 
     .usage_guide,
     .japan_terrain,
-    .japan_text {
+    .japan_text,
+    .japan_two_screen {
       cursor: pointer;
       color: #000000;
       background: rgba(255, 255, 255, .8);
@@ -144,6 +145,7 @@
     <div class="japan_terrain mb-1"><i class="fa-solid fa-lg fa-image"></i></div>
     <div class="japan_text mb-1"><i class="fa-solid fa-lg fa-font"></i></div>
     <div class="japan_city mb-1"><i class="fa-solid fa-lg fa-city"></i></div>
+    <div class="japan_two_screen mb-1"><i class="fa-solid fa-lg fa-table-columns"></i></div>
     <div class="button" id="button"><i class="fa-solid fa-lg fa-rotate"></i></div>
     <div class="button2" id="button2"><i class="fa-solid fa-lg fa-stop"></i></div>
   </span>
@@ -156,6 +158,7 @@
       <li><i class="fa-solid fa-lg fa-image"></i>　３D表示モード</li>
       <li><i class="fa-solid fa-lg fa-font"></i>　テキスト表示モード</li>
       <li><i class="fa-solid fa-lg fa-city"></i>　市区町村表示モード</li>
+      <li><i class="fa-solid fa-lg fa-table-columns"></i>　2画面表示モード</li>
 
     </div>
 
@@ -962,6 +965,7 @@
   const japan_terrain = document.querySelector('.japan_terrain');
   const japan_text = document.querySelector('.japan_text');
   const japan_city = document.querySelector('.japan_city');
+  const japan_two_screen = document.querySelector('.japan_two_screen');
 
   japan_terrain.addEventListener('click', () => {
     location.href = "./japan_terrain.html#!" + lat + "/" + lon + "/" + zoom + "/" + pitch + "/" + bearing;
@@ -973,6 +977,10 @@
 
   japan_city.addEventListener('click', () => {
     location.href = "./japan_city.html#!" + lat + "/" + lon + "/" + zoom + "/" + pitch + "/" + bearing;
+  });
+
+  japan_two_screen.addEventListener('click', () => {
+    location.href = "./japan_twoscreens.html#" + zoom + "/" + lat + "/" + lon;
   });
 
   const button = document.querySelector('.button');
