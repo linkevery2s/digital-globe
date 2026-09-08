@@ -114,6 +114,12 @@
             color: rgba(25, 68, 142, 0.8);
             border: 1px solid rgba(25, 68, 142, 0.8);
         }
+
+        .leaflet-control-layers {
+            position: fixed;
+            right: 0px;
+            top: 75px
+        }
     </style>
     <script>
 
@@ -131,8 +137,6 @@
         const tiri = L.tileLayer('https://cyberjapandata.gsi.go.jp/xyz/seamlessphoto/{z}/{x}/{y}.jpg', {
             //attribution: '&copy; <a href="http://maps.gsi.go.jp/development/ichiran.html" target="_blank">地理院タイル</a>'
         });
-
-        //const layer1 = L.layerGroup([tiri, shinsui]);
 
         const base1 = new L.tileLayer('https://cyberjapandata.gsi.go.jp/xyz/std/{z}/{x}/{y}.png', {
             //attribution: '&copy; <a href="http://maps.gsi.go.jp/development/ichiran.html" target="_blank">地理院タイル</a>'
@@ -167,8 +171,6 @@
                 zoomControl: false
             });
 
-            //L.control.layers(baseMaps, overlayMaps).addTo(map_right);
-
             L.control.layers(baseMaps).addTo(map_right);
 
             map_left.attributionControl.setPosition('bottomleft')
@@ -188,6 +190,39 @@
             const closed_btn = document.querySelector("#closed-btn");
             closed_btn.addEventListener('click', () => {
                 $('#usage-guide').fadeOut();
+            });
+
+            const japan_terrain = document.querySelector('.japan_terrain');
+            const japan_text = document.querySelector('.japan_text');
+            const japan_city = document.querySelector('.japan_city');
+            const japan_two_screen = document.querySelector('.japan_two_screen');
+
+            let pitch = 50;
+            let bearing = 0;
+            let positon; let zoom;
+
+            japan_terrain.addEventListener('click', () => {
+                position = map_left.getCenter();
+                zoom = map_left.getZoom();
+                location.href = "./japan_terrain.html#!" + position.lat + "/" + position.lng + "/" + zoom + "/" + pitch + "/" + bearing;
+            });
+
+            japan_text.addEventListener('click', () => {
+                position = map_left.getCenter();
+                zoom = map_left.getZoom();
+                location.href = "./japan_text.html#!" + position.lat + "/" + position.lng + "/" + zoom + "/" + pitch + "/" + bearing;
+            });
+
+            japan_city.addEventListener('click', () => {
+                position = map_left.getCenter();
+                zoom = map_left.getZoom();
+                location.href = "./japan_city.html#!" + position.lat + "/" + position.lng + "/" + zoom + "/" + pitch + "/" + bearing;
+            });
+
+            japan_two_screen.addEventListener('click', () => {
+                position = map_left.getCenter();
+                zoom = map_left.getZoom();
+                location.href = "./japan_twoscreens.html#" + zoom + "/" + position.lat + "/" + position.lng;
             });
 
         }
