@@ -186,17 +186,6 @@
       background: rgba(255, 255, 255, .7);
     }
 
-    .last_update {
-      position: absolute;
-      color: #000000;
-      top: 63px;
-      right: 3px;
-      z-index: 5;
-      cursor: pointer;
-      border-bottom: 1px dotted #000000;
-      background: rgba(255, 255, 255, .7);
-    }
-
     #overlay {
       width: 100%;
       height: 120vh;
@@ -312,12 +301,6 @@
       padding-bottom: 3px;
     }
 
-    .sns-fb {
-      position: absolute;
-      left: 3px;
-      bottom: 60px;
-    }
-
     #navi li:before {
       font-family: "Font Awesome 6 Free";
       content: "\f054";
@@ -327,9 +310,6 @@
       color: #ffffff;
     }
 
-    .fb_iframe_widget>span {
-      vertical-align: top !important;
-    }
   </style>
 
   <link rel="manifest" href="./manifest.json">
@@ -427,14 +407,12 @@
     /* 全画面表示の切り替え */
     const zoom = document.querySelector('.zoom');
     const zoom2 = document.querySelector('.zoom2');
-    const sns_fb = document.querySelector('.sns-fb');
 
     zoom.addEventListener('click', () => {
       $('#header').fadeOut();
       $('#footer').fadeOut();
       zoom2.style.display = "block";
       source.style.bottom = "5px";
-      sns_fb.style.display = "none";
     });
 
     zoom2.addEventListener('click', () => {
@@ -442,7 +420,6 @@
       $('#footer').fadeIn();
       zoom2.style.display = "none";
       source.style.bottom = "64px";
-      sns_fb.style.display = "block";
     });
 
     /* 使い方のポップアップ表示 */
@@ -670,10 +647,6 @@
 
     <span class="zoom"> <i class="fa-solid fa-xl fa-expand"></i> </span>
 
-    <div class="last_update text-xs px-1" id="update-btn">
-      <time datetime="2025-08-06" itemprop="datePublisher">最終更新日：2025.08.06</time> ver 2.6
-    </div>
-
     <button class="btn-menu">MENU</button>
     <div id="navi">
       <nav>
@@ -865,13 +838,6 @@
   <!-- mapの出典 -->
   <div class="source text-xs px-1" id="source">マップデータの出典</div>
 
-  <div class="sns-fb">
-
-    <div class="fb-share-button" data-href="https://digital-globe.netlify.app/" data-layout="button_count"
-      data-size="small"></div>
-
-  </div>
-
   <!-- フッター -->
   <div id="footer" class="footer p-2 text-center">
 
@@ -886,16 +852,14 @@
     <p class="text-xs mt-1">
       <a href="https://github.com/linkevery2s/digital-globe" target="_blank">src on GitHub</a> 
       <i class="fa-regular fa-copyright"></i> <a href="https://hitoshi2s.netlify.app/" target="_blank">齋藤 仁志</a>.
-      <a href="https://docs.google.com/forms/d/e/1FAIpQLSf-WMoBJRTdA1bmN_SmQ-bsNGeLs1l737d3c9BUNuErjH-KBw/viewform"
-        target="_blank">お問い合わせ</a>
+
+      <span class="last_update text-xs px-1" id="update-btn">
+        <time datetime="2025-08-06" itemprop="datePublisher">更新情報</time>
+      </span>
+
     </p>
 
   </div>
-
-  <!-- Facebookシェアボタン -->
-  <div id="fb-root"></div>
-  <script async defer crossorigin="anonymous" src="https://connect.facebook.net/ja_JP/sdk.js#xfbml=1&version=v19.0"
-    nonce="Pm3nh7PB"></script>
 
 </body>
 

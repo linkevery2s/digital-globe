@@ -7,7 +7,7 @@
 
 ## アプリ解説
 
-[Note記事](https://note.com/hitoshi2s/n/necfcb7c641db)に開発した「思い」を書きましたので、ご覧ください。
+[ProtoPedia](https://protopedia.net/prototype/5120)に開発した「思い」を書きましたので、ご覧ください。
 
 ## ライセンス
 

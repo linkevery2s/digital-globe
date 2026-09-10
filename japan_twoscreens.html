@@ -116,10 +116,15 @@
         }
 
         .leaflet-control-layers {
-            position: fixed;
             right: 0px;
-            top: 75px
+            top: 55px !important;
         }
+
+        .leaflet-control-attribution {
+            margin-bottom: 60px !important;
+            font-size: 9px;
+        }
+
     </style>
     <script>
 
@@ -158,7 +163,6 @@
             const map_left = L.map('map_left', {
                 center: [lat, lng],
                 zoom: ini_zoom,
-                maxZoom: 15,
                 layers: tiri,
                 zoomControl: false
             });
@@ -167,14 +171,13 @@
                 layers: [base1],
                 center: [lat, lng],
                 zoom: ini_zoom,
-                maxZoom: 15,
                 zoomControl: false
             });
 
             L.control.layers(baseMaps).addTo(map_right);
 
-            map_left.attributionControl.setPosition('bottomleft')
-            map_right.attributionControl.setPosition('bottomleft')
+            map_left.attributionControl.setPosition('bottomleft');
+            map_right.attributionControl.setPosition('bottomleft');
 
             /* 地図連動 */
             map_left.sync(map_right, { syncCursor: true });
